@@ -317,7 +317,7 @@ async function loadWeather(){
         "<td>"+f(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
         "<td>"+f(d.daily.temperature_2m_max[0])+"° / "+f(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
         "<td>"+next3+"</td>"+
-        "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+rainSum.toFixed(1)+" mm / 7 days</span></td>";
+        "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+(rainSum/25.4).toFixed(2)+" in / 7 days</span></td>";
       tbody.appendChild(tr);
     }
     status.textContent="Live forecast loaded: "+new Date().toLocaleString();

@@ -231,26 +231,25 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="section">
-    <div class="kicker">Current local weather • Sep. 28, 2026</div>
-    <h2>🌤️ Weather Along Our Route</h2>
-    <p><strong>Important:</strong> this is the current forecast at each destination, not your November cruise forecast. Reliable day-specific forecasts for the Nov. 3–17 stops are not available yet. Once each cruise date gets within about 7–10 days, this section should switch to the forecast for the day we are actually scheduled to be there.</p>
-    <table>
-      <tr><th>Destination</th><th>Current / today's outlook</th><th>Why it matters now</th></tr>
-      <tr><td>Amsterdam</td><td>Cloudy, about 63°F now; around 71°F / 60°F today, brief showers possible</td><td>Lower Rhine basin rainfall</td></tr>
-      <tr><td>Kinderdijk</td><td>Around 70°F / 60°F today</td><td>Lower Rhine / delta conditions</td></tr>
-      <tr><td>Cologne</td><td>Clear early; around 81°F / 57°F today</td><td>Rhine weather upstream of Koblenz</td></tr>
-      <tr><td>Koblenz / Middle Rhine</td><td>Around 80°F / 54°F today</td><td><strong>Kaub rainfall and runoff are important</strong></td></tr>
-      <tr><td>Miltenberg</td><td>Mostly dry; roughly upper-70s°F / upper-40s°F</td><td>Main River basin</td></tr>
-      <tr><td>Würzburg</td><td>Warm and dry; around 80°F / low-50s°F</td><td>Main River basin</td></tr>
-      <tr><td>Bamberg</td><td>Warm; around 78°F / low-50s°F</td><td>Main / canal approach</td></tr>
-      <tr><td>Nuremberg</td><td>Partly cloudy; around 79°F / upper-40s°F</td><td>Main-Danube Canal area</td></tr>
-      <tr><td>Regensburg</td><td>Mostly clear to lightly cloudy; dry early, warming through the day</td><td><strong>Upper Danube / Pfelling drainage</strong></td></tr>
-      <tr><td>Passau</td><td>Mostly sunny; about 75°F / 52°F, very low rain chance</td><td>Danube, Inn and Ilz inflows</td></tr>
-      <tr><td>Melk / Wachau</td><td>Around 72°F / 47°F today</td><td>Austrian Danube / Wachau</td></tr>
-      <tr><td>Vienna</td><td>Clear to sunny; about 75°F / 50°F, dry</td><td>Lower Austrian Danube</td></tr>
-      <tr><td>Budapest</td><td>Sunny; about 77°F / 59°F, dry</td><td>Lower end of our cruise route</td></tr>
-    </table>
-    <p class="small"><strong>River-level weather watch:</strong> for cruise operations, basin-wide rainfall over several days matters more than whether it rains at the dock for one afternoon. The dashboard should therefore track both destination weather and upstream precipitation.</p>
+    <div class="kicker">Live weather • updates whenever you open this page</div>
+    <h2>🌤️ Current Weather + 7-Day Forecast Along Our Route</h2>
+    <p>This section pulls fresh weather directly when the page loads. While we're on the cruise, it will always show the <strong>current conditions and next 7 days</strong> for every destination — no manual update required.</p>
+    <div id="weather-status" class="small">Loading current forecasts…</div>
+    <div style="overflow-x:auto">
+      <table id="weather-table">
+        <thead>
+          <tr>
+            <th>Destination</th>
+            <th>Now</th>
+            <th>Today</th>
+            <th>Next 3 days</th>
+            <th>Rain outlook</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="small"><strong>Why this helps the river watch:</strong> local weather is useful for sightseeing, while multi-day rainfall across the Rhine/Main/Danube basins helps us judge whether water levels may improve or worsen.</p>
   </div>
 
   <div class="section">
@@ -266,5 +265,68 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 </div>
 
 <footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer><div style="max-width:1100px;margin:0 auto 30px;padding:0 22px;color:#687b82;font-size:12px;line-height:1.5"><strong>Data sources:</strong> Germany: PEGELONLINE / Bavarian Environment Agency (Kaub, Würzburg, Pfelling). Austria/Hungary: Danube FIS Portal. Viking operations: Viking Current Sailings notice dated Sept. 25, 2026. Gauge values use each station’s own local datum; do not compare raw centimeters between stations.</div>
+
+<script>
+const weatherStops = [
+  {name:"Amsterdam", lat:52.3676, lon:4.9041},
+  {name:"Kinderdijk", lat:51.8853, lon:4.6369},
+  {name:"Cologne", lat:50.9375, lon:6.9603},
+  {name:"Koblenz / Middle Rhine", lat:50.3569, lon:7.5889},
+  {name:"Miltenberg", lat:49.7040, lon:9.2674},
+  {name:"Würzburg", lat:49.7913, lon:9.9534},
+  {name:"Bamberg", lat:49.8988, lon:10.9028},
+  {name:"Nuremberg", lat:49.4521, lon:11.0767},
+  {name:"Regensburg", lat:49.0134, lon:12.1016},
+  {name:"Passau", lat:48.5667, lon:13.4319},
+  {name:"Melk / Wachau", lat:48.2279, lon:15.3319},
+  {name:"Vienna", lat:48.2082, lon:16.3738},
+  {name:"Budapest", lat:47.4979, lon:19.0402}
+];
+
+function wx(code){
+  const m={0:"Clear",1:"Mostly clear",2:"Partly cloudy",3:"Cloudy",45:"Fog",48:"Fog",51:"Drizzle",53:"Drizzle",55:"Drizzle",61:"Rain",63:"Rain",65:"Heavy rain",71:"Snow",73:"Snow",75:"Heavy snow",80:"Showers",81:"Showers",82:"Heavy showers",95:"Thunderstorms",96:"Thunderstorms",99:"Severe thunderstorms"};
+  return m[code] || "Mixed";
+}
+function f(c){ return Math.round(c*9/5+32); }
+
+async function loadWeather(){
+  const tbody=document.querySelector("#weather-table tbody");
+  const status=document.getElementById("weather-status");
+  tbody.innerHTML="";
+  try{
+    const rows = await Promise.all(weatherStops.map(async s=>{
+      const u="https://api.open-meteo.com/v1/forecast?latitude="+s.lat+"&longitude="+s.lon+
+        "&current=temperature_2m,weather_code,precipitation&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&temperature_unit=celsius&precipitation_unit=mm&forecast_days=7&timezone=auto";
+      const r=await fetch(u);
+      if(!r.ok) throw new Error("weather request failed");
+      const d=await r.json();
+      return {s,d};
+    }));
+    for(const {s,d} of rows){
+      const tr=document.createElement("tr");
+      const next3=[1,2,3].map(i=>{
+        if(!d.daily.time[i]) return "";
+        const dt=new Date(d.daily.time[i]+"T12:00:00");
+        const day=dt.toLocaleDateString(undefined,{weekday:"short"});
+        return day+" "+f(d.daily.temperature_2m_max[i])+"°/"+f(d.daily.temperature_2m_min[i])+"°";
+      }).filter(Boolean).join("<br>");
+      const rainMax=Math.max(...d.daily.precipitation_probability_max.slice(0,7).map(v=>v??0));
+      const rainSum=d.daily.precipitation_sum.slice(0,7).reduce((a,b)=>a+(b||0),0);
+      tr.innerHTML=
+        "<td><strong>"+s.name+"</strong></td>"+
+        "<td>"+f(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
+        "<td>"+f(d.daily.temperature_2m_max[0])+"° / "+f(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
+        "<td>"+next3+"</td>"+
+        "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+rainSum.toFixed(1)+" mm / 7 days</span></td>";
+      tbody.appendChild(tr);
+    }
+    status.textContent="Live forecast loaded: "+new Date().toLocaleString();
+  } catch(e){
+    status.textContent="Weather could not load right now. Refresh the page to try again.";
+  }
+}
+loadWeather();
+</script>
+
 </body>
 </html>

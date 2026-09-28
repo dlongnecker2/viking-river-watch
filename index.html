@@ -28,6 +28,21 @@ table{width:100%;border-collapse:collapse}th,td{padding:11px 8px;text-align:left
 footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .kicker{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#67808a;font-weight:700}
 .small{font-size:13px;color:#688087}
+
+.ship-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:22px;align-items:start}
+.ship-photo{width:100%;height:330px;object-fit:cover;border-radius:12px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.deck-plan{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.deck-row{display:grid;grid-template-columns:110px 1fr;border:1px solid #d9e2e5;border-radius:10px;overflow:hidden;background:#f9fbfb}
+.deck-name{padding:12px;background:#eaf1f3;font-size:13px;line-height:1.25;color:#23454f}
+.deck-detail{padding:12px;font-size:14px;line-height:1.4}
+.deck-row.sun .deck-name{background:#e8f5eb}
+.deck-row.upper .deck-name{background:#edf3fb}
+.deck-row.middle .deck-name{background:#f7f1e5}
+.deck-row.main .deck-name{background:#f1f1f1}
+.ship-links{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.ship-links a{color:#126b7a;font-weight:700;text-decoration:none}
+.ship-links a:hover{text-decoration:underline}
+@media(max-width:850px){.ship-grid{grid-template-columns:1fr}.ship-photo{height:auto}}
 @media(max-width:600px){header h1{font-size:27px}.container{padding:12px}th,td{font-size:13px}}
 </style>
 </head>
@@ -39,6 +54,52 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 </header>
 
 <div class="container">
+  <div class="section ship-section">
+    <div class="kicker">Our ship</div>
+    <h2>🛳️ Viking Ve</h2>
+    <div class="ship-grid">
+      <div>
+        <img class="ship-photo"
+             src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Cruise%20ship%20Viking%20VE%20in%20Bamberg%20MD%20Kanal%2017RM0108.jpg?width=1200"
+             alt="Viking Ve river cruise ship in the Main-Danube Canal near Bamberg">
+        <div class="small">Viking Ve • 443 ft • 190 guests • 95 outside staterooms • built 2015</div>
+        <div class="small" style="margin-top:6px">Photo: Wikimedia Commons, Viking Ve in Bamberg (CC BY-SA).</div>
+      </div>
+
+      <div>
+        <h3 style="margin-top:0">Quick Deck Layout</h3>
+        <p class="small">Simplified guide — not to scale. Use the official Viking interactive plan for exact cabin locations.</p>
+
+        <div class="deck-plan">
+          <div class="deck-row sun">
+            <div class="deck-name">DECK 4<br><strong>Sun Deck</strong></div>
+            <div class="deck-detail">Walking track • shaded seating • Sky Bar • putting green • herb garden • solar panels</div>
+          </div>
+
+          <div class="deck-row upper">
+            <div class="deck-name">DECK 3<br><strong>Upper</strong></div>
+            <div class="deck-detail">Aquavit Terrace • Observation Lounge & Bar • Library • Explorer Suites • Veranda Suites • Veranda & French Balcony cabins</div>
+          </div>
+
+          <div class="deck-row middle">
+            <div class="deck-name">DECK 2<br><strong>Middle</strong></div>
+            <div class="deck-detail">Restaurant • Lobby / Reception • Boutique • Veranda & French Balcony cabins • elevator to Upper Deck</div>
+          </div>
+
+          <div class="deck-row main">
+            <div class="deck-name">DECK 1<br><strong>Main</strong></div>
+            <div class="deck-detail">Standard Staterooms E & F • half-height river-view windows • no elevator access</div>
+          </div>
+        </div>
+
+        <div class="ship-links">
+          <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve page & interactive deck plan ↗</a>
+          <a href="https://www.cruisedeckplans.com/ships/Viking-Ve" target="_blank" rel="noopener">Detailed cabin-by-cabin deck plans ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="outlook">
     <div class="kicker">Personal cruise monitor</div>
     <h2>Your Cruise Outlook</h2>

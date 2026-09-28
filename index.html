@@ -216,10 +216,10 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="grid">
-    <div class="card"><h2>🇩🇪 Rhine — Kaub</h2><div class="level red">-1 cm</div><p><strong>Very low today.</strong> Official forecast bottoms near 2 cm through Oct. 1.</p><p><strong>Our cruise:</strong> November 6</p></div>
-    <div class="card"><h2>🇩🇪 Main — Würzburg</h2><div class="level green">140 cm</div><p>Latest official reading. This reach is lock-controlled, so raw level alone is less predictive of cruise disruption.</p><p><strong>Our cruise:</strong> November 7–9</p></div>
-    <div class="card"><h2>🇩🇪 Danube — Pfelling</h2><div class="level yellow">209 cm</div><p>Rose from 206 cm early Sep. 27 to 209 cm late evening; still an important low-water checkpoint.</p><p><strong>Our cruise:</strong> November 11–12</p></div>
-    <div class="card"><h2>🇦🇹 Danube — Wachau</h2><div class="level yellow">98 cm</div><p>Kienstock reading in the Wachau. Farther downstream, Wildungsmauer was 76 cm late Sep. 27.</p><p><strong>Our cruise:</strong> November 13–15</p></div>
+    <div class="card"><h2>🇩🇪 Rhine — Kaub</h2><div class="level red" id="kaub-level">-1 cm</div><p><strong>Very low today.</strong> Official forecast bottoms near 2 cm through Oct. 1.</p><p><strong>Our cruise:</strong> November 6</p></div>
+    <div class="card"><h2>🇩🇪 Main — Würzburg</h2><div class="level green" id="wuerzburg-level">140 cm</div><p>Latest official reading. This reach is lock-controlled, so raw level alone is less predictive of cruise disruption.</p><p><strong>Our cruise:</strong> November 7–9</p></div>
+    <div class="card"><h2>🇩🇪 Danube — Pfelling</h2><div class="level yellow" id="pfelling-level">209 cm</div><p>Rose from 206 cm early Sep. 27 to 209 cm late evening; still an important low-water checkpoint.</p><p><strong>Our cruise:</strong> November 11–12</p></div>
+    <div class="card"><h2>🇦🇹 Danube — Wachau</h2><div class="level yellow" id="kienstock-level">98 cm</div><p>Kienstock reading in the Wachau. Farther downstream, Wildungsmauer was 76 cm late Sep. 27.</p><p><strong>Our cruise:</strong> November 13–15</p></div>
   </div>
 
   <div class="section">
@@ -230,7 +230,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <table>
       <tr><th>What we know now</th><th>Status</th><th>How solid is it?</th></tr>
       <tr>
-        <td><strong>Viking-wide Rhine/Danube advisory</strong><br>Viking's Sept. 25 notice says water remains below normal in some sections and selected itineraries may still be modified.</td>
+        <td><strong>Viking-wide Rhine/Danube advisory</strong><br><span id="viking-official-note">Viking's Sept. 25 notice says water remains below normal in some sections and selected itineraries may still be modified.</span></td>
         <td class="yellow"><strong>ACTIVE</strong></td>
         <td>Official Viking notice</td>
       </tr>

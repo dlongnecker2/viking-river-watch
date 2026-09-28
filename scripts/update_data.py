@@ -59,6 +59,38 @@ def viadonau():
         out["source_time"] = tm.group(1)+" "+tm.group(2)
     return out
 
+def shipradar():
+    url = "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/"
+    raw = get_text(url)
+    text = html.unescape(re.sub(r"<[^>]+>", " ", raw))
+    text = re.sub(r"\s+", " ", text)
+
+    out = {"checked": True, "source": url, "mmsi": "269057517"}
+
+    # Position appears as e.g. "Position 48.32965°, 16.33016°"
+    m = re.search(r"Position\s+(-?\d+(?:\.\d+)?)\s*°?\s*[,/]\s*(-?\d+(?:\.\d+)?)\s*°?", text, re.I)
+    if m:
+        out["latitude"] = float(m.group(1))
+        out["longitude"] = float(m.group(2))
+
+    m = re.search(r"Status\s+([A-Za-z ]+?)(?:Last ports|Letzte Häfen|Departure|Arrival|MMSI|$)", text, re.I)
+    if m:
+        out["status"] = m.group(1).strip()
+
+    m = re.search(r"(?:Speed|Tempo)\s+([0-9.]+)\s*(?:kn|knots?)", text, re.I)
+    if m:
+        out["speed_kn"] = float(m.group(1))
+
+    m = re.search(r"(?:Course|Courses|Kurs)\s+([0-9.]+)\s*°", text, re.I)
+    if m:
+        out["course_deg"] = float(m.group(1))
+
+    m = re.search(r"(?:last update|Letzte Aktualisierung)\s+(?:[^\d]{0,30})?(20\d{2}-\d{2}-\d{2}\s+\d{1,2}:\d{2})", text, re.I)
+    if m:
+        out["position_time"] = m.group(1)
+
+    return out
+
 def vesselfinder():
     url = "https://www.vesselfinder.com/vessels/details/269057517"
     raw = get_text(url)
@@ -135,10 +167,21 @@ except Exception as e:
     data["viking"] = {"checked": False}
 
 try:
-    data["ship"] = vesselfinder()
+    ship = vesselfinder()
 except Exception as e:
     errors.append("VesselFinder: "+repr(e))
-    data["ship"] = {"checked": False, "mmsi": "269057517"}
+    ship = {"checked": False, "mmsi": "269057517"}
+
+try:
+    radar = shipradar()
+    for k, v in radar.items():
+        if v is not None and k not in ("checked",):
+            ship[k] = v
+    ship["checked"] = True
+except Exception as e:
+    errors.append("ShipRadar: "+repr(e))
+
+data["ship"] = ship
 
 data["errors"] = errors
 

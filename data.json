@@ -7,29 +7,29 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 2.0,
+      "value_cm": 2,
       "timestamp": "2026-09-29T01:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 213.0,
+      "value_cm": 213,
       "timestamp": "2026-09-29T01:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 240.0,
-      "hour_change_cm": 0.0
+      "value_cm": 240,
+      "hour_change_cm": 0
     },
     "kienstock": {
-      "value_cm": 111.0,
-      "hour_change_cm": 2.0
+      "value_cm": 111,
+      "hour_change_cm": 2
     },
     "wildungsmauer": {
-      "value_cm": 79.0,
-      "hour_change_cm": 1.0
+      "value_cm": 79,
+      "hour_change_cm": 1
     },
     "source_time": "9/29/2026 1:11 AM"
   },
@@ -38,14 +38,20 @@
   },
   "ship": {
     "checked": true,
-    "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
+    "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
-    "area": "Europe Inland",
-    "reported_ago": "1 min ago",
+    "area": "Danube near Engelhartszell, Austria",
+    "reported_ago": "ShipFinder exact coordinate report",
     "destination": "ENGELHARTZELL",
-    "status": "Under way",
+    "status": "Under way using engine",
     "draught": "1.7 m",
-    "last_port": "Koln (Cologne), Germany"
+    "last_port": "Koln (Cologne), Germany",
+    "latitude": 48.5026,
+    "longitude": 13.7361,
+    "speed_kn": 0,
+    "course_deg": 60,
+    "heading_deg": 340,
+    "position_time": "2026-09-28 16:32:22"
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>"

@@ -1,10 +1,42 @@
 {
-  "updated_utc": "2026-09-28T05:58:22.444Z",
-  "germany": {},
-  "austria": {},
-  "viking": {
-    "checked": false,
-    "summary": "Waiting for first automated hourly update."
+  "updated_utc": "2026-09-28T06:29:41.845685Z",
+  "sources": {
+    "pegelonline": "https://www.pegelonline.wsv.de/",
+    "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
+    "viking": "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html"
   },
-  "errors": []
+  "germany": {
+    "kaub": {
+      "value_cm": 2.0,
+      "timestamp": "2026-09-28T08:15:00+02:00",
+      "station": "KAUB"
+    },
+    "wuerzburg": null,
+    "pfelling": {
+      "value_cm": 209.0,
+      "timestamp": "2026-09-28T08:15:00+02:00",
+      "station": "PFELLING"
+    }
+  },
+  "austria": {
+    "achleiten": {
+      "value_cm": 236.0,
+      "hour_change_cm": 1.0
+    },
+    "kienstock": {
+      "value_cm": 105.0,
+      "hour_change_cm": 1.0
+    },
+    "wildungsmauer": {
+      "value_cm": 75.0,
+      "hour_change_cm": 2.0
+    },
+    "source_time": "9/28/2026 8:12 AM"
+  },
+  "viking": {
+    "checked": false
+  },
+  "errors": [
+    "Viking: <HTTPError 403: 'Forbidden'>"
+  ]
 }

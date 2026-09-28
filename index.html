@@ -267,6 +267,17 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .tracker-button:hover{background:#0d303b}
 @media(max-width:700px){.ship-tracker-frame,.ship-tracker-frame iframe{min-height:420px!important}}
 
+
+/* Compact useful Viking Ve tracker */
+.tracker-status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.tracker-stat{background:#f6f9fa;border:1px solid #d7e1e4;border-radius:12px;padding:13px}
+.tracker-stat-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:#71868d;margin-bottom:5px}
+.tracker-stat strong{font-size:16px;color:#18323b}
+.tracker-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}
+.secondary-tracker{background:#eef4f6!important;color:#123c4a!important;border:1px solid #b9cbd1}
+@media(max-width:800px){.tracker-status-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.tracker-status-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -507,24 +518,35 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="section">
-    <div class="kicker">Live ship position</div>
+    <div class="kicker">Viking Ve location • refreshed hourly</div>
     <h2>📍 Track the Viking Ve</h2>
-    <p>Live AIS tracking for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). River-ship AIS can occasionally be delayed when reception is weak, but this should show the ship's latest reported position and recent track.</p>
+    <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). Inland-river AIS can lag when the ship is outside receiver coverage.</p>
 
-    <div class="ship-tracker-frame">
-      <script>
-        var mmsi = 269057517;
-        var zoom = 10;
-        var vessel_track = true;
-        var menu = false;
-      </script>
-      <script src="https://www.aisfriends.com/js/embed.js"></script>
+    <div class="tracker-status-grid">
+      <div class="tracker-stat">
+        <span class="tracker-stat-label">Latest area</span>
+        <strong id="ship-area">Loading…</strong>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-stat-label">Navigation</span>
+        <strong id="ship-status">Loading…</strong>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-stat-label">Destination</span>
+        <strong id="ship-destination">Loading…</strong>
+      </div>
+      <div class="tracker-stat">
+        <span class="tracker-stat-label">AIS age</span>
+        <strong id="ship-reported">Loading…</strong>
+      </div>
     </div>
 
-    <div class="tracker-actions">
-      <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">Open Viking Ve in CruiseMapper ↗</a>
-      <span class="small">CruiseMapper confirms this MMSI as Viking Ve. AIS positions may not be instantaneous.</span>
+    <div class="tracker-links">
+      <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">🗺️ Open live map in CruiseMapper ↗</a>
+      <a class="tracker-button secondary-tracker" href="https://www.vesselfinder.com/vessels/details/269057517" target="_blank" rel="noopener">🚢 VesselFinder details ↗</a>
     </div>
+
+    <p class="small" style="margin-top:10px">The dashboard shows the useful AIS summary here; the map buttons open the full interactive tracker without leaving a giant blank box on this page.</p>
   </div>
 
   <div class="section">
@@ -739,6 +761,13 @@ async function loadRiverWatchData(){
         const prefix=d.viking.notice_date ? "Official Viking notice ("+d.viking.notice_date+"): " : "Official Viking update: ";
         n.textContent=prefix+d.viking.summary.substring(0,700);
       }
+    }
+    if(d.ship){
+      const set=(id,val,fallback)=>{const e=document.getElementById(id);if(e)e.textContent=(val&&String(val).trim())?val:fallback;};
+      set("ship-area",d.ship.area,"Not available");
+      set("ship-status",d.ship.status,"Not available");
+      set("ship-destination",d.ship.destination,"Not reported");
+      set("ship-reported",d.ship.reported_ago,"Not available");
     }
   }catch(err){
     const updated=document.getElementById("report-last-updated");

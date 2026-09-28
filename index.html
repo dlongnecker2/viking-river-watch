@@ -37,6 +37,8 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .deck-detail{padding:12px;font-size:14px;line-height:1.4}
 .deck-row.sun .deck-name{background:#e8f5eb}
 .deck-row.upper .deck-name{background:#edf3fb}
+.cabin-highlight{border:2px solid #c48700;box-shadow:0 0 0 3px rgba(196,135,0,.10)}
+.cabin-badge{display:inline-block;margin-top:6px;padding:4px 7px;border-radius:999px;background:#fff7dd;color:#8a6100;font-size:11px;font-weight:800}
 .deck-row.middle .deck-name{background:#f7f1e5}
 .deck-row.main .deck-name{background:#f1f1f1}
 .ship-links{display:flex;flex-direction:column;gap:8px;margin-top:12px}
@@ -68,7 +70,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
       <div>
         <h3 style="margin-top:0">Quick Deck Layout</h3>
-        <p class="small">Simplified guide — not to scale. Use the official Viking interactive plan for exact cabin locations.</p>
+        <p class="small">Simplified guide — not to scale. <strong>Your cabin: 328 on the Upper Deck.</strong> Use the official Viking interactive plan for the exact position.</p>
 
         <div class="deck-plan">
           <div class="deck-row sun">
@@ -76,9 +78,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
             <div class="deck-detail">Walking track • shaded seating • Sky Bar • putting green • herb garden • solar panels</div>
           </div>
 
-          <div class="deck-row upper">
-            <div class="deck-name">DECK 3<br><strong>Upper</strong></div>
-            <div class="deck-detail">Aquavit Terrace • Observation Lounge & Bar • Library • Explorer Suites • Veranda Suites • Veranda & French Balcony cabins</div>
+          <div class="deck-row upper cabin-highlight">
+            <div class="deck-name">DECK 3<br><strong>Upper</strong><br><span class="cabin-badge">Cabin 328</span></div>
+            <div class="deck-detail">Aquavit Terrace • Observation Lounge & Bar • Library • Explorer Suites • Veranda Suites • Veranda & French Balcony cabins<br><strong>⭐ Your cabin 328 is on this deck.</strong></div>
           </div>
 
           <div class="deck-row middle">

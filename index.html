@@ -258,6 +258,15 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .webcam-live{margin-top:10px;font-size:10px;font-weight:900;letter-spacing:.05em;color:#168447}
 .webcam-live.watch-cam{color:#c48700}
 
+
+/* Viking Ve live ship tracker */
+.ship-tracker-frame{width:100%;min-height:520px;border:1px solid #d4dfe2;border-radius:14px;overflow:hidden;background:#eef3f4;box-shadow:0 3px 12px rgba(24,50,59,.08);margin-top:14px}
+.ship-tracker-frame iframe{width:100%!important;min-height:520px!important;border:0!important}
+.tracker-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.tracker-button{display:inline-block;padding:10px 14px;border-radius:10px;background:#123c4a;color:#fff;text-decoration:none;font-weight:800;font-size:13px}
+.tracker-button:hover{background:#0d303b}
+@media(max-width:700px){.ship-tracker-frame,.ship-tracker-frame iframe{min-height:420px!important}}
+
 </style>
 </head>
 <body>
@@ -494,6 +503,27 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
         <a href="https://www.icruise.com/deckplans/viking-river-cruises-viking-ve-deckplans-upper-deck.html" target="_blank" rel="noopener">Viking Ve Upper Deck source ↗</a>
       </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="kicker">Live ship position</div>
+    <h2>📍 Track the Viking Ve</h2>
+    <p>Live AIS tracking for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). River-ship AIS can occasionally be delayed when reception is weak, but this should show the ship's latest reported position and recent track.</p>
+
+    <div class="ship-tracker-frame">
+      <script>
+        var mmsi = 269057517;
+        var zoom = 10;
+        var vessel_track = true;
+        var menu = false;
+      </script>
+      <script src="https://www.aisfriends.com/js/embed.js"></script>
+    </div>
+
+    <div class="tracker-actions">
+      <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">Open Viking Ve in CruiseMapper ↗</a>
+      <span class="small">CruiseMapper confirms this MMSI as Viking Ve. AIS positions may not be instantaneous.</span>
     </div>
   </div>
 

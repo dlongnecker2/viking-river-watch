@@ -124,6 +124,24 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 @media(max-width:900px){.ship-clean-grid{grid-template-columns:1fr}.ship-photo-clean{height:250px}.simple-deck{grid-template-columns:1fr}.deck-overview{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.important-cabins{grid-template-columns:90px 1fr 90px}.distance-label{display:none}.ship-summary-cards{grid-template-columns:1fr}.deck-map-head{display:block}.deck-direction{margin-top:8px;justify-content:space-between}}
 
+
+/* Actual Viking Ve deck plan */
+.real-deck-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:start}
+.real-plan-panel h3{font-size:24px;margin:3px 0 6px}
+.real-plan-frame{background:#fff;border:1px solid #d6e0e3;border-radius:14px;padding:14px;box-shadow:0 4px 14px rgba(24,50,59,.08);overflow:auto}
+.real-plan-image{display:block;width:100%;height:auto;min-width:450px;image-rendering:auto}
+.room-callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.room-card{border-radius:12px;padding:10px 12px;display:flex;gap:9px;align-items:center;border:1px solid #d8e1e4}
+.room-card .room-num{font-size:18px;font-weight:900;white-space:nowrap}
+.room-card span{font-size:11px;color:#617981}
+.your-room{background:#fff3b8;border-color:#d8a52f}
+.friends-room{background:#e3effc;border-color:#7b9cbe}
+.public-room-card{background:#e8f5eb;border-color:#8db69a}
+.public-room-list{margin-top:12px;background:#f4f8f9;border-radius:12px;padding:11px 13px;font-size:12px;display:flex;flex-wrap:wrap;gap:8px 14px;color:#4e676f}
+.public-room-list strong{width:100%;color:#28434b}
+.public-room-list span:before{content:"• ";color:#2f9460;font-weight:900}
+@media(max-width:900px){.real-deck-wrap{grid-template-columns:1fr}.room-callouts{grid-template-columns:1fr}.real-plan-image{min-width:700px}}
+
 </style>
 </head>
 <body>
@@ -310,7 +328,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <div class="kicker">Our ship</div>
     <h2>🛳️ Viking Ve</h2>
 
-    <div class="ship-clean-grid">
+    <div class="real-deck-wrap">
       <div class="ship-photo-panel">
         <img class="ship-photo-clean"
              src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Cruise%20ship%20Viking%20VE%20in%20Bamberg%20MD%20Kanal%2017RM0108.jpg?width=1200"
@@ -319,73 +337,43 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <div class="small" style="margin-top:5px">Photo: Wikimedia Commons, Viking Ve in Bamberg (CC BY-SA).</div>
       </div>
 
-      <div class="ship-map-panel">
-        <div class="deck-map-head">
-          <div>
-            <div class="kicker">Upper Deck</div>
-            <h3>Where we are on the ship</h3>
-          </div>
-          <div class="deck-direction"><span>← BOW</span><span>AFT →</span></div>
+      <div class="real-plan-panel">
+        <div class="kicker">Upper Deck — Deck 3</div>
+        <h3>Actual Viking Ve Deck Plan</h3>
+        <p class="small">This is an actual published Viking Ve Upper Deck plan, not a homemade schematic.</p>
+
+        <div class="real-plan-frame">
+          <img
+            src="https://d23n7ahjfnjotp.cloudfront.net/imgs/client/ships/decks/450/1347302_3_450.gif"
+            alt="Actual Viking Ve Upper Deck deck plan"
+            class="real-plan-image">
         </div>
 
-        <div class="simple-deck">
-          <div class="public-spaces">
-            <div class="space aquavit-space">
-              <strong>Aquavit Terrace</strong>
-              <span>Forward outdoor dining</span>
-            </div>
-            <div class="space lounge-space">
-              <strong>Observation Lounge & Bar</strong>
-              <span class="coffee-callout">☕ 24-hour Coffee / Tea</span>
-            </div>
-            <div class="space library-space">
-              <strong>Library / Internet</strong>
-            </div>
+        <div class="room-callouts">
+          <div class="room-card your-room">
+            <div class="room-num">★ 328</div>
+            <div><strong>Your cabin</strong><br><span>Upper Deck • port side • farther aft</span></div>
           </div>
-
-          <div class="cabins-area">
-            <div class="side-title">PORT SIDE</div>
-            <div class="important-cabins">
-              <div class="cabin-marker friends-marker">
-                <span class="cabin-number">308</span>
-                <span class="cabin-owner">Poffenroths</span>
-              </div>
-              <div class="distance-line">
-                <span class="dot-step"></span><span class="dot-step"></span><span class="dot-step"></span><span class="dot-step"></span><span class="dot-step"></span>
-                <span class="distance-label">farther aft</span>
-              </div>
-              <div class="cabin-marker our-marker">
-                <span class="cabin-number">328</span>
-                <span class="cabin-owner">Your cabin</span>
-              </div>
-            </div>
-            <div class="hallway-clean">CENTER HALLWAY</div>
-            <div class="other-cabins">Other Upper Deck staterooms</div>
-            <div class="side-title">STARBOARD SIDE</div>
+          <div class="room-card friends-room">
+            <div class="room-num">👥 308</div>
+            <div><strong>Poffenroths</strong><br><span>Upper Deck • port side • closer to lounge</span></div>
+          </div>
+          <div class="room-card public-room-card">
+            <div class="room-num">☕</div>
+            <div><strong>Coffee / Tea</strong><br><span>Near Observation Lounge / forward public area</span></div>
           </div>
         </div>
 
-        <div class="ship-summary-cards">
-          <div class="summary-chip gold"><strong>★ 328</strong><span>Your cabin</span></div>
-          <div class="summary-chip blue"><strong>👥 308</strong><span>Poffenroths</span></div>
-          <div class="summary-chip green"><strong>☕ Coffee</strong><span>Near lounge</span></div>
-        </div>
-
-        <div class="ship-note">
-          <strong>Both cabins are on the Upper Deck, port side.</strong>
-          The Poffenroths in 308 are much closer to the forward lounge and coffee station; your 328 is farther aft.
-        </div>
-
-        <div class="deck-overview">
-          <div><strong>Deck 4</strong><span>Sun Deck</span></div>
-          <div class="active-deck"><strong>Deck 3</strong><span>Upper — cabins, lounge, coffee</span></div>
-          <div><strong>Deck 2</strong><span>Middle — restaurant, reception</span></div>
-          <div><strong>Deck 1</strong><span>Main — standard cabins</span></div>
+        <div class="public-room-list">
+          <strong>Upper Deck public rooms:</strong>
+          <span>Aquavit Terrace</span>
+          <span>Observation Lounge & Bar</span>
+          <span>Library / Internet Center</span>
         </div>
 
         <div class="ship-links">
           <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
-          <a href="https://www.cruisedeckplans.com/ships/deckbydeck.php?deck=3&ship=Viking-Ve" target="_blank" rel="noopener">Detailed Upper Deck plan ↗</a>
+          <a href="https://www.icruise.com/deckplans/viking-river-cruises-viking-ve-deckplans-upper-deck.html" target="_blank" rel="noopener">Actual Upper Deck source ↗</a>
         </div>
       </div>
     </div>

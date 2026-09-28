@@ -293,6 +293,8 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
 .ve-ship-tooltip{background:#123c4a!important;color:#fff!important;border:0!important;border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.2)!important;font-weight:800!important;padding:4px 7px!important}
 .ve-ship-tooltip:before{display:none!important}
+
+.ve-area-tooltip{background:#fff7dd!important;color:#7a5600!important;border:1px solid #ddb84f!important;border-radius:7px!important;font-weight:800!important;box-shadow:0 2px 8px rgba(0,0,0,.12)!important}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -761,6 +763,7 @@ loadWeather();
 
 let veMap=null;
 let veShipMarker=null;
+let veAreaLayer=null;
 
 function initVikingVeMap(){
   if(typeof L==="undefined" || !document.getElementById("ve-map")) return;
@@ -831,22 +834,43 @@ async function loadRiverWatchData(){
       set("ship-status",d.ship.status,"Not available");
       set("ship-destination",d.ship.destination,"Not reported");
       set("ship-reported",d.ship.reported_ago,"Not available");
-      if(veMap && d.ship.latitude!=null && d.ship.longitude!=null){
+
+      const b=document.getElementById("ship-location-banner");
+      const bt=document.getElementById("ship-location-time");
+      const posTime=d.ship.position_time||d.ship.reported_ago||"time unavailable";
+      const hasCoords=d.ship.latitude!=null && d.ship.longitude!=null &&
+                      Number.isFinite(Number(d.ship.latitude)) && Number.isFinite(Number(d.ship.longitude));
+
+      if(veMap && hasCoords){
         const ll=[Number(d.ship.latitude),Number(d.ship.longitude)];
-        if(Number.isFinite(ll[0]) && Number.isFinite(ll[1])){
-          const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[30,30],iconAnchor:[15,15]});
-          if(!veShipMarker){
-            veShipMarker=L.marker(ll,{icon,zIndexOffset:1000}).addTo(veMap);
-            veShipMarker.bindTooltip("Viking Ve",{permanent:true,direction:"top",offset:[0,-10],className:"ve-ship-tooltip"});
-          } else {
-            veShipMarker.setLatLng(ll);
-          }
-          const posTime=d.ship.position_time||d.ship.reported_ago||"time unavailable";
-          veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position")+"<br><small>"+posTime+"</small>");
-          const b=document.getElementById("ship-location-banner");
-          const bt=document.getElementById("ship-location-time");
-          if(b) b.textContent=(d.ship.area||"Latest AIS position")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
-          if(bt) bt.textContent="Position report: "+posTime;
+        if(veAreaLayer){ veMap.removeLayer(veAreaLayer); veAreaLayer=null; }
+        const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[30,30],iconAnchor:[15,15]});
+        if(!veShipMarker){
+          veShipMarker=L.marker(ll,{icon,zIndexOffset:1000}).addTo(veMap);
+          veShipMarker.bindTooltip("Viking Ve",{permanent:true,direction:"top",offset:[0,-10],className:"ve-ship-tooltip"});
+        } else {
+          veShipMarker.setLatLng(ll);
+        }
+        veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position")+"<br><small>"+posTime+"</small>");
+        if(b) b.textContent=(d.ship.area||"Latest AIS position")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
+        if(bt) bt.textContent="Exact AIS coordinate report: "+posTime;
+      } else {
+        if(veShipMarker){ veMap.removeLayer(veShipMarker); veShipMarker=null; }
+        if(b){
+          const dest=d.ship.destination ? " • heading toward "+d.ship.destination : "";
+          b.textContent=(d.ship.area||"Current AIS area unavailable")+dest;
+        }
+        if(bt) bt.textContent="Exact latitude/longitude is not exposed by the current public AIS feed. Latest status: "+posTime;
+
+        // When the feed exposes only a broad area, show that honestly instead of inventing a point.
+        if(veMap && d.ship.area && /austria/i.test(d.ship.area)){
+          if(veAreaLayer) veMap.removeLayer(veAreaLayer);
+          veAreaLayer=L.polyline([
+            [48.2082,16.3738], // Vienna
+            [48.2279,15.3319], // Wachau/Melk
+            [48.5667,13.4319]  // Passau / Austrian-German border corridor
+          ],{weight:14,opacity:.32,dashArray:"8 8"}).addTo(veMap);
+          veAreaLayer.bindTooltip("Latest AIS area: Austria",{permanent:true,direction:"top",className:"ve-area-tooltip"});
         }
       }
     }

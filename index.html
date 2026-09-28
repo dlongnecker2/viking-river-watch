@@ -161,6 +161,33 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   .plan-pin small{display:none}
 }
 
+
+/* Readable full-width Viking Ve deck plan */
+.ship-title-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+.ship-title-row h2{margin:0 0 4px}
+.ship-thumb{width:220px;height:105px;object-fit:cover;border-radius:12px;box-shadow:0 3px 10px rgba(24,50,59,.12)}
+.deck-plan-section{border-top:1px solid #e2e8ea;padding-top:18px}
+.deck-plan-section h3{font-size:26px;margin:4px 0 6px}
+.deck-crop{position:relative;width:100%;aspect-ratio:5.15/1;overflow:hidden;background:#fff;border:1px solid #cbd8dc;border-radius:14px;box-shadow:0 4px 14px rgba(24,50,59,.08);margin-top:14px}
+.deck-crop>img{position:absolute;width:100%;height:auto;left:0;top:-40.5%;max-width:none}
+.deck-label{position:absolute;top:2%;transform:translateX(-50%);z-index:4;border:2px solid #fff;border-radius:10px;padding:5px 8px;box-shadow:0 2px 8px rgba(0,0,0,.24);display:flex;flex-direction:column;align-items:center;line-height:1.05;white-space:nowrap}
+.deck-label strong{font-size:13px}.deck-label small{font-size:9px;margin-top:2px}.label-arrow{font-size:12px;line-height:.8;margin-bottom:2px}
+.label-328{left:30.2%;background:#fff0a8;color:#6b4a00}
+.label-308{left:52.3%;background:#dfeeff;color:#214c77}
+.label-coffee{left:65.4%;background:#e7f4ea;color:#235b42}
+.deck-reading-key{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.key-card{border-radius:11px;padding:10px 12px;border:1px solid #d7e1e4;display:flex;flex-direction:column;gap:3px;font-size:12px}
+.key-card strong{font-size:14px}.key-card span{color:#587078}
+.key-328{background:#fff7d3;border-color:#e0b44c}.key-308{background:#edf5ff;border-color:#8ba9c7}.key-coffee{background:#eef8f0;border-color:#9fc1a8}
+.public-room-strip{display:flex;flex-wrap:wrap;gap:7px 14px;margin-top:12px;padding:11px 13px;background:#f4f8f9;border-radius:11px;font-size:12px;color:#536b73}
+.public-room-strip strong{width:100%;color:#28434b}.public-room-strip span:before{content:"• ";color:#2f9460;font-weight:900}
+@media(max-width:800px){
+  .ship-title-row{align-items:flex-start}.ship-thumb{width:160px;height:88px}
+  .deck-crop{aspect-ratio:3.8/1}.deck-crop>img{top:-36%}
+  .deck-reading-key{grid-template-columns:1fr}
+  .deck-label strong{font-size:11px}.deck-label small{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -345,61 +372,63 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
   <div class="section ship-section">
     <div class="kicker">Our ship</div>
-    <h2>🛳️ Viking Ve</h2>
+    <div class="ship-title-row">
+      <div>
+        <h2>🛳️ Viking Ve</h2>
+        <div class="small">443 ft • 190 guests • 95 outside staterooms • built 2015</div>
+      </div>
+      <img class="ship-thumb"
+           src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Cruise%20ship%20Viking%20VE%20in%20Bamberg%20MD%20Kanal%2017RM0108.jpg?width=700"
+           alt="Viking Ve">
+    </div>
 
-    <div class="real-deck-wrap">
-      <div class="ship-photo-panel">
-        <img class="ship-photo-clean"
-             src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Cruise%20ship%20Viking%20VE%20in%20Bamberg%20MD%20Kanal%2017RM0108.jpg?width=1200"
-             alt="Viking Ve river cruise ship in the Main-Danube Canal near Bamberg">
-        <div class="ship-facts">443 ft • 190 guests • 95 outside staterooms • built 2015</div>
-        <div class="small" style="margin-top:5px">Photo: Wikimedia Commons, Viking Ve in Bamberg (CC BY-SA).</div>
+    <div class="deck-plan-section">
+      <div class="kicker">Upper Deck — Deck 3</div>
+      <h3>Actual Viking Longship Upper Deck Plan</h3>
+      <p class="small">This is the published Viking Longship deck plan used for Viking Ve's Longship layout, cropped to the Upper Deck so the room numbers and public spaces are readable.</p>
+
+      <div class="deck-crop">
+        <img src="https://www.cruisingholidays.co.uk/images2/river-ships/viking/viking-longships/viking-longships.png"
+             alt="Published Viking Longship Upper Deck plan">
+
+        <div class="deck-label label-328">
+          <span class="label-arrow">▼</span>
+          <strong>★ 328</strong>
+          <small>Your cabin</small>
+        </div>
+
+        <div class="deck-label label-308">
+          <span class="label-arrow">▼</span>
+          <strong>👥 308</strong>
+          <small>Poffenroths</small>
+        </div>
+
+        <div class="deck-label label-coffee">
+          <span class="label-arrow">▼</span>
+          <strong>☕ Coffee / Tea</strong>
+          <small>24-hour station</small>
+        </div>
       </div>
 
-      <div class="real-plan-panel">
-        <div class="kicker">Upper Deck — Deck 3</div>
-        <h3>Actual Viking Ve Deck Plan</h3>
-        <p class="small">This is an actual published Viking Ve Upper Deck plan, not a homemade schematic.</p>
+      <div class="deck-reading-key">
+        <div class="key-card key-328"><strong>★ Cabin 328</strong><span>Your Veranda Suite on the Upper Deck.</span></div>
+        <div class="key-card key-308"><strong>👥 Cabin 308</strong><span>Poffenroths' Veranda Suite, closer to the lounge.</span></div>
+        <div class="key-card key-coffee"><strong>☕ Coffee / Tea</strong><span>At the entrance to the Lounge area; Viking Longships have 24-hour self-service beverages here.</span></div>
+      </div>
 
-        <div class="real-plan-frame landscape-plan">
-          <div class="plan-canvas">
-            <img
-              src="https://d23n7ahjfnjotp.cloudfront.net/imgs/client/ships/decks/450/1347302_3_450.gif"
-              alt="Actual Viking Ve Upper Deck deck plan"
-              class="real-plan-image">
-            <div class="plan-pin pin-coffee"><span>☕</span><strong>Coffee / Tea</strong></div>
-            <div class="plan-pin pin-308"><span>👥</span><strong>Cabin 308</strong><small>Poffenroths</small></div>
-            <div class="plan-pin pin-328"><span>★</span><strong>Cabin 328</strong><small>Your cabin</small></div>
-          </div>
-        </div>
-        <div class="small plan-caption">Landscape view of the actual published Upper Deck plan. Callouts mark the approximate positions of the two cabins and the coffee/tea area so they are easy to find at a glance.</div>
+      <div class="public-room-strip">
+        <strong>Public spaces visible on this plan:</strong>
+        <span>Library / Internet</span>
+        <span>Observation Lounge</span>
+        <span>Bar</span>
+        <span>Buffet</span>
+        <span>Aquavit Terrace</span>
+        <span>Grills</span>
+      </div>
 
-        <div class="room-callouts">
-          <div class="room-card your-room">
-            <div class="room-num">★ 328</div>
-            <div><strong>Your cabin</strong><br><span>Upper Deck • port side • farther aft</span></div>
-          </div>
-          <div class="room-card friends-room">
-            <div class="room-num">👥 308</div>
-            <div><strong>Poffenroths</strong><br><span>Upper Deck • port side • closer to lounge</span></div>
-          </div>
-          <div class="room-card public-room-card">
-            <div class="room-num">☕</div>
-            <div><strong>Coffee / Tea</strong><br><span>Near Observation Lounge / forward public area</span></div>
-          </div>
-        </div>
-
-        <div class="public-room-list">
-          <strong>Upper Deck public rooms:</strong>
-          <span>Aquavit Terrace</span>
-          <span>Observation Lounge & Bar</span>
-          <span>Library / Internet Center</span>
-        </div>
-
-        <div class="ship-links">
-          <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
-          <a href="https://www.icruise.com/deckplans/viking-river-cruises-viking-ve-deckplans-upper-deck.html" target="_blank" rel="noopener">Actual Upper Deck source ↗</a>
-        </div>
+      <div class="ship-links">
+        <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
+        <a href="https://cms-assets.viking.com/river/longship/deck_plan/2018_Viking_Longships_Deckplan_Tagged-UA.pdf" target="_blank" rel="noopener">Official Viking Longships deck-plan PDF ↗</a>
       </div>
     </div>
   </div>

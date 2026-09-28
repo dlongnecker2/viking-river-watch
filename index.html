@@ -295,6 +295,8 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .ve-ship-tooltip:before{display:none!important}
 
 .ve-area-tooltip{background:#fff7dd!important;color:#7a5600!important;border:1px solid #ddb84f!important;border-radius:7px!important;font-weight:800!important;box-shadow:0 2px 8px rgba(0,0,0,.12)!important}
+
+.approximate-ship{filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -862,15 +864,46 @@ async function loadRiverWatchData(){
         }
         if(bt) bt.textContent="Exact latitude/longitude is not exposed by the current public AIS feed. Latest status: "+posTime;
 
-        // When the feed exposes only a broad area, show that honestly instead of inventing a point.
-        if(veMap && d.ship.area && /austria/i.test(d.ship.area)){
-          if(veAreaLayer) veMap.removeLayer(veAreaLayer);
-          veAreaLayer=L.polyline([
-            [48.2082,16.3738], // Vienna
-            [48.2279,15.3319], // Wachau/Melk
-            [48.5667,13.4319]  // Passau / Austrian-German border corridor
-          ],{weight:14,opacity:.32,dashArray:"8 8"}).addTo(veMap);
-          veAreaLayer.bindTooltip("Latest AIS area: Austria",{permanent:true,direction:"top",className:"ve-area-tooltip"});
+        // If exact coordinates are unavailable but a known destination is reported,
+        // show an explicitly approximate marker near that destination rather than leaving the map blank.
+        if(veMap){
+          if(veAreaLayer){ veMap.removeLayer(veAreaLayer); veAreaLayer=null; }
+
+          const dest=(d.ship.destination||"").toUpperCase();
+          let approx=null;
+          let approxLabel="";
+
+          if(dest.includes("ENGELHART")){
+            // Engelhartszell, Austria — Danube, a short distance upstream of Passau.
+            approx=[48.5018,13.7354];
+            approxLabel="Viking Ve — heading toward Engelhartszell";
+          } else if(d.ship.area && /austria/i.test(d.ship.area)){
+            // Broad fallback for Austrian Danube.
+            approx=[48.35,14.9];
+            approxLabel="Viking Ve — somewhere on the Austrian Danube";
+          }
+
+          if(approx){
+            const icon=L.divIcon({
+              className:"ve-ship-icon approximate-ship",
+              html:"🚢",
+              iconSize:[34,34],
+              iconAnchor:[17,17]
+            });
+            veShipMarker=L.marker(approx,{icon,zIndexOffset:1000,opacity:.82}).addTo(veMap);
+            veShipMarker.bindTooltip(approxLabel,{permanent:true,direction:"top",offset:[0,-12],className:"ve-ship-tooltip"});
+            veShipMarker.bindPopup("<strong>Approximate position</strong><br>Exact AIS coordinates are not exposed by the current feed.<br>Destination: "+(d.ship.destination||"not reported")+"<br><small>Latest AIS status: "+posTime+"</small>");
+
+            L.circle(approx,{
+              radius:18000,
+              weight:2,
+              opacity:.55,
+              fillOpacity:.08,
+              dashArray:"6 6"
+            }).addTo(veMap).bindTooltip("Approximate area — not an exact AIS coordinate");
+
+            if(b) b.textContent="Approximate map position near "+(d.ship.destination||d.ship.area||"reported area");
+          }
         }
       }
     }

@@ -246,6 +246,18 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   .deck-label2 span{display:none}
 }
 
+
+/* Live webcam section */
+.webcam-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.webcam-card{display:block;text-decoration:none;color:inherit;background:#f9fbfb;border:1px solid #d7e1e4;border-radius:13px;padding:15px;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+.webcam-card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(24,50,59,.10);border-color:#9fbec7}
+.webcam-card.featured-cam{background:#f3faf7;border-color:#b7d6c5}
+.webcam-city{font-size:14px;font-weight:800;color:#2f515b;margin-bottom:5px}
+.webcam-name{font-size:17px;font-weight:800;color:#18323b;margin-bottom:5px}
+.webcam-desc{font-size:12px;line-height:1.45;color:#617981;min-height:52px}
+.webcam-live{margin-top:10px;font-size:10px;font-weight:900;letter-spacing:.05em;color:#168447}
+.webcam-live.watch-cam{color:#c48700}
+
 </style>
 </head>
 <body>
@@ -483,6 +495,72 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <a href="https://www.icruise.com/deckplans/viking-river-cruises-viking-ve-deckplans-upper-deck.html" target="_blank" rel="noopener">Viking Ve Upper Deck source ↗</a>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="kicker">Live views along our route</div>
+    <h2>📹 Port & River Webcams</h2>
+    <p>Live or frequently refreshed cameras from places along our Grand European Tour. These open in a new tab so you can check the river, weather and city views without leaving the dashboard.</p>
+
+    <div class="webcam-grid">
+      <a class="webcam-card" href="https://sea.cruiseportamsterdam.com/" target="_blank" rel="noopener">
+        <div class="webcam-city">🇳🇱 Amsterdam</div>
+        <div class="webcam-name">Cruise Port Amsterdam</div>
+        <div class="webcam-desc">Live webcams on the IJ near the cruise terminal.</div>
+        <div class="webcam-live">● LIVE / REFRESHING</div>
+      </a>
+
+      <a class="webcam-card" href="https://www.koeln.de/leben/webcams-koeln/" target="_blank" rel="noopener">
+        <div class="webcam-city">🇩🇪 Cologne</div>
+        <div class="webcam-name">Cologne Webcams</div>
+        <div class="webcam-desc">Domcam plus city and Rhine-area camera links.</div>
+        <div class="webcam-live">● LIVE / REFRESHING</div>
+      </a>
+
+      <a class="webcam-card featured-cam" href="https://www.seilbahn-koblenz.de/webcam.html" target="_blank" rel="noopener">
+        <div class="webcam-city">🇩🇪 Koblenz</div>
+        <div class="webcam-name">Deutsches Eck / Rhine & Moselle</div>
+        <div class="webcam-desc">Excellent view from Ehrenbreitstein Fortress over the river confluence.</div>
+        <div class="webcam-live">● HIGH-RES LIVE VIEW</div>
+      </a>
+
+      <a class="webcam-card" href="https://www.r-kom.de/webcams" target="_blank" rel="noopener">
+        <div class="webcam-city">🇩🇪 Regensburg</div>
+        <div class="webcam-name">Stone Bridge / Danube</div>
+        <div class="webcam-desc">Live video of the Stone Bridge and several Regensburg locations.</div>
+        <div class="webcam-live">● LIVE VIDEO</div>
+      </a>
+
+      <a class="webcam-card" href="https://www.passau.de/rathaus-buergerservice/buergerservice/webcam/" target="_blank" rel="noopener">
+        <div class="webcam-city">🇩🇪 Passau</div>
+        <div class="webcam-name">Veste Oberhaus Panorama</div>
+        <div class="webcam-desc">Panoramic city and three-rivers view. Camera may update intermittently.</div>
+        <div class="webcam-live watch-cam">● SOMETIMES LIMITED</div>
+      </a>
+
+      <a class="webcam-card featured-cam" href="https://wachau.webcam/" target="_blank" rel="noopener">
+        <div class="webcam-city">🇦🇹 Wachau</div>
+        <div class="webcam-name">Wachau Webcam</div>
+        <div class="webcam-desc">Live view in the Wachau Valley along the Danube.</div>
+        <div class="webcam-live">● LIVE</div>
+      </a>
+
+      <a class="webcam-card" href="https://www.wien.gv.at/en/content/webcams" target="_blank" rel="noopener">
+        <div class="webcam-city">🇦🇹 Vienna</div>
+        <div class="webcam-name">City of Vienna Webcams</div>
+        <div class="webcam-desc">Official city cameras including skyline and Danube-area views.</div>
+        <div class="webcam-live">● OFFICIAL CAMERAS</div>
+      </a>
+
+      <a class="webcam-card featured-cam" href="https://www.youtube.com/watch?v=KGHw7rw5uuQ" target="_blank" rel="noopener">
+        <div class="webcam-city">🇭🇺 Budapest</div>
+        <div class="webcam-name">EarthCam — Danube View</div>
+        <div class="webcam-desc">Live Budapest view over the Danube from Hotel Victoria.</div>
+        <div class="webcam-live">● LIVE VIDEO</div>
+      </a>
+    </div>
+
+    <p class="small" style="margin-top:12px">Camera operators occasionally take feeds offline for maintenance or weather. I selected views that are useful for seeing the rivers or cities we will actually visit.</p>
   </div>
 
   <div class="section">

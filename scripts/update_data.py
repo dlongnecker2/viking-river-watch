@@ -59,6 +59,37 @@ def viadonau():
         out["source_time"] = tm.group(1)+" "+tm.group(2)
     return out
 
+def vesselfinder():
+    url = "https://www.vesselfinder.com/vessels/details/269057517"
+    raw = get_text(url)
+    text = html.unescape(re.sub(r"<[^>]+>", " ", raw))
+    text = re.sub(r"\s+", " ", text)
+
+    out = {"checked": True, "source": url, "mmsi": "269057517"}
+
+    m = re.search(r"current position of VIKING VE is at ([^.]+?) reported ([^.]+?) by AIS", text, re.I)
+    if m:
+        out["area"] = m.group(1).strip()
+        out["reported_ago"] = m.group(2).strip()
+
+    m = re.search(r"vessel is en route to ([A-Z0-9_-]+)", text, re.I)
+    if m:
+        out["destination"] = m.group(1).strip()
+
+    m = re.search(r"Navigation Status\s+([A-Za-z ]+?)\s+Position Received", text, re.I)
+    if m:
+        out["status"] = m.group(1).strip()
+
+    m = re.search(r"Current draught\s+([0-9.]+\s*m)", text, re.I)
+    if m:
+        out["draught"] = m.group(1).strip()
+
+    m = re.search(r"Last Port\s+([^\n]+?)\s+ATD:", text, re.I)
+    if m:
+        out["last_port"] = m.group(1).strip()
+
+    return out
+
 def viking():
     url = "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html"
     raw = get_text(url)
@@ -102,6 +133,12 @@ try:
 except Exception as e:
     errors.append("Viking: "+repr(e))
     data["viking"] = {"checked": False}
+
+try:
+    data["ship"] = vesselfinder()
+except Exception as e:
+    errors.append("VesselFinder: "+repr(e))
+    data["ship"] = {"checked": False, "mmsi": "269057517"}
 
 data["errors"] = errors
 

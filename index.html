@@ -278,7 +278,14 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 @media(max-width:800px){.tracker-status-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:500px){.tracker-status-grid{grid-template-columns:1fr}}
 
+
+/* Visible Viking Ve route map */
+.ve-map{width:100%;height:390px;border:1px solid #d4dfe2;border-radius:14px;overflow:hidden;margin:14px 0;background:#eef3f4}
+.ve-ship-icon{font-size:24px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+@media(max-width:700px){.ve-map{height:320px}}
+
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
 <header>
@@ -520,7 +527,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <div class="section">
     <div class="kicker">Viking Ve location • refreshed hourly</div>
     <h2>📍 Track the Viking Ve</h2>
-    <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). Inland-river AIS can lag when the ship is outside receiver coverage.</p>
+    <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). CruiseMapper currently lists the ship on its Budapest → Amsterdam Grand European Tour.</p>
+
+    <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
 
     <div class="tracker-status-grid">
       <div class="tracker-stat">
@@ -542,11 +551,11 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     </div>
 
     <div class="tracker-links">
-      <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">🗺️ Open live map in CruiseMapper ↗</a>
+      <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">🗺️ Open live CruiseMapper map ↗</a>
       <a class="tracker-button secondary-tracker" href="https://www.vesselfinder.com/vessels/details/269057517" target="_blank" rel="noopener">🚢 VesselFinder details ↗</a>
     </div>
 
-    <p class="small" style="margin-top:10px">The dashboard shows the useful AIS summary here; the map buttons open the full interactive tracker without leaving a giant blank box on this page.</p>
+    <p class="small" style="margin-top:10px">The map on this page shows the Viking Ve route corridor and latest known area. The buttons open the provider's fully live AIS map when you want the exact vessel position.</p>
   </div>
 
   <div class="section">
@@ -672,6 +681,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
 <footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer><div style="max-width:1100px;margin:0 auto 30px;padding:0 22px;color:#687b82;font-size:12px;line-height:1.5"><strong>Data sources:</strong> Germany: PEGELONLINE / Bavarian Environment Agency (Kaub, Würzburg, Pfelling). Austria/Hungary: Danube FIS Portal. Viking operations: Viking Current Sailings notice dated Sept. 25, 2026. Gauge values use each station’s own local datum; do not compare raw centimeters between stations.</div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 const weatherStops = [
   {name:"Amsterdam", lat:52.3676, lon:4.9041},
@@ -733,6 +743,44 @@ async function loadWeather(){
 }
 loadWeather();
 
+
+let veMap=null;
+let veShipMarker=null;
+
+function initVikingVeMap(){
+  if(typeof L==="undefined" || !document.getElementById("ve-map")) return;
+  veMap=L.map("ve-map",{scrollWheelZoom:false}).setView([49.6,11.0],6);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    maxZoom:18,
+    attribution:"&copy; OpenStreetMap contributors"
+  }).addTo(veMap);
+
+  const route=[
+    [47.4979,19.0402], // Budapest
+    [48.2082,16.3738], // Vienna
+    [48.2279,15.3319], // Wachau/Melk
+    [48.5667,13.4319], // Passau
+    [49.0134,12.1016], // Regensburg
+    [49.4521,11.0767], // Nuremberg
+    [49.8988,10.9028], // Bamberg
+    [49.7913,9.9534],  // Wurzburg
+    [50.3569,7.5889],  // Koblenz
+    [50.9375,6.9603],  // Cologne
+    [51.8853,4.6369],  // Kinderdijk
+    [52.3676,4.9041]   // Amsterdam
+  ];
+  L.polyline(route,{weight:5,opacity:.75}).addTo(veMap);
+  const labels=[
+    ["Budapest",47.4979,19.0402],["Vienna",48.2082,16.3738],["Passau",48.5667,13.4319],
+    ["Regensburg",49.0134,12.1016],["Nuremberg",49.4521,11.0767],["Bamberg",49.8988,10.9028],
+    ["Würzburg",49.7913,9.9534],["Koblenz",50.3569,7.5889],["Cologne",50.9375,6.9603],
+    ["Amsterdam",52.3676,4.9041]
+  ];
+  labels.forEach(([name,lat,lon])=>L.circleMarker([lat,lon],{radius:4,weight:2,fillOpacity:1}).addTo(veMap).bindTooltip(name));
+  veMap.fitBounds(L.latLngBounds(route),{padding:[20,20]});
+}
+initVikingVeMap();
+
 async function loadRiverWatchData(){
   try{
     const response=await fetch("data.json?nocache="+Date.now(),{cache:"no-store"});
@@ -768,6 +816,15 @@ async function loadRiverWatchData(){
       set("ship-status",d.ship.status,"Not available");
       set("ship-destination",d.ship.destination,"Not reported");
       set("ship-reported",d.ship.reported_ago,"Not available");
+      if(veMap && d.ship.latitude!=null && d.ship.longitude!=null){
+        const ll=[Number(d.ship.latitude),Number(d.ship.longitude)];
+        if(Number.isFinite(ll[0]) && Number.isFinite(ll[1])){
+          const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[28,28],iconAnchor:[14,14]});
+          if(!veShipMarker) veShipMarker=L.marker(ll,{icon}).addTo(veMap);
+          else veShipMarker.setLatLng(ll);
+          veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position"));
+        }
+      }
     }
   }catch(err){
     const updated=document.getElementById("report-last-updated");

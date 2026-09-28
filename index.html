@@ -4,129 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dennis's Viking River Watch</title>
-
 <style>
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background: #f4f7f8;
-    color: #18323b;
-  }
-
-  header {
-    background: #123c4a;
-    color: white;
-    padding: 32px 20px;
-    text-align: center;
-  }
-
-  header h1 {
-    margin: 0 0 8px;
-    font-size: 34px;
-  }
-
-  header p {
-    margin: 5px 0;
-    opacity: .9;
-  }
-
-  .container {
-    max-width: 1050px;
-    margin: auto;
-    padding: 22px;
-  }
-
-  .outlook {
-    background: white;
-    border-radius: 14px;
-    padding: 22px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  }
-
-  .status {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    background: #dff4e5;
-    color: #126b35;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-    gap: 16px;
-  }
-
-  .card {
-    background: white;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  }
-
-  .card h2 {
-    margin-top: 0;
-    font-size: 21px;
-  }
-
-  .level {
-    font-size: 31px;
-    font-weight: bold;
-    margin: 10px 0;
-  }
-
-  .green { color: #168447; }
-  .yellow { color: #c48700; }
-  .red { color: #c4382b; }
-
-  .section {
-    background: white;
-    margin-top: 20px;
-    padding: 22px;
-    border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th, td {
-    padding: 11px 8px;
-    text-align: left;
-    border-bottom: 1px solid #e2e7e9;
-  }
-
-  th {
-    color: #49626b;
-  }
-
-  .next {
-    background: #fff7dd;
-  }
-
-  footer {
-    text-align: center;
-    color: #687b82;
-    padding: 30px;
-    font-size: 14px;
-  }
-
-  @media(max-width:600px) {
-    header h1 { font-size: 27px; }
-    .container { padding: 12px; }
-    th, td { font-size: 13px; }
-  }
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#f4f7f8;color:#18323b}
+header{background:#123c4a;color:#fff;padding:32px 20px;text-align:center}
+header h1{margin:0 0 8px;font-size:34px} header p{margin:5px 0;opacity:.9}
+.container{max-width:1100px;margin:auto;padding:22px}
+.outlook,.section,.route-visual{background:#fff;border-radius:14px;padding:22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.status{display:inline-block;padding:8px 15px;border-radius:20px;font-weight:700;background:#dff4e5;color:#126b35}
+.route-visual h2{margin-top:0}
+.visual-wrap{overflow-x:auto;padding-bottom:4px}
+.river-svg{width:100%;min-width:900px;height:auto;display:block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:14px;color:#526870}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.dot{width:13px;height:13px;border-radius:50%;display:inline-block}.g{background:#2f9460}.y{background:#d39a16}.r{background:#c74638}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.card h2{margin-top:0;font-size:21px}.level{font-size:30px;font-weight:700;margin:10px 0}
+.green{color:#168447}.yellow{color:#c48700}.red{color:#c4382b}
+.section{margin-top:20px}
+table{width:100%;border-collapse:collapse}th,td{padding:11px 8px;text-align:left;border-bottom:1px solid #e2e7e9}th{color:#49626b}
+.next{background:#fff7dd}
+footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
+.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#67808a;font-weight:700}
+.small{font-size:13px;color:#688087}
+@media(max-width:600px){header h1{font-size:27px}.container{padding:12px}th,td{font-size:13px}}
 </style>
 </head>
-
 <body>
-
 <header>
   <h1>🚢 Viking River Watch</h1>
   <p>Grand European Tour • Amsterdam → Budapest</p>
@@ -134,131 +39,175 @@
 </header>
 
 <div class="container">
-
   <div class="outlook">
+    <div class="kicker">Personal cruise monitor</div>
     <h2>Your Cruise Outlook</h2>
     <span class="status">● MONITORING CONDITIONS</span>
-
-    <p>
-      Tracking Rhine, Main and Danube river conditions for our upcoming
-      Viking Grand European Tour.
-    </p>
-
+    <p>Tracking the Rhine, Main, Main-Danube Canal and Danube for conditions that could affect our Viking Grand European Tour.</p>
     <p><strong>Next update:</strong> Daily</p>
   </div>
 
+  <div class="route-visual">
+    <div class="kicker">Route at a glance</div>
+    <h2>Amsterdam → Budapest River Conditions</h2>
+    <p class="small">Visual gauges will show current level, trend and risk once live data is connected.</p>
+    <div class="visual-wrap">
+      <svg class="river-svg" viewBox="0 0 1120 500" role="img" aria-label="Visual route and river level gauges from Amsterdam to Budapest">
+        <defs>
+          <linearGradient id="river" x1="0" x2="1">
+            <stop offset="0%" stop-color="#2f9e83"/>
+            <stop offset="55%" stop-color="#48a98e"/>
+            <stop offset="100%" stop-color="#2f9460"/>
+          </linearGradient>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9edcc8"/>
+            <stop offset="100%" stop-color="#48a98e"/>
+          </linearGradient>
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity=".15"/>
+          </filter>
+        </defs>
+
+        <text x="35" y="55" font-size="20" font-weight="700" fill="#21434d">NORTH SEA / AMSTERDAM</text>
+        <text x="940" y="55" font-size="20" font-weight="700" fill="#21434d">BUDAPEST</text>
+
+        <path d="M60,380 C180,340 250,350 340,375 S520,430 640,390 S820,335 1035,365"
+              fill="none" stroke="url(#river)" stroke-width="28" stroke-linecap="round"/>
+        <path d="M60,380 C180,340 250,350 340,375 S520,430 640,390 S820,335 1035,365"
+              fill="none" stroke="#d9f1e8" stroke-width="3" stroke-dasharray="5 11" stroke-linecap="round"/>
+
+        <text x="135" y="420" font-size="14" fill="#49626b">RHINE</text>
+        <text x="430" y="454" font-size="14" fill="#49626b">MAIN</text>
+        <text x="624" y="442" font-size="14" fill="#49626b">CANAL</text>
+        <text x="820" y="420" font-size="14" fill="#49626b">DANUBE</text>
+
+        <!-- Gauge 1 -->
+        <g transform="translate(150,95)" filter="url(#shadow)">
+          <text x="55" y="-18" text-anchor="middle" font-size="18" font-weight="700" fill="#21434d">Kaub</text>
+          <text x="55" y="2" text-anchor="middle" font-size="13" fill="#687f86">Middle Rhine</text>
+          <rect x="8" y="20" width="94" height="210" rx="16" fill="#f8fbfa" stroke="#d39a16" stroke-width="3"/>
+          <line x1="18" x2="92" y1="85" y2="85" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="18" x2="92" y1="145" y2="145" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="55" y="120" text-anchor="middle" font-size="12" fill="#2f7d5b">normal</text>
+          <path d="M10 176 Q30 168 50 176 T100 176 L100 228 L10 228 Z" fill="url(#water)"/>
+          <text x="55" y="257" text-anchor="middle" font-size="18" font-weight="700" fill="#c48700">Monitoring</text>
+        </g>
+
+        <!-- Gauge 2 -->
+        <g transform="translate(350,85)" filter="url(#shadow)">
+          <text x="55" y="-18" text-anchor="middle" font-size="18" font-weight="700" fill="#21434d">Main River</text>
+          <text x="55" y="2" text-anchor="middle" font-size="13" fill="#687f86">Würzburg area</text>
+          <rect x="8" y="20" width="94" height="210" rx="16" fill="#f8fbfa" stroke="#2f9460" stroke-width="3"/>
+          <line x1="18" x2="92" y1="85" y2="85" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="18" x2="92" y1="145" y2="145" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="55" y="120" text-anchor="middle" font-size="12" fill="#2f7d5b">normal</text>
+          <path d="M10 155 Q30 147 50 155 T100 155 L100 228 L10 228 Z" fill="url(#water)"/>
+          <text x="55" y="257" text-anchor="middle" font-size="18" font-weight="700" fill="#168447">Monitoring</text>
+        </g>
+
+        <!-- Gauge 3 -->
+        <g transform="translate(550,100)" filter="url(#shadow)">
+          <text x="55" y="-18" text-anchor="middle" font-size="18" font-weight="700" fill="#21434d">Pfelling</text>
+          <text x="55" y="2" text-anchor="middle" font-size="13" fill="#687f86">Upper Danube</text>
+          <rect x="8" y="20" width="94" height="210" rx="16" fill="#f8fbfa" stroke="#d39a16" stroke-width="3"/>
+          <line x1="18" x2="92" y1="85" y2="85" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="18" x2="92" y1="145" y2="145" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="55" y="120" text-anchor="middle" font-size="12" fill="#2f7d5b">normal</text>
+          <path d="M10 190 Q30 182 50 190 T100 190 L100 228 L10 228 Z" fill="url(#water)"/>
+          <text x="55" y="257" text-anchor="middle" font-size="18" font-weight="700" fill="#c48700">Monitoring</text>
+        </g>
+
+        <!-- Gauge 4 -->
+        <g transform="translate(745,90)" filter="url(#shadow)">
+          <text x="55" y="-18" text-anchor="middle" font-size="18" font-weight="700" fill="#21434d">Passau</text>
+          <text x="55" y="2" text-anchor="middle" font-size="13" fill="#687f86">Danube</text>
+          <rect x="8" y="20" width="94" height="210" rx="16" fill="#f8fbfa" stroke="#2f9460" stroke-width="3"/>
+          <line x1="18" x2="92" y1="85" y2="85" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="18" x2="92" y1="145" y2="145" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="55" y="120" text-anchor="middle" font-size="12" fill="#2f7d5b">normal</text>
+          <path d="M10 160 Q30 152 50 160 T100 160 L100 228 L10 228 Z" fill="url(#water)"/>
+          <text x="55" y="257" text-anchor="middle" font-size="18" font-weight="700" fill="#168447">Monitoring</text>
+        </g>
+
+        <!-- Gauge 5 -->
+        <g transform="translate(925,105)" filter="url(#shadow)">
+          <text x="55" y="-18" text-anchor="middle" font-size="18" font-weight="700" fill="#21434d">Vienna / Wachau</text>
+          <text x="55" y="2" text-anchor="middle" font-size="13" fill="#687f86">Austrian Danube</text>
+          <rect x="8" y="20" width="94" height="210" rx="16" fill="#f8fbfa" stroke="#2f9460" stroke-width="3"/>
+          <line x1="18" x2="92" y1="85" y2="85" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="18" x2="92" y1="145" y2="145" stroke="#2f9460" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="55" y="120" text-anchor="middle" font-size="12" fill="#2f7d5b">normal</text>
+          <path d="M10 150 Q30 142 50 150 T100 150 L100 228 L10 228 Z" fill="url(#water)"/>
+          <text x="55" y="257" text-anchor="middle" font-size="18" font-weight="700" fill="#168447">Monitoring</text>
+        </g>
+
+        <circle cx="92" cy="370" r="8" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="92" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#21434d">Amsterdam</text>
+        <circle cx="286" cy="365" r="7" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="286" y="345" text-anchor="middle" font-size="13" fill="#21434d">Koblenz</text>
+        <circle cx="485" cy="407" r="7" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="485" y="432" text-anchor="middle" font-size="13" fill="#21434d">Bamberg</text>
+        <circle cx="690" cy="373" r="7" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="690" y="353" text-anchor="middle" font-size="13" fill="#21434d">Regensburg</text>
+        <circle cx="855" cy="348" r="7" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="855" y="328" text-anchor="middle" font-size="13" fill="#21434d">Vienna</text>
+        <circle cx="1030" cy="365" r="8" fill="#fff" stroke="#2f9460" stroke-width="4"/>
+        <text x="1030" y="345" text-anchor="middle" font-size="13" font-weight="700" fill="#21434d">Budapest</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><i class="dot g"></i> Normal</span>
+      <span><i class="dot y"></i> Watch / running low or high</span>
+      <span><i class="dot r"></i> Disruption risk</span>
+      <span>Dashed lines = normal operating band</span>
+    </div>
+  </div>
+
   <div class="grid">
-
-    <div class="card">
-      <h2>🇩🇪 Rhine — Kaub</h2>
-      <div class="level yellow">Monitoring</div>
-      <p>Middle Rhine navigation checkpoint</p>
-      <p><strong>Our cruise:</strong> November 6</p>
-    </div>
-
-    <div class="card">
-      <h2>🇩🇪 Main River</h2>
-      <div class="level green">Monitoring</div>
-      <p>Miltenberg → Würzburg → Bamberg</p>
-      <p><strong>Our cruise:</strong> November 7–9</p>
-    </div>
-
-    <div class="card">
-      <h2>🇩🇪 Danube — Pfelling</h2>
-      <div class="level yellow">Monitoring</div>
-      <p>Important low-water navigation point</p>
-      <p><strong>Our cruise:</strong> November 11–12</p>
-    </div>
-
-    <div class="card">
-      <h2>🇦🇹 Danube — Wachau</h2>
-      <div class="level green">Monitoring</div>
-      <p>Melk → Vienna</p>
-      <p><strong>Our cruise:</strong> November 13–15</p>
-    </div>
-
+    <div class="card"><h2>🇩🇪 Rhine — Kaub</h2><div class="level yellow">Monitoring</div><p>Middle Rhine navigation checkpoint</p><p><strong>Our cruise:</strong> November 6</p></div>
+    <div class="card"><h2>🇩🇪 Main River</h2><div class="level green">Monitoring</div><p>Miltenberg → Würzburg → Bamberg</p><p><strong>Our cruise:</strong> November 7–9</p></div>
+    <div class="card"><h2>🇩🇪 Danube — Pfelling</h2><div class="level yellow">Monitoring</div><p>Important low-water navigation point</p><p><strong>Our cruise:</strong> November 11–12</p></div>
+    <div class="card"><h2>🇦🇹 Danube — Wachau</h2><div class="level green">Monitoring</div><p>Melk → Vienna</p><p><strong>Our cruise:</strong> November 13–15</p></div>
   </div>
 
   <div class="section">
     <h2>🚢 Viking Operations</h2>
-
     <p><strong>Current status:</strong> Checking Viking operations.</p>
-
-    <p>
-      This section will report confirmed information about normal sailing,
-      ship swaps, altered docking locations, skipped river sections or
-      bus transportation.
-    </p>
+    <p>This section will report confirmed information about normal sailing, ship swaps, altered docking locations, skipped river sections or bus transportation.</p>
   </div>
 
   <div class="section">
     <h2>🗺️ Our Journey</h2>
-
     <table>
-      <tr>
-        <th>Date</th>
-        <th>Destination</th>
-        <th>River Area</th>
-      </tr>
-
+      <tr><th>Date</th><th>Destination</th><th>River Area</th></tr>
       <tr><td>Nov 3</td><td>Amsterdam</td><td>Rhine system</td></tr>
       <tr><td>Nov 4</td><td>Kinderdijk</td><td>Lower Rhine</td></tr>
       <tr><td>Nov 5</td><td>Cologne</td><td>Rhine</td></tr>
-
-      <tr class="next">
-        <td>Nov 6</td>
-        <td>Koblenz / Middle Rhine</td>
-        <td><strong>Kaub checkpoint</strong></td>
-      </tr>
-
+      <tr class="next"><td>Nov 6</td><td>Koblenz / Middle Rhine</td><td><strong>Kaub checkpoint</strong></td></tr>
       <tr><td>Nov 7</td><td>Miltenberg</td><td>Main</td></tr>
       <tr><td>Nov 8</td><td>Würzburg</td><td>Main</td></tr>
       <tr><td>Nov 9</td><td>Bamberg</td><td>Main</td></tr>
       <tr><td>Nov 10</td><td>Nuremberg</td><td>Main-Danube Canal</td></tr>
-
-      <tr class="next">
-        <td>Nov 11</td>
-        <td>Regensburg</td>
-        <td><strong>Danube</strong></td>
-      </tr>
-
+      <tr class="next"><td>Nov 11</td><td>Regensburg</td><td><strong>Danube</strong></td></tr>
       <tr><td>Nov 12</td><td>Passau</td><td>Danube</td></tr>
       <tr><td>Nov 13</td><td>Melk / Wachau</td><td>Danube</td></tr>
       <tr><td>Nov 14–15</td><td>Vienna</td><td>Danube</td></tr>
       <tr><td>Nov 16–17</td><td>Budapest</td><td>Danube</td></tr>
-
     </table>
   </div>
 
   <div class="section">
     <h2>🌧️ Weather & River Trend</h2>
-    <p>
-      Rainfall forecasts and upstream river trends will appear here.
-      Rising water upstream can improve navigability several days later.
-    </p>
+    <p>Rainfall forecasts and upstream river trends will appear here. Rising water upstream can improve navigability several days later.</p>
   </div>
 
   <div class="section">
     <h2>ℹ️ What We're Watching</h2>
-
-    <p>
-      River cruise ships require adequate water beneath the hull but can
-      also encounter problems when water becomes too high to pass safely
-      beneath bridges.
-    </p>
-
-    <p>
-      The dashboard will focus on conditions that could actually affect
-      our Viking itinerary rather than simply reporting raw gauge numbers.
-    </p>
+    <p>River cruise ships require adequate water beneath the hull but can also encounter problems when water becomes too high to pass safely beneath bridges.</p>
+    <p>The dashboard focuses on conditions that could actually affect our Viking itinerary rather than simply reporting raw gauge numbers.</p>
   </div>
-
 </div>
 
-<footer>
-  Dennis's Viking Grand European Tour River Watch<br>
-  Amsterdam → Budapest • 2026
-</footer>
-
+<footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer>
 </body>
 </html>

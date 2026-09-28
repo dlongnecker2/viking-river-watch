@@ -193,6 +193,59 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .ship-title-row{display:block!important;margin-bottom:18px}
 .ship-thumb{display:none!important}
 
+
+/* Actual Upper Deck image only — rotated to landscape */
+.upper-deck-only{
+  width:100%;
+  margin-top:14px;
+  border:1px solid #cbd8dc;
+  border-radius:14px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 4px 14px rgba(24,50,59,.08)
+}
+.rotated-plan-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:3.25/1;
+  overflow:hidden;
+  background:#fff
+}
+.upper-deck-actual{
+  position:absolute;
+  left:50%;
+  top:50%;
+  height:285%;
+  width:auto;
+  max-width:none;
+  transform:translate(-50%,-50%) rotate(90deg);
+  transform-origin:center center;
+  object-fit:contain
+}
+.deck-label2{
+  position:absolute;
+  z-index:5;
+  transform:translate(-50%,-50%);
+  border:2px solid #fff;
+  border-radius:10px;
+  box-shadow:0 2px 9px rgba(0,0,0,.26);
+  padding:6px 9px;
+  text-align:center;
+  line-height:1.05;
+  white-space:nowrap
+}
+.deck-label2 strong{display:block;font-size:14px}
+.deck-label2 span{display:block;font-size:9px;margin-top:3px;font-weight:700}
+.room328{left:35%;top:24%;background:#fff0a8;color:#6b4a00}
+.room308{left:58%;top:24%;background:#dfeeff;color:#214c77}
+.coffee2{left:74%;top:57%;background:#e7f4ea;color:#235b42}
+@media(max-width:800px){
+  .rotated-plan-wrap{aspect-ratio:2.4/1}
+  .upper-deck-actual{height:230%}
+  .deck-label2 strong{font-size:11px}
+  .deck-label2 span{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -377,49 +430,46 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
   <div class="section ship-section">
     <div class="kicker">Our ship</div>
-    <div class="ship-title-row">
-      <div>
-        <h2>🛳️ Viking Ve</h2>
-        <div class="small">443 ft • 190 guests • 95 outside staterooms • built 2015</div>
-      </div>
-    </div>
+    <h2>🛳️ Viking Ve</h2>
+    <div class="small" style="margin-bottom:18px">443 ft • 190 guests • 95 outside staterooms • built 2015</div>
 
     <div class="deck-plan-section">
       <div class="kicker">Upper Deck — Deck 3</div>
-      <h3>Actual Viking Longship Upper Deck Plan</h3>
-      <p class="small">This is the published Viking Longship deck plan used for Viking Ve's Longship layout, cropped to the Upper Deck so the room numbers and public spaces are readable.</p>
+      <h3>Viking Ve Upper Deck Plan</h3>
+      <p class="small">Actual Viking Ve Upper Deck plan — no ship profile and no other decks.</p>
 
-      <div class="deck-crop">
-        <img src="https://www.cruisingholidays.co.uk/images2/river-ships/viking/viking-longships/viking-longships.png"
-             alt="Published Viking Longship Upper Deck plan">
+      <div class="upper-deck-only">
+        <div class="rotated-plan-wrap">
+          <img
+            src="https://d23n7ahjfnjotp.cloudfront.net/imgs/client/ships/decks/450/1347302_3_450.gif"
+            alt="Viking Ve Upper Deck plan"
+            class="upper-deck-actual">
 
-        <div class="deck-label label-328">
-          <span class="label-arrow">▼</span>
-          <strong>★ 328</strong>
-          <small>Your cabin</small>
-        </div>
+          <div class="deck-label2 room328">
+            <strong>★ 328</strong>
+            <span>Your cabin</span>
+          </div>
 
-        <div class="deck-label label-308">
-          <span class="label-arrow">▼</span>
-          <strong>👥 308</strong>
-          <small>Poffenroths</small>
-        </div>
+          <div class="deck-label2 room308">
+            <strong>👥 308</strong>
+            <span>Poffenroths</span>
+          </div>
 
-        <div class="deck-label label-coffee">
-          <span class="label-arrow">▼</span>
-          <strong>☕ Coffee / Tea</strong>
-          <small>24-hour station</small>
+          <div class="deck-label2 coffee2">
+            <strong>☕ Coffee / Tea</strong>
+            <span>24-hour station</span>
+          </div>
         </div>
       </div>
 
       <div class="deck-reading-key">
         <div class="key-card key-328"><strong>★ Cabin 328</strong><span>Your Veranda Suite on the Upper Deck.</span></div>
         <div class="key-card key-308"><strong>👥 Cabin 308</strong><span>Poffenroths' Veranda Suite, closer to the lounge.</span></div>
-        <div class="key-card key-coffee"><strong>☕ Coffee / Tea</strong><span>At the entrance to the Lounge area; Viking Longships have 24-hour self-service beverages here.</span></div>
+        <div class="key-card key-coffee"><strong>☕ Coffee / Tea</strong><span>Near the Observation Lounge / forward public area.</span></div>
       </div>
 
       <div class="public-room-strip">
-        <strong>Public spaces visible on this plan:</strong>
+        <strong>Upper Deck public spaces:</strong>
         <span>Library / Internet</span>
         <span>Observation Lounge</span>
         <span>Bar</span>
@@ -430,7 +480,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
       <div class="ship-links">
         <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
-        <a href="https://cms-assets.viking.com/river/longship/deck_plan/2018_Viking_Longships_Deckplan_Tagged-UA.pdf" target="_blank" rel="noopener">Official Viking Longships deck-plan PDF ↗</a>
+        <a href="https://www.icruise.com/deckplans/viking-river-cruises-viking-ve-deckplans-upper-deck.html" target="_blank" rel="noopener">Viking Ve Upper Deck source ↗</a>
       </div>
     </div>
   </div>

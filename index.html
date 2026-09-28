@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dennis's Viking River Watch</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #f4f7f8;
+    color: #18323b;
+  }
+
+  header {
+    background: #123c4a;
+    color: white;
+    padding: 32px 20px;
+    text-align: center;
+  }
+
+  header h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+  }
+
+  header p {
+    margin: 5px 0;
+    opacity: .9;
+  }
+
+  .container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 22px;
+  }
+
+  .outlook {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .status {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    background: #dff4e5;
+    color: #126b35;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .card h2 {
+    margin-top: 0;
+    font-size: 21px;
+  }
+
+  .level {
+    font-size: 31px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .green { color: #168447; }
+  .yellow { color: #c48700; }
+  .red { color: #c4382b; }
+
+  .section {
+    background: white;
+    margin-top: 20px;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 11px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e2e7e9;
+  }
+
+  th {
+    color: #49626b;
+  }
+
+  .next {
+    background: #fff7dd;
+  }
+
+  footer {
+    text-align: center;
+    color: #687b82;
+    padding: 30px;
+    font-size: 14px;
+  }
+
+  @media(max-width:600px) {
+    header h1 { font-size: 27px; }
+    .container { padding: 12px; }
+    th, td { font-size: 13px; }
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🚢 Viking River Watch</h1>
+  <p>Grand European Tour • Amsterdam → Budapest</p>
+  <p>November 3–17, 2026</p>
+</header>
+
+<div class="container">
+
+  <div class="outlook">
+    <h2>Your Cruise Outlook</h2>
+    <span class="status">● MONITORING CONDITIONS</span>
+
+    <p>
+      Tracking Rhine, Main and Danube river conditions for our upcoming
+      Viking Grand European Tour.
+    </p>
+
+    <p><strong>Next update:</strong> Daily</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>🇩🇪 Rhine — Kaub</h2>
+      <div class="level yellow">Monitoring</div>
+      <p>Middle Rhine navigation checkpoint</p>
+      <p><strong>Our cruise:</strong> November 6</p>
+    </div>
+
+    <div class="card">
+      <h2>🇩🇪 Main River</h2>
+      <div class="level green">Monitoring</div>
+      <p>Miltenberg → Würzburg → Bamberg</p>
+      <p><strong>Our cruise:</strong> November 7–9</p>
+    </div>
+
+    <div class="card">
+      <h2>🇩🇪 Danube — Pfelling</h2>
+      <div class="level yellow">Monitoring</div>
+      <p>Important low-water navigation point</p>
+      <p><strong>Our cruise:</strong> November 11–12</p>
+    </div>
+
+    <div class="card">
+      <h2>🇦🇹 Danube — Wachau</h2>
+      <div class="level green">Monitoring</div>
+      <p>Melk → Vienna</p>
+      <p><strong>Our cruise:</strong> November 13–15</p>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <h2>🚢 Viking Operations</h2>
+
+    <p><strong>Current status:</strong> Checking Viking operations.</p>
+
+    <p>
+      This section will report confirmed information about normal sailing,
+      ship swaps, altered docking locations, skipped river sections or
+      bus transportation.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>🗺️ Our Journey</h2>
+
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Destination</th>
+        <th>River Area</th>
+      </tr>
+
+      <tr><td>Nov 3</td><td>Amsterdam</td><td>Rhine system</td></tr>
+      <tr><td>Nov 4</td><td>Kinderdijk</td><td>Lower Rhine</td></tr>
+      <tr><td>Nov 5</td><td>Cologne</td><td>Rhine</td></tr>
+
+      <tr class="next">
+        <td>Nov 6</td>
+        <td>Koblenz / Middle Rhine</td>
+        <td><strong>Kaub checkpoint</strong></td>
+      </tr>
+
+      <tr><td>Nov 7</td><td>Miltenberg</td><td>Main</td></tr>
+      <tr><td>Nov 8</td><td>Würzburg</td><td>Main</td></tr>
+      <tr><td>Nov 9</td><td>Bamberg</td><td>Main</td></tr>
+      <tr><td>Nov 10</td><td>Nuremberg</td><td>Main-Danube Canal</td></tr>
+
+      <tr class="next">
+        <td>Nov 11</td>
+        <td>Regensburg</td>
+        <td><strong>Danube</strong></td>
+      </tr>
+
+      <tr><td>Nov 12</td><td>Passau</td><td>Danube</td></tr>
+      <tr><td>Nov 13</td><td>Melk / Wachau</td><td>Danube</td></tr>
+      <tr><td>Nov 14–15</td><td>Vienna</td><td>Danube</td></tr>
+      <tr><td>Nov 16–17</td><td>Budapest</td><td>Danube</td></tr>
+
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🌧️ Weather & River Trend</h2>
+    <p>
+      Rainfall forecasts and upstream river trends will appear here.
+      Rising water upstream can improve navigability several days later.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>ℹ️ What We're Watching</h2>
+
+    <p>
+      River cruise ships require adequate water beneath the hull but can
+      also encounter problems when water becomes too high to pass safely
+      beneath bridges.
+    </p>
+
+    <p>
+      The dashboard will focus on conditions that could actually affect
+      our Viking itinerary rather than simply reporting raw gauge numbers.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  Dennis's Viking Grand European Tour River Watch<br>
+  Amsterdam → Budapest • 2026
+</footer>
+
+</body>
+</html>

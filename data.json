@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-09-28T18:28:29.108597Z",
+  "updated_utc": "2026-09-28T19:18:51.470069Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,48 +7,47 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 0,
-      "timestamp": "2026-09-28T20:15:00+02:00",
+      "value_cm": 0.0,
+      "timestamp": "2026-09-28T21:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 213,
-      "timestamp": "2026-09-28T20:15:00+02:00",
+      "value_cm": 213.0,
+      "timestamp": "2026-09-28T21:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 237,
-      "hour_change_cm": 0
+      "value_cm": 241.0,
+      "hour_change_cm": 4.0
     },
     "kienstock": {
-      "value_cm": 106,
-      "hour_change_cm": 2
+      "value_cm": 106.0,
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 73,
-      "hour_change_cm": -2
+      "value_cm": 72.0,
+      "hour_change_cm": -1.0
     },
-    "source_time": "9/28/2026 8:12 PM"
+    "source_time": "9/28/2026 9:12 PM"
   },
   "viking": {
     "checked": false
   },
-  "errors": [
-    "Viking: <HTTPError 403: 'Forbidden'>"
-  ],
   "ship": {
     "checked": true,
     "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
     "mmsi": "269057517",
-    "latitude": 48.32965,
-    "longitude": 16.33016,
-    "position_time": "2026-09-21 07:31",
-    "area": "Latest coordinate-bearing AIS report available",
-    "status": "Moored",
-    "destination": "ENGELHARTSZELL",
-    "reported_ago": "Coordinate is older — see live CruiseMapper for newest AIS status"
-  }
+    "area": "Europe Inland",
+    "reported_ago": "0 min ago",
+    "destination": "ENGELHARTZELL",
+    "status": "Under way",
+    "draught": "1.7 m",
+    "last_port": "Koln (Cologne), Germany"
+  },
+  "errors": [
+    "Viking: <HTTPError 403: 'Forbidden'>"
+  ]
 }

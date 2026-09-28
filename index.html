@@ -284,6 +284,15 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .ve-ship-icon{font-size:24px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 @media(max-width:700px){.ve-map{height:320px}}
 
+
+.current-location-banner{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:#eef7f2;border:1px solid #cfe4d7;border-radius:12px;padding:10px 13px;margin-top:12px}
+.current-location-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:#3c6b50}
+.current-location-banner strong{font-size:15px;color:#18323b}
+#ship-location-time{width:100%;margin-top:-2px}
+
+
+.ve-ship-tooltip{background:#123c4a!important;color:#fff!important;border:0!important;border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.2)!important;font-weight:800!important;padding:4px 7px!important}
+.ve-ship-tooltip:before{display:none!important}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -528,6 +537,12 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <div class="kicker">Viking Ve location • refreshed hourly</div>
     <h2>📍 Track the Viking Ve</h2>
     <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). CruiseMapper currently lists the ship on its Budapest → Amsterdam Grand European Tour.</p>
+
+    <div class="current-location-banner">
+      <span class="current-location-label">🚢 Latest mapped position</span>
+      <strong id="ship-location-banner">Loading latest AIS position…</strong>
+      <span id="ship-location-time" class="small"></span>
+    </div>
 
     <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
 
@@ -819,10 +834,19 @@ async function loadRiverWatchData(){
       if(veMap && d.ship.latitude!=null && d.ship.longitude!=null){
         const ll=[Number(d.ship.latitude),Number(d.ship.longitude)];
         if(Number.isFinite(ll[0]) && Number.isFinite(ll[1])){
-          const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[28,28],iconAnchor:[14,14]});
-          if(!veShipMarker) veShipMarker=L.marker(ll,{icon}).addTo(veMap);
-          else veShipMarker.setLatLng(ll);
-          veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position"));
+          const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[30,30],iconAnchor:[15,15]});
+          if(!veShipMarker){
+            veShipMarker=L.marker(ll,{icon,zIndexOffset:1000}).addTo(veMap);
+            veShipMarker.bindTooltip("Viking Ve",{permanent:true,direction:"top",offset:[0,-10],className:"ve-ship-tooltip"});
+          } else {
+            veShipMarker.setLatLng(ll);
+          }
+          const posTime=d.ship.position_time||d.ship.reported_ago||"time unavailable";
+          veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position")+"<br><small>"+posTime+"</small>");
+          const b=document.getElementById("ship-location-banner");
+          const bt=document.getElementById("ship-location-time");
+          if(b) b.textContent=(d.ship.area||"Latest AIS position")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
+          if(bt) bt.textContent="Position report: "+posTime;
         }
       }
     }

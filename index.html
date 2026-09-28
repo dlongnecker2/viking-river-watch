@@ -46,6 +46,37 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .ship-links{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .ship-links a{color:#126b7a;font-weight:700;text-decoration:none}
 .ship-links a:hover{text-decoration:underline}
+.deck-detail-panel{min-width:0}
+.upper-plan-wrap{margin-top:12px}
+.plan-direction{display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:#657d85;letter-spacing:.06em;margin-bottom:5px}
+.upper-plan{border:2px solid #9fb2b8;border-radius:18px;background:#f9fbfb;padding:10px;display:grid;grid-template-columns:190px 1fr;gap:10px;box-shadow:inset 0 0 0 3px #fff}
+.public-zone{display:grid;gap:6px}
+.public-box{border-radius:9px;padding:10px 8px;text-align:center;font-size:12px;font-weight:800;border:1px solid #cfdadd}
+.aquavit{background:#eaf6f1}
+.lounge{background:#eef5fb}
+.library{background:#f3f0fa}
+.lounge span{font-weight:700;color:#235b42}
+.cabin-zone{display:grid;grid-template-rows:auto auto auto auto auto;gap:5px;min-width:0}
+.side-label{text-align:center;font-size:10px;font-weight:800;color:#7b8d92;letter-spacing:.12em}
+.cabin-strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(42px,1fr);gap:3px;overflow-x:auto;padding-bottom:2px}
+.cabin-cell{min-width:42px;border:1px solid #c7d3d7;border-radius:5px;background:#fff;padding:8px 3px;text-align:center;font-size:11px;font-weight:700;white-space:nowrap}
+.cabin-cell.ours{background:#fff1a8;border:2px solid #b57a00;color:#6c4b00}
+.cabin-cell.friends{background:#dfeeff;border:2px solid #3f72a8;color:#214c77}
+.cabin-cell.explorer{background:#efe7f6}
+.hallway{background:#d9e5e8;border-radius:999px;text-align:center;font-size:9px;font-weight:800;color:#587078;padding:4px}
+.plan-key{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.key-chip{display:inline-block;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+.ours-key{background:#fff1a8;color:#6c4b00}
+.friends-key{background:#dfeeff;color:#214c77}
+.coffee-key{background:#eaf6f1;color:#235b42}
+.cabin-note{font-size:12px;line-height:1.45;color:#4e676f;background:#f4f8f9;border-radius:9px;padding:10px}
+.mini-decks{display:grid;gap:6px;margin-top:14px}
+.mini-deck{display:grid;grid-template-columns:150px 1fr;gap:10px;border:1px solid #d9e2e5;border-radius:8px;padding:8px 10px;font-size:12px;background:#fafcfc}
+.mini-deck span{color:#607980}
+.active-mini{border:2px solid #c48700;background:#fffaf0}
+@media(max-width:850px){.upper-plan{grid-template-columns:1fr}.public-zone{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.public-zone{grid-template-columns:1fr}.mini-deck{grid-template-columns:1fr}.cabin-strip{grid-auto-columns:48px}}
+
 @media(max-width:850px){.ship-grid{grid-template-columns:1fr}.ship-photo{height:220px}}
 @media(max-width:600px){header h1{font-size:27px}.container{padding:12px}th,td{font-size:13px}}
 </style>
@@ -240,35 +271,51 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <div class="small" style="margin-top:6px">Photo: Wikimedia Commons, Viking Ve in Bamberg (CC BY-SA).</div>
       </div>
 
-      <div>
-        <h3 style="margin-top:0">Quick Deck Layout</h3>
-        <p class="small">Simplified guide — not to scale. <strong>Your cabin: 328 on the Upper Deck.</strong> Use the official Viking interactive plan for the exact position.</p>
+      <div class="deck-detail-panel">
+        <h3 style="margin-top:0">Actual-Style Deck Diagram</h3>
+        <p class="small"><strong>This is the floor-plan style view you were asking for.</strong> It is a custom schematic based on Viking Ve's published deck arrangement and cabin numbering, not Viking's copyrighted official drawing and not to scale.</p>
 
-        <div class="deck-plan">
-          <div class="deck-row sun">
-            <div class="deck-name">DECK 4<br><strong>Sun Deck</strong></div>
-            <div class="deck-detail">Walking track • shaded seating • Sky Bar • putting green • herb garden • solar panels</div>
+        <div class="upper-plan-wrap">
+          <div class="plan-direction"><span>← BOW / FRONT</span><span>AFT / REAR →</span></div>
+          <div class="upper-plan">
+            <div class="public-zone">
+              <div class="public-box aquavit">Aquavit Terrace</div>
+              <div class="public-box lounge">Observation Lounge & Bar<br><span>☕ 24-hour Coffee / Tea</span></div>
+              <div class="public-box library">Library / Internet</div>
+            </div>
+
+            <div class="cabin-zone">
+              <div class="side-label">PORT</div>
+              <div class="cabin-strip even-strip"><div class="cabin-cell">304</div><div class="cabin-cell friends">👥 308</div><div class="cabin-cell">312</div><div class="cabin-cell">316</div><div class="cabin-cell">320</div><div class="cabin-cell">324</div><div class="cabin-cell ours">★ 328</div><div class="cabin-cell">330</div><div class="cabin-cell">332</div><div class="cabin-cell">334</div><div class="cabin-cell">336</div><div class="cabin-cell">338</div><div class="cabin-cell explorer">340</div></div>
+              <div class="hallway">CENTER HALLWAY</div>
+              <div class="cabin-strip odd-strip"><div class="cabin-cell">301</div><div class="cabin-cell">303</div><div class="cabin-cell">305</div><div class="cabin-cell">307</div><div class="cabin-cell">309</div><div class="cabin-cell">311</div><div class="cabin-cell">313</div><div class="cabin-cell">315</div><div class="cabin-cell">317</div><div class="cabin-cell">319</div><div class="cabin-cell">321</div><div class="cabin-cell">323</div><div class="cabin-cell">325</div><div class="cabin-cell">327</div><div class="cabin-cell">329</div><div class="cabin-cell">331</div><div class="cabin-cell">333</div><div class="cabin-cell">335</div><div class="cabin-cell">337</div><div class="cabin-cell">339</div><div class="cabin-cell explorer">341</div></div>
+              <div class="side-label">STARBOARD</div>
+            </div>
           </div>
 
-          <div class="deck-row upper cabin-highlight">
-            <div class="deck-name">DECK 3<br><strong>Upper</strong><br><span class="cabin-badge">Cabin 328</span></div>
-            <div class="deck-detail">Aquavit Terrace • Observation Lounge & Bar • Library • Explorer Suites • Veranda Suites • Veranda & French Balcony cabins<br><strong>⭐ Your cabin 328 is on this deck.</strong><br><span class="friend-badge">👥 Poffenroths: Cabin 308 — same deck</span><br><span class="coffee-badge">☕ Coffee & Tea Station — near the Observation Lounge / Aquavit Terrace</span></div>
+          <div class="plan-key">
+            <span class="key-chip ours-key">★ Your cabin 328</span>
+            <span class="key-chip friends-key">👥 Poffenroths 308</span>
+            <span class="key-chip coffee-key">☕ Coffee station</span>
           </div>
 
-          <div class="deck-row middle">
-            <div class="deck-name">DECK 2<br><strong>Middle</strong></div>
-            <div class="deck-detail">Restaurant • Lobby / Reception • Boutique • Veranda & French Balcony cabins • elevator to Upper Deck</div>
-          </div>
-
-          <div class="deck-row main">
-            <div class="deck-name">DECK 1<br><strong>Main</strong></div>
-            <div class="deck-detail">Standard Staterooms E & F • half-height river-view windows • no elevator access</div>
+          <div class="cabin-note">
+            <strong>Cabin 328:</strong> Upper Deck, Category AA Veranda Suite. &nbsp;
+            <strong>Cabin 308:</strong> Upper Deck, Category AA Veranda Suite. &nbsp;
+            Both are on the <strong>port side</strong>, with 308 much closer to the forward lounge/coffee area and 328 farther aft.
           </div>
         </div>
 
+        <div class="mini-decks">
+          <div class="mini-deck"><strong>Deck 4 — Sun</strong><span>Walking track • Sky Bar • herb garden • seating</span></div>
+          <div class="mini-deck active-mini"><strong>Deck 3 — Upper</strong><span>Aquavit • Lounge • Coffee • Library • cabins 301–341</span></div>
+          <div class="mini-deck"><strong>Deck 2 — Middle</strong><span>Restaurant • Reception • Shop • cabins 200–237</span></div>
+          <div class="mini-deck"><strong>Deck 1 — Main</strong><span>Standard cabins 100–125</span></div>
+        </div>
+
         <div class="ship-links">
-          <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve page & interactive deck plan ↗</a>
-          <a href="https://www.cruisedeckplans.com/ships/Viking-Ve" target="_blank" rel="noopener">Detailed cabin-by-cabin deck plans ↗</a>
+          <a href="https://www.vikingrivercruises.com/ships/longships/viking-ve.html" target="_blank" rel="noopener">Official Viking Ve interactive deck plan ↗</a>
+          <a href="https://www.cruisedeckplans.com/ships/deckbydeck.php?deck=3&ship=Viking-Ve" target="_blank" rel="noopener">Detailed Upper Deck plan ↗</a>
         </div>
       </div>
     </div>

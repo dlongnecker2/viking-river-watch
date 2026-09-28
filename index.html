@@ -440,6 +440,44 @@ async function loadWeather(){
   }
 }
 loadWeather();
+
+async function loadRiverWatchData(){
+  try{
+    const response=await fetch("data.json?nocache="+Date.now(),{cache:"no-store"});
+    const d=await response.json();
+    const updated=document.getElementById("report-last-updated");
+    if(updated && d.updated_utc){
+      updated.textContent=new Date(d.updated_utc).toLocaleString();
+    }
+    if(d.germany){
+      if(d.germany.kaub && d.germany.kaub.value_cm!=null){
+        document.getElementById("kaub-level").textContent=Math.round(d.germany.kaub.value_cm)+" cm";
+      }
+      if(d.germany.wuerzburg && d.germany.wuerzburg.value_cm!=null){
+        document.getElementById("wuerzburg-level").textContent=Math.round(d.germany.wuerzburg.value_cm)+" cm";
+      }
+      if(d.germany.pfelling && d.germany.pfelling.value_cm!=null){
+        document.getElementById("pfelling-level").textContent=Math.round(d.germany.pfelling.value_cm)+" cm";
+      }
+    }
+    if(d.austria && d.austria.kienstock && d.austria.kienstock.value_cm!=null){
+      document.getElementById("kienstock-level").textContent=Math.round(d.austria.kienstock.value_cm)+" cm";
+    }
+    if(d.viking && d.viking.summary){
+      const n=document.getElementById("viking-official-note");
+      if(n){
+        const prefix=d.viking.notice_date ? "Official Viking notice ("+d.viking.notice_date+"): " : "Official Viking update: ";
+        n.textContent=prefix+d.viking.summary.substring(0,700);
+      }
+    }
+  }catch(err){
+    const updated=document.getElementById("report-last-updated");
+    if(updated) updated.textContent="live update temporarily unavailable";
+  }
+}
+loadRiverWatchData();
+setInterval(loadRiverWatchData,60*60*1000);
+
 </script>
 
 </body>

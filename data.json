@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-09-28T23:20:20.918316Z",
+  "updated_utc": "2026-09-29T00:59:45.291176Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,51 +7,45 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 2,
-      "timestamp": "2026-09-29T01:15:00+02:00",
+      "value_cm": 3.0,
+      "timestamp": "2026-09-29T02:45:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 213,
-      "timestamp": "2026-09-29T01:15:00+02:00",
+      "value_cm": 213.0,
+      "timestamp": "2026-09-29T02:45:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 240,
-      "hour_change_cm": 0
+      "value_cm": 238.0,
+      "hour_change_cm": 0.0
     },
     "kienstock": {
-      "value_cm": 111,
-      "hour_change_cm": 2
+      "value_cm": 108.0,
+      "hour_change_cm": -2.0
     },
     "wildungsmauer": {
-      "value_cm": 79,
-      "hour_change_cm": 1
+      "value_cm": 80.0,
+      "hour_change_cm": 0.0
     },
-    "source_time": "9/29/2026 1:11 AM"
+    "source_time": "9/29/2026 2:42 AM"
   },
   "viking": {
     "checked": false
   },
   "ship": {
     "checked": true,
-    "source": "https://www.shipfinder.com/vessels/details/269057517",
+    "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
     "mmsi": "269057517",
-    "area": "Danube near Engelhartszell, Austria",
-    "reported_ago": "ShipFinder exact coordinate report",
+    "area": "Europe Inland",
+    "reported_ago": "0 min ago",
     "destination": "ENGELHARTZELL",
-    "status": "Under way using engine",
+    "status": "Under way",
     "draught": "1.7 m",
-    "last_port": "Koln (Cologne), Germany",
-    "latitude": 48.5026,
-    "longitude": 13.7361,
-    "speed_kn": 0,
-    "course_deg": 60,
-    "heading_deg": 340,
-    "position_time": "2026-09-28 16:32:22"
+    "last_port": "Koln (Cologne), Germany"
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>"

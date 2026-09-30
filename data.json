@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-09-30T01:01:09.980629Z",
+  "updated_utc": "2026-09-30T01:40:20.245108Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -8,20 +8,20 @@
   "germany": {
     "kaub": {
       "value_cm": 0.0,
-      "timestamp": "2026-09-30T02:45:00+02:00",
+      "timestamp": "2026-09-30T03:30:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
       "value_cm": 204.0,
-      "timestamp": "2026-09-30T02:45:00+02:00",
+      "timestamp": "2026-09-30T03:30:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 241.0,
-      "hour_change_cm": -1.0
+      "value_cm": 240.0,
+      "hour_change_cm": -2.0
     },
     "kienstock": {
       "value_cm": 111.0,
@@ -31,7 +31,7 @@
       "value_cm": 92.0,
       "hour_change_cm": 1.0
     },
-    "source_time": "9/30/2026 2:56 AM"
+    "source_time": "9/30/2026 3:27 AM"
   },
   "viking": {
     "checked": false
@@ -41,11 +41,11 @@
     "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "1 min ago",
+    "reported_ago": "2 min ago",
     "destination": "ENGELHARTZELL",
-    "status": "On the move",
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",
+    "status": "On the move",
     "course_deg": 326.7
   },
   "errors": [

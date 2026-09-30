@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-09-29T23:19:44.841772Z",
+  "updated_utc": "2026-09-30T01:01:09.980629Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": -2.0,
-      "timestamp": "2026-09-30T01:15:00+02:00",
+      "value_cm": 0.0,
+      "timestamp": "2026-09-30T02:45:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 205.0,
-      "timestamp": "2026-09-30T01:15:00+02:00",
+      "value_cm": 204.0,
+      "timestamp": "2026-09-30T02:45:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
       "value_cm": 241.0,
-      "hour_change_cm": 1.0
+      "hour_change_cm": -1.0
     },
     "kienstock": {
       "value_cm": 111.0,
-      "hour_change_cm": -1.0
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 90.0,
-      "hour_change_cm": -1.0
+      "value_cm": 92.0,
+      "hour_change_cm": 1.0
     },
-    "source_time": "9/30/2026 1:12 AM"
+    "source_time": "9/30/2026 2:56 AM"
   },
   "viking": {
     "checked": false

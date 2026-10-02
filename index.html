@@ -435,14 +435,14 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="grid">
-    <div class="card"><h2>🇩🇪 Rhine — Kaub</h2><div class="level red" id="kaub-level">-1 cm</div><p><strong>Very low today.</strong> Official forecast bottoms near 2 cm through Oct. 1.</p><p><strong>Our cruise:</strong> November 6</p></div>
-    <div class="card"><h2>🇩🇪 Main — Würzburg</h2><div class="level green" id="wuerzburg-level">140 cm</div><p>Latest official reading. This reach is lock-controlled, so raw level alone is less predictive of cruise disruption.</p><p><strong>Our cruise:</strong> November 7–9</p></div>
-    <div class="card"><h2>🇩🇪 Danube — Pfelling</h2><div class="level yellow" id="pfelling-level">209 cm</div><p>Rose from 206 cm early Sep. 27 to 209 cm late evening; still an important low-water checkpoint.</p><p><strong>Our cruise:</strong> November 11–12</p></div>
-    <div class="card"><h2>🇦🇹 Danube — Wachau</h2><div class="level yellow" id="kienstock-level">98 cm</div><p>Kienstock reading in the Wachau. Farther downstream, Wildungsmauer was 76 cm late Sep. 27.</p><p><strong>Our cruise:</strong> November 13–15</p></div>
+    <div class="card"><h2>🇩🇪 Rhine — Kaub</h2><div class="level" id="kaub-level">Loading…</div><p id="kaub-note">Loading current official reading…</p><p><strong>Our cruise:</strong> November 6</p></div>
+    <div class="card"><h2>🇩🇪 Main — Würzburg</h2><div class="level" id="wuerzburg-level">Loading…</div><p id="wuerzburg-note">Loading current official reading…</p><p><strong>Our cruise:</strong> November 7–9</p></div>
+    <div class="card"><h2>🇩🇪 Danube — Pfelling</h2><div class="level" id="pfelling-level">Loading…</div><p id="pfelling-note">Loading current official reading…</p><p><strong>Our cruise:</strong> November 11–12</p></div>
+    <div class="card"><h2>🇦🇹 Danube — Wachau</h2><div class="level" id="kienstock-level">Loading…</div><p id="kienstock-note">Loading current official reading…</p><p><strong>Our cruise:</strong> November 13–15</p></div><p>Kienstock reading in the Wachau. Farther downstream, Wildungsmauer was 76 cm late Sep. 27.</p><p><strong>Our cruise:</strong> November 13–15</p></div>
   </div>
 
   <div class="section">
-    <div class="kicker">Current Viking operations • updated Oct. 1, 2026</div>
+    <div class="kicker">Current Viking operations • <span id="operations-updated">loading latest update…</span></div>
     <h2>🚢 Are Viking ships sailing or busing right now?</h2>
     <p><strong>Answer: both.</strong> Viking is still operating cruises, but current low water is causing a mix of normal sailing, motorcoach transfers, hotel substitutions and identical sister-ship swaps on affected Rhine/Danube itineraries.</p>
 
@@ -469,9 +469,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <td>Reported from an official Viking guest letter</td>
       </tr>
       <tr>
-        <td><strong>Current Grand European Tour operations</strong><br>Grand European Tours are still operating. Viking Ve's current Budapest→Amsterdam sailing has progressed through the Danube/Main-Danube corridor and is scheduled at Würzburg today (Oct. 1). I do not have departure-specific public evidence that this sailing is currently busing, swapping ships, or using hotels.</td>
-        <td class="yellow"><strong>SAILING / WATCH</strong></td>
-        <td>Current ship/port schedule evidence; no blanket conclusion for other departures</td>
+        <td><strong>Current Grand European Tour operations</strong><br><span id="get-live-operations">Loading the latest automated ship and operations data…</span></td>
+        <td class="yellow"><strong id="get-live-status">UPDATING</strong></td>
+        <td>Automated data refresh; departure-specific evidence only</td>
       </tr>
     </table>
 
@@ -538,7 +538,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="section">
-    <div class="kicker">Viking Ve location • refreshed hourly</div>
+    <div class="kicker">Viking Ve location • refreshed every two hours</div>
     <h2>📍 Track the Viking Ve</h2>
     <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). CruiseMapper currently lists the ship on its Budapest → Amsterdam Grand European Tour.</p>
 
@@ -807,21 +807,25 @@ async function loadRiverWatchData(){
     const d=await response.json();
     const updated=document.getElementById("report-last-updated");
     if(updated && d.updated_utc){
-      updated.textContent=new Date(d.updated_utc).toLocaleString();
+      const stamp=new Date(d.updated_utc);
+      updated.textContent=stamp.toLocaleString();
+      const ou=document.getElementById("operations-updated"); if(ou) ou.textContent="data refreshed "+stamp.toLocaleString();
     }
     if(d.germany){
-      if(d.germany.kaub && d.germany.kaub.value_cm!=null){
-        document.getElementById("kaub-level").textContent=Math.round(d.germany.kaub.value_cm)+" cm";
-      }
-      if(d.germany.wuerzburg && d.germany.wuerzburg.value_cm!=null){
-        document.getElementById("wuerzburg-level").textContent=Math.round(d.germany.wuerzburg.value_cm)+" cm";
-      }
-      if(d.germany.pfelling && d.germany.pfelling.value_cm!=null){
-        document.getElementById("pfelling-level").textContent=Math.round(d.germany.pfelling.value_cm)+" cm";
-      }
+      const paint=(id,val,noteId,ts)=>{
+        const el=document.getElementById(id); if(!el)return;
+        if(val==null){el.textContent="Unavailable";el.className="level";return;}
+        el.textContent=Math.round(val)+" cm";
+        el.className="level "+(id==="kaub-level"?(val<30?"red":val<80?"yellow":"green"):id==="pfelling-level"?(val<230?"red":val<280?"yellow":"green"):"green");
+        const n=document.getElementById(noteId); if(n)n.textContent="Official reading"+(ts?" • "+new Date(ts).toLocaleString():"")+" • automatically refreshed.";
+      };
+      paint("kaub-level",d.germany.kaub?.value_cm,"kaub-note",d.germany.kaub?.timestamp);
+      paint("wuerzburg-level",d.germany.wuerzburg?.value_cm,"wuerzburg-note",d.germany.wuerzburg?.timestamp);
+      paint("pfelling-level",d.germany.pfelling?.value_cm,"pfelling-note",d.germany.pfelling?.timestamp);
     }
     if(d.austria && d.austria.kienstock && d.austria.kienstock.value_cm!=null){
-      document.getElementById("kienstock-level").textContent=Math.round(d.austria.kienstock.value_cm)+" cm";
+      const e=document.getElementById("kienstock-level"); e.textContent=Math.round(d.austria.kienstock.value_cm)+" cm"; e.className="level "+(d.austria.kienstock.value_cm<90?"red":d.austria.kienstock.value_cm<130?"yellow":"green");
+      const n=document.getElementById("kienstock-note"); if(n)n.textContent="Official viadonau reading • "+(d.austria.source_time||"latest update")+" • automatically refreshed.";
     }
     if(d.viking && d.viking.summary && d.viking.checked !== false){
       const n=document.getElementById("viking-official-note");
@@ -831,6 +835,9 @@ async function loadRiverWatchData(){
       }
     }
     if(d.ship){
+      const go=document.getElementById("get-live-operations"), gs=document.getElementById("get-live-status");
+      if(go) go.textContent="Viking Ve live navigation: "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";
+      if(gs) gs.textContent=(d.ship.status&&/under way/i.test(d.ship.status))?"SAILING / WATCH":"WATCH";
       const set=(id,val,fallback)=>{const e=document.getElementById(id);if(e)e.textContent=(val&&String(val).trim())?val:fallback;};
       set("ship-area",d.ship.area,"Not available");
       set("ship-status",d.ship.status,"Not available");
@@ -858,20 +865,9 @@ async function loadRiverWatchData(){
         if(bt) bt.textContent="Exact AIS coordinate report: "+posTime;
       } else {
         if(veShipMarker){ veMap.removeLayer(veShipMarker); veShipMarker=null; }
-        if(b) b.textContent="Exact AIS position unavailable • current itinerary checkpoint: Würzburg (Oct. 1)";
-        if(bt) bt.textContent="Public AIS reports navigation status but no usable coordinates. AIS destination '"+(d.ship.destination||"not reported")+"' may be stale; it is not used as the map position. Latest AIS status: "+posTime;
-
-        // Never infer the vessel's position from the AIS destination field.
-        // When coordinates are unavailable, show today's published itinerary checkpoint,
-        // clearly labeled as itinerary/schedule evidence rather than an AIS fix.
-        if(veMap){
-          if(veAreaLayer){ veMap.removeLayer(veAreaLayer); veAreaLayer=null; }
-          const checkpoint=[49.7913,9.9534]; // Würzburg
-          const icon=L.divIcon({className:"ve-ship-icon approximate-ship",html:"📅",iconSize:[34,34],iconAnchor:[17,17]});
-          veShipMarker=L.marker(checkpoint,{icon,zIndexOffset:1000,opacity:.82}).addTo(veMap);
-          veShipMarker.bindTooltip("Viking Ve — Oct. 1 itinerary checkpoint: Würzburg",{permanent:true,direction:"top",offset:[0,-12],className:"ve-ship-tooltip"});
-          veShipMarker.bindPopup("<strong>Published itinerary checkpoint — not an AIS fix</strong><br>Viking Ve is scheduled at Würzburg on Oct. 1. Exact public AIS coordinates are unavailable.<br>AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).");
-        }
+        if(b) b.textContent="Exact AIS position unavailable — no inferred location shown";
+        if(bt) bt.textContent="Public AIS has no usable coordinates. AIS destination '"+(d.ship.destination||"not reported")+"' may be stale and is not used as position. Latest AIS status: "+posTime;
+        if(veMap && veAreaLayer){ veMap.removeLayer(veAreaLayer); veAreaLayer=null; }
       }
     }
   }catch(err){
@@ -880,7 +876,7 @@ async function loadRiverWatchData(){
   }
 }
 loadRiverWatchData();
-setInterval(loadRiverWatchData,60*60*1000);
+setInterval(loadRiverWatchData,2*60*60*1000);
 
 </script>
 

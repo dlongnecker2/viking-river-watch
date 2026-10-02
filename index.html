@@ -442,14 +442,14 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 
   <div class="section">
-    <div class="kicker">Current Viking operations • updated Sep. 27, 2026</div>
+    <div class="kicker">Current Viking operations • updated Oct. 1, 2026</div>
     <h2>🚢 Are Viking ships sailing or busing right now?</h2>
     <p><strong>Answer: both.</strong> Viking is still operating cruises, but current low water is causing a mix of normal sailing, motorcoach transfers, hotel substitutions and identical sister-ship swaps on affected Rhine/Danube itineraries.</p>
 
     <table>
       <tr><th>What we know now</th><th>Status</th><th>How solid is it?</th></tr>
       <tr>
-        <td><strong>Viking-wide Rhine/Danube advisory</strong><br><span id="viking-official-note">Viking's Sept. 25 notice says water remains below normal in some sections and selected itineraries may still be modified.</span></td>
+        <td><strong>Viking-wide Rhine/Danube advisory</strong><br><span id="viking-official-note">Viking's Sept. 30 notice says sections of the Danube, Elbe and Rhine remain abnormally low; select Viking itineraries are being modified and some adjustments are still necessary.</span></td>
         <td class="yellow"><strong>ACTIVE</strong></td>
         <td>Official Viking notice</td>
       </tr>
@@ -469,9 +469,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <td>Reported from an official Viking guest letter</td>
       </tr>
       <tr>
-        <td><strong>Current Amsterdam→Budapest departures</strong><br>Public river data show severe low-water pressure at several checkpoints, but I do not yet have a verified public passenger report proving that every current Grand European Tour is being bused or swapped.</td>
-        <td class="yellow"><strong>WATCH</strong></td>
-        <td>No blanket Viking statement by departure</td>
+        <td><strong>Current Grand European Tour operations</strong><br>Grand European Tours are still operating. Viking Ve's current Budapest→Amsterdam sailing has progressed through the Danube/Main-Danube corridor and is scheduled at Würzburg today (Oct. 1). I do not have departure-specific public evidence that this sailing is currently busing, swapping ships, or using hotels.</td>
+        <td class="yellow"><strong>SAILING / WATCH</strong></td>
+        <td>Current ship/port schedule evidence; no blanket conclusion for other departures</td>
       </tr>
     </table>
 
@@ -560,7 +560,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
         <strong id="ship-status">Loading…</strong>
       </div>
       <div class="tracker-stat">
-        <span class="tracker-stat-label">Destination</span>
+        <span class="tracker-stat-label">AIS destination field</span>
         <strong id="ship-destination">Loading…</strong>
       </div>
       <div class="tracker-stat">
@@ -574,7 +574,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <a class="tracker-button secondary-tracker" href="https://www.vesselfinder.com/vessels/details/269057517" target="_blank" rel="noopener">🚢 VesselFinder details ↗</a>
     </div>
 
-    <p class="small" style="margin-top:10px">The map on this page shows the Viking Ve route corridor and latest known area. The buttons open the provider's fully live AIS map when you want the exact vessel position.</p>
+    <p class="small" style="margin-top:10px"><strong>Important:</strong> inland AIS coverage can be incomplete. The AIS destination field is not the ship's current position and may be stale. When exact coordinates are unavailable, this page will show the ship's current itinerary checkpoint instead of placing the ship at the reported AIS destination.</p>
   </div>
 
   <div class="section">
@@ -823,7 +823,7 @@ async function loadRiverWatchData(){
     if(d.austria && d.austria.kienstock && d.austria.kienstock.value_cm!=null){
       document.getElementById("kienstock-level").textContent=Math.round(d.austria.kienstock.value_cm)+" cm";
     }
-    if(d.viking && d.viking.summary){
+    if(d.viking && d.viking.summary && d.viking.checked !== false){
       const n=document.getElementById("viking-official-note");
       if(n){
         const prefix=d.viking.notice_date ? "Official Viking notice ("+d.viking.notice_date+"): " : "Official Viking update: ";
@@ -858,52 +858,19 @@ async function loadRiverWatchData(){
         if(bt) bt.textContent="Exact AIS coordinate report: "+posTime;
       } else {
         if(veShipMarker){ veMap.removeLayer(veShipMarker); veShipMarker=null; }
-        if(b){
-          const dest=d.ship.destination ? " • heading toward "+d.ship.destination : "";
-          b.textContent=(d.ship.area||"Current AIS area unavailable")+dest;
-        }
-        if(bt) bt.textContent="Exact latitude/longitude is not exposed by the current public AIS feed. Latest status: "+posTime;
+        if(b) b.textContent="Exact AIS position unavailable • current itinerary checkpoint: Würzburg (Oct. 1)";
+        if(bt) bt.textContent="Public AIS reports navigation status but no usable coordinates. AIS destination '"+(d.ship.destination||"not reported")+"' may be stale; it is not used as the map position. Latest AIS status: "+posTime;
 
-        // If exact coordinates are unavailable but a known destination is reported,
-        // show an explicitly approximate marker near that destination rather than leaving the map blank.
+        // Never infer the vessel's position from the AIS destination field.
+        // When coordinates are unavailable, show today's published itinerary checkpoint,
+        // clearly labeled as itinerary/schedule evidence rather than an AIS fix.
         if(veMap){
           if(veAreaLayer){ veMap.removeLayer(veAreaLayer); veAreaLayer=null; }
-
-          const dest=(d.ship.destination||"").toUpperCase();
-          let approx=null;
-          let approxLabel="";
-
-          if(dest.includes("ENGELHART")){
-            // Engelhartszell, Austria — Danube, a short distance upstream of Passau.
-            approx=[48.5018,13.7354];
-            approxLabel="Viking Ve — heading toward Engelhartszell";
-          } else if(d.ship.area && /austria/i.test(d.ship.area)){
-            // Broad fallback for Austrian Danube.
-            approx=[48.35,14.9];
-            approxLabel="Viking Ve — somewhere on the Austrian Danube";
-          }
-
-          if(approx){
-            const icon=L.divIcon({
-              className:"ve-ship-icon approximate-ship",
-              html:"🚢",
-              iconSize:[34,34],
-              iconAnchor:[17,17]
-            });
-            veShipMarker=L.marker(approx,{icon,zIndexOffset:1000,opacity:.82}).addTo(veMap);
-            veShipMarker.bindTooltip(approxLabel,{permanent:true,direction:"top",offset:[0,-12],className:"ve-ship-tooltip"});
-            veShipMarker.bindPopup("<strong>Approximate position</strong><br>Exact AIS coordinates are not exposed by the current feed.<br>Destination: "+(d.ship.destination||"not reported")+"<br><small>Latest AIS status: "+posTime+"</small>");
-
-            L.circle(approx,{
-              radius:18000,
-              weight:2,
-              opacity:.55,
-              fillOpacity:.08,
-              dashArray:"6 6"
-            }).addTo(veMap).bindTooltip("Approximate area — not an exact AIS coordinate");
-
-            if(b) b.textContent="Approximate map position near "+(d.ship.destination||d.ship.area||"reported area");
-          }
+          const checkpoint=[49.7913,9.9534]; // Würzburg
+          const icon=L.divIcon({className:"ve-ship-icon approximate-ship",html:"📅",iconSize:[34,34],iconAnchor:[17,17]});
+          veShipMarker=L.marker(checkpoint,{icon,zIndexOffset:1000,opacity:.82}).addTo(veMap);
+          veShipMarker.bindTooltip("Viking Ve — Oct. 1 itinerary checkpoint: Würzburg",{permanent:true,direction:"top",offset:[0,-12],className:"ve-ship-tooltip"});
+          veShipMarker.bindPopup("<strong>Published itinerary checkpoint — not an AIS fix</strong><br>Viking Ve is scheduled at Würzburg on Oct. 1. Exact public AIS coordinates are unavailable.<br>AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).");
         }
       }
     }

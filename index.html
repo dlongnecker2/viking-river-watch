@@ -315,13 +315,13 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <h2>Your Cruise Outlook</h2>
     <span class="status">● MONITORING CONDITIONS</span>
     <p>Tracking the Rhine, Main, Main-Danube Canal and Danube for conditions that could affect our Viking Grand European Tour.</p>
-    <p><strong>Next update:</strong> Daily</p>
+    <p><strong>Next update:</strong> Every 2 hours</p>
   </div>
 
   <div class="route-visual">
     <div class="kicker">Route at a glance</div>
     <h2>Amsterdam → Budapest River Conditions</h2>
-    <p class="small"><strong>Current snapshot: September 27–28, 2026.</strong> These are today's readings, not a forecast for November. Gauge heights are local-reference values and are not directly comparable from one station to another.</p>
+    <p class="small"><strong>Current snapshot: <span id="snapshot-date">loading latest automated refresh…</span>.</strong> These are today's readings, not a forecast for November. Gauge heights are local-reference values and are not directly comparable from one station to another.</p>
     <div class="visual-wrap">
       <svg class="river-svg" viewBox="0 0 1120 500" role="img" aria-label="Visual route and river level gauges from Amsterdam to Budapest">
         <defs>
@@ -688,7 +688,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
   <div class="section">
     <h2>🌧️ Weather & River Trend</h2>
-    <p>Kaub remains exceptionally low. Pfelling improved slightly late Sep. 27. Current conditions can change materially after sustained basin-wide rain, so the trend in the final 10–14 days before departure will matter much more than today’s number.</p>
+    <p><span id="river-trend-live">Loading the latest automated river trend…</span></p>
   </div>
 
   <div class="section">
@@ -698,7 +698,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   </div>
 </div>
 
-<footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer><div style="max-width:1100px;margin:0 auto 30px;padding:0 22px;color:#687b82;font-size:12px;line-height:1.5"><strong>Data sources:</strong> Germany: PEGELONLINE / Bavarian Environment Agency (Kaub, Würzburg, Pfelling). Austria/Hungary: Danube FIS Portal. Viking operations: Viking Current Sailings notice dated Sept. 25, 2026. Gauge values use each station’s own local datum; do not compare raw centimeters between stations.</div>
+<footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer><div style="max-width:1100px;margin:0 auto 30px;padding:0 22px;color:#687b82;font-size:12px;line-height:1.5"><strong>Data sources:</strong> Germany: PEGELONLINE / Bavarian Environment Agency (Kaub, Würzburg, Pfelling). Austria/Hungary: Danube FIS Portal. Viking operations: automatically refreshed from the latest available Viking Current Sailings data. Gauge values use each station’s own local datum; do not compare raw centimeters between stations.</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
@@ -808,7 +808,7 @@ async function loadRiverWatchData(){
     const updated=document.getElementById("report-last-updated");
     if(updated && d.updated_utc){
       const stamp=new Date(d.updated_utc);
-      updated.textContent=stamp.toLocaleString();
+      updated.textContent=stamp.toLocaleString(); const sd=document.getElementById("snapshot-date"); if(sd) sd.textContent=stamp.toLocaleString();
       const ou=document.getElementById("operations-updated"); if(ou) ou.textContent="data refreshed "+stamp.toLocaleString();
     }
     if(d.germany){
@@ -821,7 +821,7 @@ async function loadRiverWatchData(){
       };
       paint("kaub-level",d.germany.kaub?.value_cm,"kaub-note",d.germany.kaub?.timestamp);
       paint("wuerzburg-level",d.germany.wuerzburg?.value_cm,"wuerzburg-note",d.germany.wuerzburg?.timestamp);
-      paint("pfelling-level",d.germany.pfelling?.value_cm,"pfelling-note",d.germany.pfelling?.timestamp);
+      paint("pfelling-level",d.germany.pfelling?.value_cm,"pfelling-note",d.germany.pfelling?.timestamp); const rt=document.getElementById("river-trend-live"); if(rt){ const k=d.germany.kaub?.value_cm, p=d.germany.pfelling?.value_cm; rt.textContent="Latest automated readings: Kaub "+(k==null?"unavailable":Math.round(k)+" cm")+"; Pfelling "+(p==null?"unavailable":Math.round(p)+" cm")+". Current conditions can change materially after sustained basin-wide rain; the final 10–14 days before departure remain the most important trend window."; }
     }
     if(d.austria && d.austria.kienstock && d.austria.kienstock.value_cm!=null){
       const e=document.getElementById("kienstock-level"); e.textContent=Math.round(d.austria.kienstock.value_cm)+" cm"; e.className="level "+(d.austria.kienstock.value_cm<90?"red":d.austria.kienstock.value_cm<130?"yellow":"green");

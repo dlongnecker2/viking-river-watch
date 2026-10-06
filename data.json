@@ -3,33 +3,34 @@
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
-    "viking": "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html"
+    "viking": "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html",
+    "marinetraffic": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
   "germany": {
     "kaub": {
-      "value_cm": 0.0,
+      "value_cm": 0,
       "timestamp": "2026-10-07T00:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 204.0,
+      "value_cm": 204,
       "timestamp": "2026-10-07T00:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 237.0,
-      "hour_change_cm": -1.0
+      "value_cm": 237,
+      "hour_change_cm": -1
     },
     "kienstock": {
-      "value_cm": 102.0,
-      "hour_change_cm": 0.0
+      "value_cm": 102,
+      "hour_change_cm": 0
     },
     "wildungsmauer": {
-      "value_cm": 77.0,
-      "hour_change_cm": 1.0
+      "value_cm": 77,
+      "hour_change_cm": 1
     },
     "source_time": "10/7/2026 12:12 AM"
   },
@@ -46,7 +47,14 @@
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",
     "status": "On the move",
-    "course_deg": 326.7
+    "course_deg": 326.7,
+    "latitude": 48.18211,
+    "longitude": 15.07668,
+    "position_time": "2026-10-06 (manually verified map position)",
+    "coordinate_source": "CruiseMapper live-map hover",
+    "coordinate_quality": "last_verified",
+    "coordinate_note": "Last verified plotted position; retained until a newer machine-readable AIS coordinate is available.",
+    "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>"

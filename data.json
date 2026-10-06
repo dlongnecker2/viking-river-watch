@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-06T20:25:07.461554Z",
+  "updated_utc": "2026-10-06T22:23:00.192284Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": -1.0,
-      "timestamp": "2026-10-06T22:15:00+02:00",
+      "value_cm": 0.0,
+      "timestamp": "2026-10-07T00:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 205.0,
-      "timestamp": "2026-10-06T22:15:00+02:00",
+      "value_cm": 204.0,
+      "timestamp": "2026-10-07T00:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 240.0,
+      "value_cm": 237.0,
       "hour_change_cm": -1.0
     },
     "kienstock": {
-      "value_cm": 104.0,
-      "hour_change_cm": -1.0
+      "value_cm": 102.0,
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 75.0,
+      "value_cm": 77.0,
       "hour_change_cm": 1.0
     },
-    "source_time": "10/6/2026 10:12 PM"
+    "source_time": "10/7/2026 12:12 AM"
   },
   "viking": {
     "checked": false
@@ -41,7 +41,7 @@
     "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "37 hours ago",
+    "reported_ago": "39 hours ago",
     "destination": "WALLSEE",
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",

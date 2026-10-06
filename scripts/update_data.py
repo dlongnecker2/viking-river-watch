@@ -231,6 +231,23 @@ try:
 except Exception as e:
     errors.append("ShipRadar: "+repr(e))
 
+# Keep the last manually verified plotted position when public machine-readable
+# AIS sources do not expose coordinates. Never infer coordinates from destination
+# or itinerary text. This point was verified by hovering directly over Viking Ve
+# on the CruiseMapper live map on 2026-10-06.
+if ship.get("latitude") is None or ship.get("longitude") is None:
+    ship["latitude"] = 48.18211
+    ship["longitude"] = 15.07668
+    ship["position_time"] = "2026-10-06 (manually verified map position)"
+    ship["coordinate_source"] = "CruiseMapper live-map hover"
+    ship["coordinate_quality"] = "last_verified"
+    ship["coordinate_note"] = "Last verified plotted position; retained until a newer machine-readable AIS coordinate is available."
+else:
+    ship["coordinate_quality"] = "live_machine_readable"
+    ship["coordinate_source"] = ship.get("source", "public AIS source")
+
+ship["marine_traffic_url"] = "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
+
 data["ship"] = ship
 
 data["errors"] = errors

@@ -540,7 +540,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <div class="section">
     <div class="kicker">Viking Ve location • refreshed every two hours</div>
     <h2>📍 Track the Viking Ve</h2>
-    <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). CruiseMapper currently lists the ship on its Budapest → Amsterdam Grand European Tour.</p>
+    <p>Latest publicly reported AIS information for <strong>Viking Ve</strong> (MMSI <strong>269057517</strong>). The automated tracker uses machine-readable AIS coordinates when available; the embedded live tracker below provides a direct live-map fallback.</p>
 
     <div class="current-location-banner">
       <span class="current-location-label">🚢 Latest mapped position</span>
@@ -549,6 +549,11 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     </div>
 
     <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
+    <div style="margin-top:12px">
+      <h3 style="margin-bottom:8px">Live AIS trackers</h3>
+      <p class="small">If our automated feed cannot obtain machine-readable coordinates, use these live tracker views for the newest available plotted AIS position.</p>
+      <iframe src="https://www.vesselfinder.com/aismap?mmsi=269057517" title="Viking Ve live VesselFinder AIS map" style="width:100%;height:430px;border:1px solid #d4dfe2;border-radius:14px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
     <div class="tracker-status-grid">
       <div class="tracker-stat">
@@ -574,7 +579,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <a class="tracker-button secondary-tracker" href="https://www.vesselfinder.com/vessels/details/269057517" target="_blank" rel="noopener">🚢 VesselFinder details ↗</a>
     </div>
 
-    <p class="small" style="margin-top:10px"><strong>Important:</strong> inland AIS coverage can be incomplete. The AIS destination field is not the ship's current position and may be stale. When exact coordinates are unavailable, this page will show the ship's current itinerary checkpoint instead of placing the ship at the reported AIS destination.</p>
+    <p class="small" style="margin-top:10px"><strong>Important:</strong> inland AIS coverage can be incomplete. The AIS destination field is not the ship's current position and may be stale. When exact machine-readable coordinates are unavailable, this page does not invent a position from the AIS destination or itinerary. Use the embedded live tracker or the tracker links above for the newest plotted position.</p>
   </div>
 
   <div class="section">

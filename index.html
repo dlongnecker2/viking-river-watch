@@ -551,8 +551,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
     <div style="margin-top:12px">
       <h3 style="margin-bottom:8px">Live AIS trackers</h3>
-      <p class="small">If our automated feed cannot obtain machine-readable coordinates, use these live tracker views for the newest available plotted AIS position.</p>
-      <iframe src="https://www.vesselfinder.com/aismap?mmsi=269057517" title="Viking Ve live VesselFinder AIS map" style="width:100%;height:430px;border:1px solid #d4dfe2;border-radius:14px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <p class="small">VesselFinder does not allow this ship map to be embedded reliably, so I removed the broken frame. Use the tracker buttons below for the newest plotted AIS position.</p>
     </div>
 
     <div class="tracker-status-grid">
@@ -576,10 +575,11 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
     <div class="tracker-links">
       <a class="tracker-button" href="https://www.cruisemapper.com/?mmsi=269057517" target="_blank" rel="noopener">🗺️ Open live CruiseMapper map ↗</a>
+      <a class="tracker-button secondary-tracker" href="https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14" target="_blank" rel="noopener">🌊 MarineTraffic live map ↗</a>
       <a class="tracker-button secondary-tracker" href="https://www.vesselfinder.com/vessels/details/269057517" target="_blank" rel="noopener">🚢 VesselFinder details ↗</a>
     </div>
 
-    <p class="small" style="margin-top:10px"><strong>Important:</strong> inland AIS coverage can be incomplete. The AIS destination field is not the ship's current position and may be stale. When exact machine-readable coordinates are unavailable, this page does not invent a position from the AIS destination or itinerary. Use the embedded live tracker or the tracker links above for the newest plotted position.</p>
+    <p class="small" style="margin-top:10px"><strong>Important:</strong> inland AIS coverage can be incomplete. The AIS destination field is not the ship's current position and may be stale. When exact machine-readable coordinates are unavailable, this page keeps the last verified plotted position and labels it accordingly; it never invents a position from the AIS destination or itinerary. Use CruiseMapper or MarineTraffic above for the newest plotted position.</p>
   </div>
 
   <div class="section">

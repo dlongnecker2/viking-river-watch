@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-10T06:36:22.086403Z",
+  "updated_utc": "2026-10-10T08:28:32.652725Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 5.0,
-      "timestamp": "2026-10-10T08:30:00+02:00",
+      "value_cm": 7.0,
+      "timestamp": "2026-10-10T10:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 217.0,
-      "timestamp": "2026-10-10T08:30:00+02:00",
+      "value_cm": 222.0,
+      "timestamp": "2026-10-10T10:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 239.0,
+      "value_cm": 241.0,
       "hour_change_cm": 0.0
     },
     "kienstock": {
-      "value_cm": 106.0,
-      "hour_change_cm": 2.0
+      "value_cm": 107.0,
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 77.0,
+      "value_cm": 75.0,
       "hour_change_cm": -1.0
     },
-    "source_time": "10/10/2026 8:27 AM"
+    "source_time": "10/10/2026 10:12 AM"
   },
   "viking": {
     "checked": false
@@ -41,7 +41,7 @@
     "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "6 hours ago",
+    "reported_ago": "8 hours ago",
     "destination": "GREIN",
     "status": "On the move",
     "draught": "1.7 m",

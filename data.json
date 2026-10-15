@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-14T22:19:14.588438Z",
+  "updated_utc": "2026-10-15T00:50:41.591074Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -8,46 +8,43 @@
   "germany": {
     "kaub": {
       "value_cm": 17.0,
-      "timestamp": "2026-10-15T00:15:00+02:00",
+      "timestamp": "2026-10-15T02:45:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 236.0,
-      "timestamp": "2026-10-15T00:15:00+02:00",
+      "value_cm": 235.0,
+      "timestamp": "2026-10-15T02:45:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 247.0,
-      "hour_change_cm": 2.0
+      "value_cm": 244.0,
+      "hour_change_cm": -3.0
     },
     "kienstock": {
-      "value_cm": 124.0,
-      "hour_change_cm": 2.0
-    },
-    "wildungsmauer": {
-      "value_cm": 97.0,
+      "value_cm": 131.0,
       "hour_change_cm": 1.0
     },
-    "source_time": "10/15/2026 12:12 AM"
+    "wildungsmauer": {
+      "value_cm": 98.0,
+      "hour_change_cm": 0.0
+    },
+    "source_time": "10/15/2026 2:42 AM"
   },
   "viking": {
     "checked": false
   },
   "ship": {
     "checked": true,
-    "source": "https://marinetraffic.live/en/vessels/viking-ve-position/269057517/",
+    "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "11 hours ago",
+    "reported_ago": "14 hours ago",
     "destination": "LINDAU",
-    "status": "Under way",
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",
-    "speed_kn": 8.0,
-    "course_deg": 282.0,
     "latitude": 48.18211,
     "longitude": 15.07668,
     "position_time": "2026-10-06 (manually verified map position)",
@@ -57,6 +54,7 @@
     "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
   "errors": [
-    "Viking: <HTTPError 403: 'Forbidden'>"
+    "Viking: <HTTPError 403: 'Forbidden'>",
+    "ShipRadar: <HTTPError 403: 'Forbidden'>"
   ]
 }

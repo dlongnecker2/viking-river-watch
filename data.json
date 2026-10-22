@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-22T12:32:47.321649Z",
+  "updated_utc": "2026-10-22T14:23:25.850397Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 18.0,
-      "timestamp": "2026-10-22T14:30:00+02:00",
+      "value_cm": 17.0,
+      "timestamp": "2026-10-22T16:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 230.0,
-      "timestamp": "2026-10-22T14:30:00+02:00",
+      "value_cm": 228.0,
+      "timestamp": "2026-10-22T16:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
       "value_cm": 243.0,
-      "hour_change_cm": 2.0
+      "hour_change_cm": 1.0
     },
     "kienstock": {
-      "value_cm": 125.0,
-      "hour_change_cm": 2.0
+      "value_cm": 129.0,
+      "hour_change_cm": 3.0
     },
     "wildungsmauer": {
       "value_cm": 102.0,
-      "hour_change_cm": 1.0
+      "hour_change_cm": 0.0
     },
-    "source_time": "10/22/2026 2:27 PM"
+    "source_time": "10/22/2026 4:12 PM"
   },
   "viking": {
     "checked": false
@@ -41,8 +41,9 @@
     "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "24 hours ago",
+    "reported_ago": "1 min ago",
     "destination": "GREIN",
+    "status": "Under way",
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",
     "latitude": 48.18211,

@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-23T02:31:38.006751Z",
+  "updated_utc": "2026-10-23T04:25:21.540026Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,45 +7,39 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 28.0,
-      "timestamp": "2026-10-23T04:30:00+02:00",
+      "value_cm": 29.0,
+      "timestamp": "2026-10-23T06:15:00+02:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 234.0,
-      "timestamp": "2026-10-23T04:30:00+02:00",
+      "value_cm": 236.0,
+      "timestamp": "2026-10-23T06:15:00+02:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 241.0,
+      "value_cm": 243.0,
       "hour_change_cm": 1.0
     },
     "kienstock": {
-      "value_cm": 136.0,
+      "value_cm": 135.0,
       "hour_change_cm": -1.0
     },
     "wildungsmauer": {
       "value_cm": 110.0,
-      "hour_change_cm": 1.0
+      "hour_change_cm": 0.0
     },
-    "source_time": "10/23/2026 4:27 AM"
+    "source_time": "10/23/2026 6:12 AM"
   },
   "viking": {
     "checked": false
   },
   "ship": {
     "checked": true,
-    "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
-    "area": "Europe Inland",
-    "reported_ago": "0 min ago",
-    "destination": "WIEN",
-    "status": "Moored",
-    "draught": "1.7 m",
-    "last_port": "Koln (Cologne), Germany",
+    "source": "https://www.shipfinder.com/vessels/details/269057517",
     "latitude": 48.18211,
     "longitude": 15.07668,
     "position_time": "2026-10-06 (manually verified map position)",
@@ -56,6 +50,7 @@
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>",
+    "VesselFinder: <HTTPError 503: 'Service Unavailable'>",
     "ShipRadar: <HTTPError 403: 'Forbidden'>"
   ]
 }

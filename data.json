@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-25T16:21:01.908548Z",
+  "updated_utc": "2026-10-25T18:23:41.889854Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,14 +7,14 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 35.0,
-      "timestamp": "2026-10-25T17:15:00+01:00",
+      "value_cm": 38.0,
+      "timestamp": "2026-10-25T19:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 242.0,
-      "timestamp": "2026-10-25T17:15:00+01:00",
+      "value_cm": 244.0,
+      "timestamp": "2026-10-25T19:15:00+01:00",
       "station": "PFELLING"
     }
   },
@@ -42,7 +42,7 @@
     "mmsi": "269057517",
     "area": "Europe Inland",
     "reported_ago": "1 min ago",
-    "destination": "PASSAU",
+    "destination": "ENGELHARTSZELL",
     "status": "Under way",
     "draught": "1.7 m",
     "last_port": "Koln (Cologne), Germany",

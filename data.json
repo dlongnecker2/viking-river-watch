@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-25T10:19:28.748222Z",
+  "updated_utc": "2026-10-25T12:27:57.822433Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,14 +7,14 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 28.0,
-      "timestamp": "2026-10-25T11:15:00+01:00",
+      "value_cm": 30.0,
+      "timestamp": "2026-10-25T13:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 236.0,
-      "timestamp": "2026-10-25T11:15:00+01:00",
+      "value_cm": 238.0,
+      "timestamp": "2026-10-25T13:15:00+01:00",
       "station": "PFELLING"
     }
   },
@@ -41,7 +41,7 @@
     "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "2 hours ago",
+    "reported_ago": "39 min ago",
     "destination": "PASSAU",
     "status": "Moored",
     "draught": "1.7 m",

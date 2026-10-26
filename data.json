@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-26T15:08:09.100797Z",
+  "updated_utc": "2026-10-26T16:26:54.981203Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -8,13 +8,13 @@
   "germany": {
     "kaub": {
       "value_cm": 55.0,
-      "timestamp": "2026-10-26T16:00:00+01:00",
+      "timestamp": "2026-10-26T17:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 276.0,
-      "timestamp": "2026-10-26T16:00:00+01:00",
+      "value_cm": 278.0,
+      "timestamp": "2026-10-26T17:15:00+01:00",
       "station": "PFELLING"
     }
   },
@@ -41,7 +41,7 @@
     "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "1 min ago",
+    "reported_ago": "0 min ago",
     "destination": "ENGELHARTSZELL",
     "status": "Under way",
     "draught": "1.7 m",

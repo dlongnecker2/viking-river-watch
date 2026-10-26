@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-26T06:47:56.048459Z",
+  "updated_utc": "2026-10-26T08:36:54.553103Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,14 +7,14 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 56.0,
-      "timestamp": "2026-10-26T07:45:00+01:00",
+      "value_cm": 55.0,
+      "timestamp": "2026-10-26T09:30:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 260.0,
-      "timestamp": "2026-10-26T07:45:00+01:00",
+      "value_cm": 262.0,
+      "timestamp": "2026-10-26T09:30:00+01:00",
       "station": "PFELLING"
     }
   },

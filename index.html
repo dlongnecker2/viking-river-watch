@@ -845,7 +845,8 @@ async function refreshTopWeather(force=false){
  document.getElementById("top-location-label").textContent=onTrip?"📍 YOU ARE HERE — SCHEDULED":"🧳 UPCOMING DESTINATION";
  document.getElementById("top-journey-city").textContent=place;renderDestinationDescription(place);
  document.getElementById("top-journey-detail").textContent=onTrip?"Based on your itinerary, NOT live GPS or confirmed docking.":"Showing Amsterdam weather before travel begins. This is NOT your current location.";
- document.getElementById("top-trip-countdown").textContent=day<"2026-11-03"?daysToBoard+" days to embarkation":day<="2026-11-19"?"November 2026 journey":"Trip completed";
+ const vacationDay=Math.floor((Date.parse(day+"T12:00:00Z")-Date.parse("2026-11-01T12:00:00Z"))/86400000)+1;
+ document.getElementById("top-trip-countdown").textContent=day<"2026-11-01"?daysToBoard+" days to embarkation":day<="2026-11-19"?"Vacation Day "+vacationDay+" of 19"+(day<"2026-11-03"?" · "+daysToBoard+" days to embarkation":""):"Trip completed";
  if(!force&&lastTopWeatherPlace===place)return;
  lastTopWeatherPlace=place;
  const target=document.getElementById("top-weather"),stamp=document.getElementById("top-weather-time");

@@ -310,6 +310,12 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .top-journey-head{font-size:13px;font-weight:800;color:#26714e}
 .top-label{letter-spacing:.05em}.top-journey-main{margin:9px 0}.top-city{font-size:29px;font-weight:900}.top-sub,.top-footer{font-size:12px;color:#547368}.top-weather{text-align:right;display:flex;flex-direction:column;gap:3px}.top-weather strong{font-size:23px}.top-weather span{font-size:13px}.top-footer{border-top:1px solid #c9e3d4;padding-top:8px}
 @media(max-width:650px){.top-journey{margin:10px;padding:14px}.top-journey-main{align-items:flex-start;flex-direction:column;gap:12px}.top-weather{text-align:left}.top-city{font-size:24px}}
+.top-excursions{margin:14px 0 8px;padding:12px 14px;background:#fff;border:1px solid #c9e3d4;border-radius:12px}
+.top-excursions-title{font-weight:900;color:#17573b;margin-bottom:7px}
+.top-excursion{display:flex;gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px solid #e7eee9}
+.top-excursion:last-child{border-bottom:0}.top-excursion-time{min-width:78px;font-weight:900;color:#174d39}.top-excursion-name{font-weight:650}.top-excursion-duration{color:#647a70;font-size:12px}
+.top-excursions-note{font-size:11px;color:#6b7971;margin-top:8px}
+@media(max-width:650px){.top-excursion{flex-wrap:wrap;gap:5px}.top-excursion-time{min-width:70px}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -322,7 +328,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <div class="top-journey" id="top-journey" aria-live="polite">
   <div class="top-journey-head"><span class="top-label" id="top-location-label">📍 YOUR JOURNEY — UPCOMING</span><span id="top-trip-countdown">Loading itinerary…</span></div>
   <div class="top-journey-main"><div><div class="top-city" id="top-journey-city">Amsterdam</div><div id="top-journey-detail" class="top-sub">Scheduled itinerary location · not GPS tracking</div></div><div class="top-weather" id="top-weather"><strong>Loading current weather…</strong><span>Live weather at the scheduled destination</span></div></div>
-  <div class="top-footer" id="top-weather-time">Weather supplied by Open-Meteo. Updates when the page opens and every 15 minutes while open.</div>
+  <div class="top-excursions"><div class="top-excursions-title" id="top-excursions-title">📅 Excursions for your scheduled day</div><div id="top-excursions-list">Loading excursions…</div><div class="top-excursions-note">Times from your October 20 Viking excursion schedule and confirmed private plans. All times are local; verify meeting times in the Viking Daily.</div></div><div class="top-footer" id="top-weather-time">Weather supplied by Open-Meteo. Updates when the page opens and every 15 minutes while open.</div>
 </div>
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
@@ -776,6 +782,33 @@ updateJourneyProgress();
 setInterval(updateJourneyProgress,60*60*1000);
 
 
+
+const bookedExcursions={"10":[["8:30 AM","Surviving the War: Art in Nuremberg","3 hr"]],"11":[["9:00 AM","Regensburg by Foot","1.5 hr"],["2:15 PM","Medieval Regensburg","2.5 hr"]],"12":[["9:00 AM","Passau Walking Tour","1.5 hr"]],"13":[["11:00 AM","Melk Abbey & Organ Concert","3 hr"]],"14":[["8:30 AM","Panoramic Vienna","3.5 hr"],["2:15 PM","Behind the Scenes at the Lipizzaner Stallions","3.5 hr"]],"16":[["8:45 AM","Panoramic Budapest","3.5 hr"]],"18":[["7:00 PM","Private Budapest Night Tour — Mary Carry","3 hr"]],"02":[["9:30 AM","Amsterdam On Foot","2 hr"]],"04":[["9:30 AM","Kinderdijk Windmills","2 hr"]],"05":[["9:00 AM","Cologne Walking Tour","2 hr"],["2:00 PM","Brühl UNESCO Palaces","4 hr"]],"06":[["8:45 AM","Historic Koblenz","2 hr"]],"07":[["3:00 PM","Miltenberg Walking Tour","1.5 hr"]],"08":[["8:30 AM","Rothenburg ob der Tauber","8.5 hr"]],"09":[["1:30 PM","Bamberg Walking Tour","4.5 hr"]]};
+function renderTopExcursions(){
+ const day=europeanTripDay();
+ const active=day>="2026-11-01"&&day<="2026-11-19";
+ const selected=active?day:"2026-11-02";
+ const key=selected.slice(-2);
+ const heading=document.getElementById("top-excursions-title"),list=document.getElementById("top-excursions-list");
+ if(!heading||!list)return;
+ heading.textContent=active?"📅 Today's booked excursions — "+selected:"📅 First booked excursion — November 2";
+ list.replaceChildren();
+ const events=bookedExcursions[key]||[];
+ if(!events.length){
+   const note=document.createElement("div");
+   note.textContent=key==="03"?"Viking embarkation day — no booked shore excursion.":key==="01"?"Travel day — no booked shore excursion.":"No excursion booked for this date.";
+   list.append(note);return;
+ }
+ for(const [time,name,duration] of events){
+   const line=document.createElement("div");line.className="top-excursion";
+   const t=document.createElement("span");t.className="top-excursion-time";t.textContent=time;
+   const n=document.createElement("span");n.className="top-excursion-name";n.textContent=name;
+   const d=document.createElement("span");d.className="top-excursion-duration";d.textContent="("+duration+")";
+   line.append(t,n,d);list.append(line);
+ }
+}
+renderTopExcursions();
+
 const tripWeatherPlaces={
  "Amsterdam":[52.3676,4.9041],"Kinderdijk":[51.8853,4.6369],"Cologne":[50.9375,6.9603],
  "Koblenz / Middle Rhine":[50.3569,7.5889],"Miltenberg":[49.704,9.2674],"Würzburg":[49.7913,9.9534],
@@ -830,7 +863,7 @@ async function refreshTopWeather(force=false){
  }
 }
 refreshTopWeather(true);
-setInterval(()=>{updateJourneyProgress();refreshTopWeather(true)},15*60*1000);
+setInterval(()=>{updateJourneyProgress();renderTopExcursions();refreshTopWeather(true)},15*60*1000);
 
 const weatherStops = [
   {name:"Amsterdam", lat:52.3676, lon:4.9041},

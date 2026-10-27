@@ -305,6 +305,11 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .ve-area-tooltip{background:#fff7dd!important;color:#7a5600!important;border:1px solid #ddb84f!important;border-radius:7px!important;font-weight:800!important;box-shadow:0 2px 8px rgba(0,0,0,.12)!important}
 
 .approximate-ship{filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.top-journey{max-width:1160px;margin:14px auto 4px;padding:18px 24px;background:#edf8f2;border:2px solid #a5d5b8;border-radius:16px;color:#173c30;box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.top-journey-head,.top-journey-main{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.top-journey-head{font-size:13px;font-weight:800;color:#26714e}
+.top-label{letter-spacing:.05em}.top-journey-main{margin:9px 0}.top-city{font-size:29px;font-weight:900}.top-sub,.top-footer{font-size:12px;color:#547368}.top-weather{text-align:right;display:flex;flex-direction:column;gap:3px}.top-weather strong{font-size:23px}.top-weather span{font-size:13px}.top-footer{border-top:1px solid #c9e3d4;padding-top:8px}
+@media(max-width:650px){.top-journey{margin:10px;padding:14px}.top-journey-main{align-items:flex-start;flex-direction:column;gap:12px}.top-weather{text-align:left}.top-city{font-size:24px}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -314,7 +319,11 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <p>Grand European Tour • Amsterdam → Budapest</p>
   <p>November 3–17, 2026</p>
 </header>
-
+<div class="top-journey" id="top-journey" aria-live="polite">
+  <div class="top-journey-head"><span class="top-label" id="top-location-label">📍 YOUR JOURNEY — UPCOMING</span><span id="top-trip-countdown">Loading itinerary…</span></div>
+  <div class="top-journey-main"><div><div class="top-city" id="top-journey-city">Amsterdam</div><div id="top-journey-detail" class="top-sub">Scheduled itinerary location · not GPS tracking</div></div><div class="top-weather" id="top-weather"><strong>Loading current weather…</strong><span>Live weather at the scheduled destination</span></div></div>
+  <div class="top-footer" id="top-weather-time">Weather supplied by Open-Meteo. Updates when the page opens and every 15 minutes while open.</div>
+</div>
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
 <div class="container">
@@ -765,6 +774,63 @@ function updateJourneyProgress(){
 }
 updateJourneyProgress();
 setInterval(updateJourneyProgress,60*60*1000);
+
+
+const tripWeatherPlaces={
+ "Amsterdam":[52.3676,4.9041],"Kinderdijk":[51.8853,4.6369],"Cologne":[50.9375,6.9603],
+ "Koblenz / Middle Rhine":[50.3569,7.5889],"Miltenberg":[49.704,9.2674],"Würzburg":[49.7913,9.9534],
+ "Bamberg":[49.8988,10.9028],"Nuremberg":[49.4521,11.0767],"Regensburg":[49.0134,12.1016],
+ "Passau":[48.5667,13.4319],"Melk / Wachau":[48.2279,15.3319],"Vienna":[48.2082,16.3738],
+ "Budapest":[47.4979,19.0402]
+};
+const tripDayPlaces={
+ "2026-11-01":"Amsterdam","2026-11-02":"Amsterdam","2026-11-03":"Amsterdam",
+ "2026-11-04":"Kinderdijk","2026-11-05":"Cologne","2026-11-06":"Koblenz / Middle Rhine",
+ "2026-11-07":"Miltenberg","2026-11-08":"Würzburg","2026-11-09":"Bamberg",
+ "2026-11-10":"Nuremberg","2026-11-11":"Regensburg","2026-11-12":"Passau",
+ "2026-11-13":"Melk / Wachau","2026-11-14":"Vienna","2026-11-15":"Vienna",
+ "2026-11-16":"Budapest","2026-11-17":"Budapest","2026-11-18":"Budapest","2026-11-19":"Budapest"
+};
+let lastTopWeatherPlace="";
+function europeanTripDay(){
+ const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Amsterdam",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+ return p.year+"-"+p.month+"-"+p.day;
+}
+async function refreshTopWeather(force=false){
+ const day=europeanTripDay(),onTrip=day>="2026-11-01"&&day<="2026-11-19";
+ const place=day<"2026-11-01"?"Amsterdam":day>"2026-11-19"?"Budapest":tripDayPlaces[day];
+ const daysToBoard=Math.max(0,Math.round((Date.parse("2026-11-03T12:00:00Z")-Date.parse(day+"T12:00:00Z"))/86400000));
+ document.getElementById("top-location-label").textContent=onTrip?"📍 YOU ARE HERE — SCHEDULED":"🧳 UPCOMING DESTINATION";
+ document.getElementById("top-journey-city").textContent=place;
+ document.getElementById("top-journey-detail").textContent=onTrip?"Based on your itinerary, NOT live GPS or confirmed docking.":"Showing Amsterdam weather before travel begins. This is NOT your current location.";
+ document.getElementById("top-trip-countdown").textContent=day<"2026-11-03"?daysToBoard+" days to embarkation":day<="2026-11-19"?"November 2026 journey":"Trip completed";
+ if(!force&&lastTopWeatherPlace===place)return;
+ lastTopWeatherPlace=place;
+ const target=document.getElementById("top-weather"),stamp=document.getElementById("top-weather-time");
+ target.innerHTML="<strong>Loading current weather…</strong><span>"+place+"</span>";
+ try{
+   const [lat,lon]=tripWeatherPlaces[place];
+   const url="https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&forecast_days=2";
+   const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw Error("Weather unavailable");
+   const d=await response.json(),c=d.current;
+   if(place!==lastTopWeatherPlace)return;
+   const temp=Math.round(c.temperature_2m);
+   target.replaceChildren();
+   const main=document.createElement("strong");main.textContent=temp+"°F · "+wx(c.weather_code);
+   const feels=document.createElement("span");feels.textContent="Feels like "+Math.round(c.apparent_temperature)+"°F · Wind "+Math.round(c.wind_speed_10m)+" mph";
+   const forecast=document.createElement("span");forecast.textContent="Today "+Math.round(d.daily.temperature_2m_max[0])+"° / "+Math.round(d.daily.temperature_2m_min[0])+"° · Rain chance "+(d.daily.precipitation_probability_max[0]??"—")+"%";
+   target.append(main,feels,forecast);
+   stamp.textContent="Observed: "+(c.time||"time unavailable")+" ("+d.timezone+") · Open-Meteo. Updates every 15 minutes while this page is open.";
+ }catch(e){
+   target.replaceChildren();
+   const msg=document.createElement("strong");msg.textContent="Current weather unavailable";
+   const hint=document.createElement("span");hint.textContent="Please retry or refresh this page.";
+   target.append(msg,hint);stamp.textContent="Live weather request failed. No old conditions are shown as current.";
+ }
+}
+refreshTopWeather(true);
+setInterval(()=>{updateJourneyProgress();refreshTopWeather(true)},15*60*1000);
 
 const weatherStops = [
   {name:"Amsterdam", lat:52.3676, lon:4.9041},

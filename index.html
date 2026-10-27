@@ -307,7 +307,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <p>November 3–17, 2026</p>
 </header>
 
-<div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first hourly refresh…</span></div><div class="small">River/Viking data refresh hourly • weather refreshes when this page opens</div></div>
+<div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
 <div class="container">
   <div class="outlook">
@@ -728,6 +728,20 @@ function wx(code){
   return m[code] || "Mixed";
 }
 function f(c){ return Math.round(c*9/5+32); }
+function gaugeRisk(key,value){
+  if(value==null || !Number.isFinite(Number(value))) return "unavailable";
+  const thresholds={kaub:[30,77],pfelling:[230,290],kienstock:[90,161]};
+  if(!thresholds[key]) return "unrated";
+  const [critical,reference]=thresholds[key];
+  return value<critical?"red":value<reference?"yellow":"green";
+}
+function gaugeColor(key,value){
+  return {red:"#c4382b",yellow:"#c48700",green:"#168447",unavailable:"#687f86",unrated:"#18323b"}[gaugeRisk(key,value)];
+}
+function paintSvgGauge(id,key,value){
+  const el=document.getElementById(id);
+  if(el){el.textContent=value==null?"Unavailable":Math.round(value)+" cm";el.setAttribute("fill",gaugeColor(key,value));}
+}
 
 async function loadWeather(){
   const tbody=document.querySelector("#weather-table tbody");
@@ -819,29 +833,30 @@ async function loadRiverWatchData(){
     if(d.germany){
       const paint=(id,val,noteId,ts)=>{
         const el=document.getElementById(id); if(!el)return;
-        if(val==null){el.textContent="Unavailable";el.className="level";return;}
+        if(val==null){el.textContent="Unavailable";el.className="level";const n=document.getElementById(noteId);if(n)n.textContent="Current official observation unavailable.";return;}
         el.textContent=Math.round(val)+" cm";
-        el.className="level "+(id==="kaub-level"?(val<30?"red":val<80?"yellow":"green"):id==="pfelling-level"?(val<230?"red":val<280?"yellow":"green"):"green");
+        el.className="level "+gaugeRisk(id.replace("-level",""),val);
         const n=document.getElementById(noteId); if(n)n.textContent="Official reading"+(ts?" • "+new Date(ts).toLocaleString():"")+" • automatically refreshed.";
       };
       paint("kaub-level",d.germany.kaub?.value_cm,"kaub-note",d.germany.kaub?.timestamp);
       paint("wuerzburg-level",d.germany.wuerzburg?.value_cm,"wuerzburg-note",d.germany.wuerzburg?.timestamp);
       paint("pfelling-level",d.germany.pfelling?.value_cm,"pfelling-note",d.germany.pfelling?.timestamp);
-      const svgSet=(id,val,noteId,ts)=>{const e=document.getElementById(id); if(e)e.textContent=val==null?"Unavailable":Math.round(val)+" cm"; const n=document.getElementById(noteId); if(n)n.textContent=ts?new Date(ts).toLocaleString():"latest automated reading";};
+      const svgSet=(id,val,noteId,ts)=>{const e=document.getElementById(id); if(e)paintSvgGauge(id,id.replace("svg-","").replace("-value",""),val); const n=document.getElementById(noteId); if(n)n.textContent=ts?new Date(ts).toLocaleString():"latest automated reading";};
       svgSet("svg-kaub-value",d.germany.kaub?.value_cm,"svg-kaub-note",d.germany.kaub?.timestamp);
       svgSet("svg-wuerzburg-value",d.germany.wuerzburg?.value_cm,"svg-wuerzburg-note",d.germany.wuerzburg?.timestamp);
       svgSet("svg-pfelling-value",d.germany.pfelling?.value_cm,"svg-pfelling-note",d.germany.pfelling?.timestamp); const rt=document.getElementById("river-trend-live"); if(rt){ const k=d.germany.kaub?.value_cm, p=d.germany.pfelling?.value_cm; rt.textContent="Latest automated readings: Kaub "+(k==null?"unavailable":Math.round(k)+" cm")+"; Pfelling "+(p==null?"unavailable":Math.round(p)+" cm")+". Current conditions can change materially after sustained basin-wide rain; the final 10–14 days before departure remain the most important trend window."; }
     }
     if(d.austria){
-      const av=(id,obj)=>{const e=document.getElementById(id);if(e)e.textContent=(obj&&obj.value_cm!=null)?Math.round(obj.value_cm)+" cm":"Unavailable";};
+      const av=(id,obj)=>{const e=document.getElementById(id);if(e)paintSvgGauge(id,id.replace("svg-","").replace("-value",""),obj?.value_cm);};
       av("svg-achleiten-value",d.austria.achleiten); av("svg-kienstock-value",d.austria.kienstock);
       const an=document.getElementById("svg-achleiten-note"); if(an)an.textContent=d.austria.source_time||"latest automated reading";
       const kn=document.getElementById("svg-kienstock-note"); if(kn)kn.textContent=d.austria.source_time||"latest automated reading";
     }
     if(d.austria && d.austria.kienstock && d.austria.kienstock.value_cm!=null){
-      const e=document.getElementById("kienstock-level"); e.textContent=Math.round(d.austria.kienstock.value_cm)+" cm"; e.className="level "+(d.austria.kienstock.value_cm<90?"red":d.austria.kienstock.value_cm<130?"yellow":"green");
+      const e=document.getElementById("kienstock-level"); e.textContent=Math.round(d.austria.kienstock.value_cm)+" cm"; e.className="level "+gaugeRisk("kienstock",d.austria.kienstock.value_cm);
       const n=document.getElementById("kienstock-note"); if(n)n.textContent="Official viadonau reading • "+(d.austria.source_time||"latest update")+" • automatically refreshed.";
     }
+    if(d.viking && d.viking.checked === false){const n=document.getElementById("viking-official-note");if(n)n.textContent="Official Viking page could not be checked automatically during this refresh. Previously published September 30 advisory is historical; check Viking directly for current operations.";}
     if(d.viking && d.viking.summary && d.viking.checked !== false){
       const n=document.getElementById("viking-official-note");
       if(n){
@@ -851,8 +866,8 @@ async function loadRiverWatchData(){
     }
     if(d.ship){
       const go=document.getElementById("get-live-operations"), gs=document.getElementById("get-live-status");
-      if(go) go.textContent="Viking Ve live navigation: "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";
-      if(gs) gs.textContent=(d.ship.status&&/under way/i.test(d.ship.status))?"SAILING / WATCH":"WATCH";
+      if(go) go.textContent="Viking Ve last publicly reported navigation (may be stale): "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";
+      if(gs) gs.textContent="UNVERIFIED / WATCH";
       const set=(id,val,fallback)=>{const e=document.getElementById(id);if(e)e.textContent=(val&&String(val).trim())?val:fallback;};
       set("ship-area",d.ship.area,"Not available");
       set("ship-status",d.ship.status,"Not available");
@@ -875,9 +890,9 @@ async function loadRiverWatchData(){
         } else {
           veShipMarker.setLatLng(ll);
         }
-        veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.area||"Latest AIS position")+"<br><small>"+posTime+"</small>");
-        if(b) b.textContent=(d.ship.area||"Latest AIS position")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
-        if(bt) bt.textContent="Exact AIS coordinate report: "+posTime;
+        veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.coordinate_quality==="live_machine_readable"?"Machine-readable position":"Historical manually verified position — not live AIS")+"<br><small>"+posTime+"</small>");
+        if(b) b.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Reported position":"Historical position — NOT LIVE")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
+        if(bt) bt.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Machine-readable position: ":"Last manually verified position (NOT live AIS): ")+posTime;
       } else {
         if(veShipMarker){ veMap.removeLayer(veShipMarker); veShipMarker=null; }
         if(b) b.textContent="Exact AIS position unavailable — no inferred location shown";

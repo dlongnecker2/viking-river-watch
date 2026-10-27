@@ -319,6 +319,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .top-destination{background:#fff;border:1px solid #c9e3d4;border-radius:12px;padding:13px 15px;margin:12px 0}
 .top-destination-title{font-weight:900;color:#17573b;margin-bottom:6px}
 .top-destination p{margin:0;font-size:14px;line-height:1.65;color:#314d43}
+.viking-personal-notice{max-width:1160px;margin:16px auto 8px;padding:20px 24px;border:3px solid #b54729;border-radius:16px;background:#fff5ee;color:#542d22;line-height:1.6;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.notice-heading{font-size:20px;font-weight:900;color:#9c341c}.viking-personal-notice ul{padding-left:22px}.viking-personal-notice li{margin:8px 0}.viking-personal-notice p{margin:9px 0}.notice-caution{font-size:13px;border-top:1px solid #dcb4a6;padding-top:10px}
+@media(max-width:650px){.viking-personal-notice{margin:10px;padding:15px}.notice-heading{font-size:17px}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -328,6 +331,16 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <p>Grand European Tour • Amsterdam → Budapest</p>
   <p>November 3–17, 2026</p>
 </header>
+<section class="viking-personal-notice" aria-label="Viking October 27 personal itinerary notice">
+<div class="notice-heading">🚨 IMPORTANT — VIKING NOTICE FOR YOUR NOVEMBER 3 DEPARTURE</div>
+<p><strong>October 27, 2026 — direct email from Viking to your booking.</strong> This is confirmed departure-specific information, not an inference from river gauges.</p>
+<ul><li><strong>New embarkation ship: Viking Egdir</strong> (instead of Viking Ve), November 3, <strong>Port of Amsterdam — Coenhaven Westerhoofd, 1013 BS Amsterdam.</strong> Viking pre-extension guests are transferred from their hotel as planned.</li>
+<li><strong>Kinderdijk:</strong> November 4 program expected as planned.</li>
+<li><strong>Rhine:</strong> Viking expects a sister-ship swap between Kinderdijk and Frankfurt, involving approximately <strong>280 miles of coach transfer</strong>. <strong>Koblenz excursions canceled.</strong> Viking plans a Cologne lunch stop; do not assume previously booked Cologne excursions remain unchanged.</li>
+<li><strong>Danube contingency:</strong> a second ship swap between Nuremberg and Passau (about <strong>140 miles</strong>) is possible, not yet confirmed. Additional hotels near disembarkation and further excursion cancellations are also possible.</li>
+<li><strong>Compensation:</strong> 60% of paid cruise fare as a <strong>future Viking cruise voucher</strong> after return (excludes land packages/extension hotels; Viking says allow two weeks). Canceled optional shore excursions refunded within 12 business days after return.</li></ul>
+<p><strong>Viking Egdir embarkation-day contact:</strong> +49 152 525 37 767 · <strong>Viking support:</strong> 1-855-756-2326 (5 AM–7 PM Pacific).</p>
+<p class="notice-caution">This personal notice overrides older generic website advisories. Exact coach schedules, second ship, revised excursions and any hotel stay have NOT yet been specified. Confirm with Viking's Program Director.</p></section>
 <div class="top-journey" id="top-journey" aria-live="polite">
   <div class="top-journey-head"><span class="top-label" id="top-location-label">📍 YOUR JOURNEY — UPCOMING</span><span id="top-trip-countdown">Loading itinerary…</span></div>
   <div class="top-journey-main"><div><div class="top-city" id="top-journey-city">Amsterdam</div><div id="top-journey-detail" class="top-sub">Scheduled itinerary location · not GPS tracking</div></div><div class="top-weather" id="top-weather"><strong>Loading current weather…</strong><span>Live weather at the scheduled destination</span></div></div>
@@ -680,16 +693,16 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <p class="small"><strong>Yellow rows = key navigation checkpoints we are watching closely.</strong> They are not automatically a warning that your cruise is disrupted.</p>
     <table>
       <tr><th>Date</th><th>Destination</th><th>River Area</th></tr>
-      <tr data-journey-start="2026-11-03" data-journey-end="2026-11-03"><td>Nov 3</td><td>Amsterdam</td><td>Rhine system</td></tr>
+      <tr data-journey-start="2026-11-03" data-journey-end="2026-11-03"><td>Nov 3</td><td>Amsterdam — EMBARK VIKING EGDIR at Coenhaven Westerhoofd</td><td>Rhine system</td></tr>
       <tr data-journey-start="2026-11-04" data-journey-end="2026-11-04"><td>Nov 4</td><td>Kinderdijk</td><td>Lower Rhine</td></tr>
-      <tr data-journey-start="2026-11-05" data-journey-end="2026-11-05"><td>Nov 5</td><td>Cologne</td><td>Rhine</td></tr>
-      <tr data-journey-start="2026-11-06" data-journey-end="2026-11-06" class="next"><td>Nov 6</td><td>Koblenz / Middle Rhine</td><td><strong>Kaub checkpoint — key water-level watch</strong></td></tr>
+      <tr data-journey-start="2026-11-05" data-journey-end="2026-11-05"><td>Nov 5</td><td>Cologne — planned lunch stop; excursions not reconfirmed</td><td>Rhine</td></tr>
+      <tr data-journey-start="2026-11-06" data-journey-end="2026-11-06" class="next"><td>Nov 6</td><td>Koblenz excursions CANCELED — Rhine ship swap expected (date/location TBD)</td><td><strong>Kaub checkpoint — key water-level watch</strong></td></tr>
       <tr data-journey-start="2026-11-07" data-journey-end="2026-11-07"><td>Nov 7</td><td>Miltenberg</td><td>Main</td></tr>
       <tr data-journey-start="2026-11-08" data-journey-end="2026-11-08"><td>Nov 8</td><td>Würzburg</td><td>Main</td></tr>
       <tr data-journey-start="2026-11-09" data-journey-end="2026-11-09"><td>Nov 9</td><td>Bamberg</td><td>Main</td></tr>
       <tr data-journey-start="2026-11-10" data-journey-end="2026-11-10"><td>Nov 10</td><td>Nuremberg</td><td>Main-Danube Canal</td></tr>
-      <tr data-journey-start="2026-11-11" data-journey-end="2026-11-11" class="next"><td>Nov 11</td><td>Regensburg</td><td><strong>Upper Danube — Pfelling watch</strong></td></tr>
-      <tr data-journey-start="2026-11-12" data-journey-end="2026-11-12" class="next"><td>Nov 12</td><td>Passau</td><td><strong>Danube — Achleiten watch</strong></td></tr>
+      <tr data-journey-start="2026-11-11" data-journey-end="2026-11-11" class="next"><td>Nov 11</td><td>Regensburg — possible Danube transfer nearby</td><td><strong>Upper Danube — Pfelling watch</strong></td></tr>
+      <tr data-journey-start="2026-11-12" data-journey-end="2026-11-12" class="next"><td>Nov 12</td><td>Passau — possible second ship swap</td><td><strong>Danube — Achleiten watch</strong></td></tr>
       <tr data-journey-start="2026-11-13" data-journey-end="2026-11-13" class="next"><td>Nov 13</td><td>Melk / Wachau</td><td><strong>Danube — Kienstock / Wachau watch</strong></td></tr>
       <tr data-journey-start="2026-11-14" data-journey-end="2026-11-15" class="next"><td>Nov 14–15</td><td>Vienna</td><td><strong>Danube — Wildungsmauer watch</strong></td></tr>
       <tr data-journey-start="2026-11-16" data-journey-end="2026-11-17" class="next"><td>Nov 16–17</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
@@ -786,7 +799,7 @@ setInterval(updateJourneyProgress,60*60*1000);
 
 
 
-const bookedExcursions={"10":[["8:30 AM","Surviving the War: Art in Nuremberg","3 hr"]],"11":[["9:00 AM","Regensburg by Foot","1.5 hr"],["2:15 PM","Medieval Regensburg","2.5 hr"]],"12":[["9:00 AM","Passau Walking Tour","1.5 hr"]],"13":[["11:00 AM","Melk Abbey & Organ Concert","3 hr"]],"14":[["8:30 AM","Panoramic Vienna","3.5 hr"],["2:15 PM","Behind the Scenes at the Lipizzaner Stallions","3.5 hr"]],"16":[["8:45 AM","Panoramic Budapest","3.5 hr"]],"18":[["7:00 PM","Private Budapest Night Tour — Mary Carry","3 hr"]],"02":[["9:30 AM","Amsterdam On Foot","2 hr"]],"04":[["9:30 AM","Kinderdijk Windmills","2 hr"]],"05":[["9:00 AM","Cologne Walking Tour","2 hr"],["2:00 PM","Brühl UNESCO Palaces","4 hr"]],"06":[["8:45 AM","Historic Koblenz","2 hr"]],"07":[["3:00 PM","Miltenberg Walking Tour","1.5 hr"]],"08":[["8:30 AM","Rothenburg ob der Tauber","8.5 hr"]],"09":[["1:30 PM","Bamberg Walking Tour","4.5 hr"]]};
+const bookedExcursions={"10":[["8:30 AM","Surviving the War: Art in Nuremberg","3 hr"]],"11":[["9:00 AM","Regensburg by Foot","1.5 hr"],["2:15 PM","Medieval Regensburg","2.5 hr"]],"12":[["9:00 AM","Passau Walking Tour","1.5 hr"]],"13":[["11:00 AM","Melk Abbey & Organ Concert","3 hr"]],"14":[["8:30 AM","Panoramic Vienna","3.5 hr"],["2:15 PM","Behind the Scenes at the Lipizzaner Stallions","3.5 hr"]],"16":[["8:45 AM","Panoramic Budapest","3.5 hr"]],"18":[["7:00 PM","Private Budapest Night Tour — Mary Carry","3 hr"]],"02":[["9:30 AM","Amsterdam On Foot","2 hr"]],"04":[["9:30 AM","Kinderdijk Windmills","2 hr"]],"05":[["9:00 AM","Cologne Walking Tour","2 hr"],["2:00 PM","Brühl UNESCO Palaces","4 hr"]],"06":[],"07":[["3:00 PM","Miltenberg Walking Tour","1.5 hr"]],"08":[["8:30 AM","Rothenburg ob der Tauber","8.5 hr"]],"09":[["1:30 PM","Bamberg Walking Tour","4.5 hr"]]};
 function renderTopExcursions(){
  const day=europeanTripDay();
  const active=day>="2026-11-01"&&day<="2026-11-19";
@@ -799,9 +812,10 @@ function renderTopExcursions(){
  const events=bookedExcursions[key]||[];
  if(!events.length){
    const note=document.createElement("div");
-   note.textContent=key==="03"?"Viking embarkation day — no booked shore excursion.":key==="01"?"Travel day — no booked shore excursion.":"No excursion booked for this date.";
+   note.textContent=key==="06"?"CANCELED BY VIKING (Oct 27 notice): Historic Koblenz. Rhine ship swap expected; revised activities not yet provided.":key==="03"?"Embark Viking Egdir at Coenhaven Westerhoofd — no booked shore excursion.":key==="01"?"Travel day — no booked shore excursion.":"No excursion booked for this date.";
    list.append(note);return;
  }
+ if(["05","07","08","09","10","11","12","13","14","16"].includes(key)){const warning=document.createElement("div");warning.style.cssText="color:#a04a22;font-weight:800;margin:6px 0";warning.textContent=key==="05"?"Viking now plans a Cologne lunch stop during the Rhine transfer. These originally booked excursions are NOT reconfirmed.":"Original booking schedule; Viking warned that coach transfers, ship swaps and cancellations may change this program. Not reconfirmed.";list.append(warning);}
  for(const [time,name,duration] of events){
    const line=document.createElement("div");line.className="top-excursion";
    const t=document.createElement("span");t.className="top-excursion-time";t.textContent=time;
@@ -1033,7 +1047,7 @@ async function loadRiverWatchData(){
     }
     if(d.ship){
       const go=document.getElementById("get-live-operations"), gs=document.getElementById("get-live-status");
-      if(go) go.textContent="Viking Ve last publicly reported navigation (may be stale): "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";
+      if(go) go.textContent="Viking Ve historical tracking (NOT your new embarkation ship; Viking Egdir confirmed for Nov 3): "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";
       if(gs) gs.textContent="UNVERIFIED / WATCH";
       const set=(id,val,fallback)=>{const e=document.getElementById(id);if(e)e.textContent=(val&&String(val).trim())?val:fallback;};
       set("ship-area",d.ship.area,"Not available");
@@ -1053,7 +1067,7 @@ async function loadRiverWatchData(){
         const icon=L.divIcon({className:"ve-ship-icon",html:"🚢",iconSize:[30,30],iconAnchor:[15,15]});
         if(!veShipMarker){
           veShipMarker=L.marker(ll,{icon,zIndexOffset:1000}).addTo(veMap);
-          veShipMarker.bindTooltip("Viking Ve",{permanent:true,direction:"top",offset:[0,-10],className:"ve-ship-tooltip"});
+          veShipMarker.bindTooltip("Viking Ve — NOT your embarkation ship",{permanent:true,direction:"top",offset:[0,-10],className:"ve-ship-tooltip"});
         } else {
           veShipMarker.setLatLng(ll);
         }

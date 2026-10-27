@@ -794,7 +794,7 @@ function renderTopExcursions(){
  const key=selected.slice(-2);
  const heading=document.getElementById("top-excursions-title"),list=document.getElementById("top-excursions-list");
  if(!heading||!list)return;
- heading.textContent=active?"📅 All booked excursions today — "+selected:"📅 All booked excursions for November 2 (first excursion day)";
+ heading.textContent=active?"📅 ALL scheduled excursions for "+selected:"📅 November 2 — ALL scheduled excursions";
  list.replaceChildren();
  const events=bookedExcursions[key]||[];
  if(!events.length){

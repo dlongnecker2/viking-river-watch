@@ -25,6 +25,14 @@ header h1{margin:0 0 8px;font-size:34px} header p{margin:5px 0;opacity:.9}
 .section{margin-top:20px}
 table{width:100%;border-collapse:collapse}th,td{padding:11px 8px;text-align:left;border-bottom:1px solid #e2e7e9}th{color:#49626b}
 .next{background:#fff7dd}
+.journey-today{background:#dff3e8!important;outline:2px solid #168447;outline-offset:-2px}
+.journey-today td{font-weight:800}
+.you-here-pill{display:inline-block;background:#126b35;color:white;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:900;margin-left:8px;white-space:nowrap}
+.journey-banner{margin:14px 0 16px;padding:17px 20px;border:2px solid #8bc5a6;border-radius:14px;background:#effaf3}
+.journey-banner strong{display:block;font-size:21px;color:#126b35;margin:4px 0}
+.journey-banner small{display:block;color:#526870;line-height:1.5}
+.journey-banner .kicker{color:#126b35}
+@media(max-width:650px){.journey-banner strong{font-size:18px}}
 footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .kicker{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#67808a;font-weight:700}
 .small{font-size:13px;color:#688087}
@@ -650,22 +658,23 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
   <div class="section">
     <h2>🗺️ Our Journey</h2>
+    <div id="journey-banner" class="journey-banner" aria-live="polite"><div class="kicker">📍 Your scheduled journey</div><strong>Loading your travel day…</strong><small>Based on the itinerary, not GPS tracking.</small></div>
     <p class="small"><strong>Yellow rows = key navigation checkpoints we are watching closely.</strong> They are not automatically a warning that your cruise is disrupted.</p>
     <table>
       <tr><th>Date</th><th>Destination</th><th>River Area</th></tr>
-      <tr><td>Nov 3</td><td>Amsterdam</td><td>Rhine system</td></tr>
-      <tr><td>Nov 4</td><td>Kinderdijk</td><td>Lower Rhine</td></tr>
-      <tr><td>Nov 5</td><td>Cologne</td><td>Rhine</td></tr>
-      <tr class="next"><td>Nov 6</td><td>Koblenz / Middle Rhine</td><td><strong>Kaub checkpoint — key water-level watch</strong></td></tr>
-      <tr><td>Nov 7</td><td>Miltenberg</td><td>Main</td></tr>
-      <tr><td>Nov 8</td><td>Würzburg</td><td>Main</td></tr>
-      <tr><td>Nov 9</td><td>Bamberg</td><td>Main</td></tr>
-      <tr><td>Nov 10</td><td>Nuremberg</td><td>Main-Danube Canal</td></tr>
-      <tr class="next"><td>Nov 11</td><td>Regensburg</td><td><strong>Upper Danube — Pfelling watch</strong></td></tr>
-      <tr class="next"><td>Nov 12</td><td>Passau</td><td><strong>Danube — Achleiten watch</strong></td></tr>
-      <tr class="next"><td>Nov 13</td><td>Melk / Wachau</td><td><strong>Danube — Kienstock / Wachau watch</strong></td></tr>
-      <tr class="next"><td>Nov 14–15</td><td>Vienna</td><td><strong>Danube — Wildungsmauer watch</strong></td></tr>
-      <tr class="next"><td>Nov 16–17</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
+      <tr data-journey-start="2026-11-03" data-journey-end="2026-11-03"><td>Nov 3</td><td>Amsterdam</td><td>Rhine system</td></tr>
+      <tr data-journey-start="2026-11-04" data-journey-end="2026-11-04"><td>Nov 4</td><td>Kinderdijk</td><td>Lower Rhine</td></tr>
+      <tr data-journey-start="2026-11-05" data-journey-end="2026-11-05"><td>Nov 5</td><td>Cologne</td><td>Rhine</td></tr>
+      <tr data-journey-start="2026-11-06" data-journey-end="2026-11-06" class="next"><td>Nov 6</td><td>Koblenz / Middle Rhine</td><td><strong>Kaub checkpoint — key water-level watch</strong></td></tr>
+      <tr data-journey-start="2026-11-07" data-journey-end="2026-11-07"><td>Nov 7</td><td>Miltenberg</td><td>Main</td></tr>
+      <tr data-journey-start="2026-11-08" data-journey-end="2026-11-08"><td>Nov 8</td><td>Würzburg</td><td>Main</td></tr>
+      <tr data-journey-start="2026-11-09" data-journey-end="2026-11-09"><td>Nov 9</td><td>Bamberg</td><td>Main</td></tr>
+      <tr data-journey-start="2026-11-10" data-journey-end="2026-11-10"><td>Nov 10</td><td>Nuremberg</td><td>Main-Danube Canal</td></tr>
+      <tr data-journey-start="2026-11-11" data-journey-end="2026-11-11" class="next"><td>Nov 11</td><td>Regensburg</td><td><strong>Upper Danube — Pfelling watch</strong></td></tr>
+      <tr data-journey-start="2026-11-12" data-journey-end="2026-11-12" class="next"><td>Nov 12</td><td>Passau</td><td><strong>Danube — Achleiten watch</strong></td></tr>
+      <tr data-journey-start="2026-11-13" data-journey-end="2026-11-13" class="next"><td>Nov 13</td><td>Melk / Wachau</td><td><strong>Danube — Kienstock / Wachau watch</strong></td></tr>
+      <tr data-journey-start="2026-11-14" data-journey-end="2026-11-15" class="next"><td>Nov 14–15</td><td>Vienna</td><td><strong>Danube — Wildungsmauer watch</strong></td></tr>
+      <tr data-journey-start="2026-11-16" data-journey-end="2026-11-17" class="next"><td>Nov 16–17</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
     </table>
   </div>
 
@@ -707,6 +716,56 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
+
+// Date-based itinerary progress; explicitly not a claim of actual GPS position.
+function updateJourneyProgress(){
+  const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Amsterdam",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+  const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+  const today=p.year+"-"+p.month+"-"+p.day;
+  const schedule=[
+    ["2026-11-01","Travel day — flying to Europe"],
+    ["2026-11-02","Amsterdam — pre-cruise stay"],
+    ["2026-11-03","Amsterdam — Viking embarkation"],
+    ["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],
+    ["2026-11-06","Koblenz / scenic Middle Rhine"],
+    ["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],
+    ["2026-11-09","Bamberg"],["2026-11-10","Nuremberg / Main–Danube Canal"],
+    ["2026-11-11","Regensburg"],["2026-11-12","Passau"],
+    ["2026-11-13","Melk / Wachau"],["2026-11-14","Vienna"],
+    ["2026-11-15","Vienna"],["2026-11-16","Budapest"],
+    ["2026-11-17","Budapest — cruise concludes"],
+    ["2026-11-18","Budapest — post-cruise stay"],
+    ["2026-11-19","Return travel"]
+  ];
+  const banner=document.getElementById("journey-banner");
+  if(!banner)return;
+  document.querySelectorAll("[data-journey-start]").forEach(row=>{
+    const active=today>=row.dataset.journeyStart && today<=row.dataset.journeyEnd;
+    row.classList.toggle("journey-today",active);
+    row.querySelectorAll(".you-here-pill").forEach(el=>el.remove());
+    if(active){const tag=document.createElement("span");tag.className="you-here-pill";tag.textContent="📍 YOU ARE HERE";row.cells[1].appendChild(tag);}
+  });
+  const current=schedule.find(([date])=>date===today);
+  const upcoming=schedule.find(([date])=>date>today);
+  const daysUntil=Math.ceil((Date.parse("2026-11-03T12:00:00Z")-Date.parse(today+"T12:00:00Z"))/86400000);
+  const kicker=banner.querySelector(".kicker"),headline=banner.querySelector("strong"),detail=banner.querySelector("small");
+  if(today<"2026-11-01"){
+    kicker.textContent="🧳 Upcoming adventure";
+    headline.textContent=daysUntil+" days until Viking embarkation";
+    detail.textContent="Amsterdam boarding: November 3. Scheduled travel begins November 1. Progress uses European calendar dates, not GPS.";
+  }else if(current){
+    kicker.textContent="📍 YOU ARE HERE — scheduled itinerary";
+    headline.textContent=current[1];
+    detail.textContent=(upcoming?"Tomorrow: "+upcoming[1]+". ":"")+"Based on your planned itinerary, not your actual GPS or Viking's live docking instructions. Local calendar date: "+today+".";
+  }else{
+    kicker.textContent="🗺️ Journey progress";
+    headline.textContent=today>"2026-11-19"?"Your November 2026 journey is complete":"Between scheduled itinerary dates";
+    detail.textContent="Historical itinerary, not live location tracking.";
+  }
+}
+updateJourneyProgress();
+setInterval(updateJourneyProgress,60*60*1000);
+
 const weatherStops = [
   {name:"Amsterdam", lat:52.3676, lon:4.9041},
   {name:"Kinderdijk", lat:51.8853, lon:4.6369},

@@ -453,10 +453,10 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       </svg>
     </div>
     <div class="legend">
-      <span><i class="dot g"></i> Normal</span>
+      <span><i class="dot g"></i> Above dashboard watch range (not navigation clearance)</span>
       <span><i class="dot y"></i> Watch / running low or high</span>
       <span><i class="dot r"></i> Disruption risk</span>
-      <span>Dashed lines are reference guides only; current status is calculated from the latest automated readings</span>
+      <span>Dashed lines are illustrative only. Colors are conservative dashboard monitoring indicators, not official navigability or Viking operating decisions. Pfelling remains on WATCH below 340 cm; 340 cm is our monitoring threshold, not an official limit.</span>
     </div>
   </div>
 
@@ -897,7 +897,7 @@ function wx(code){
 function f(c){ return Math.round(c*9/5+32); }
 function gaugeRisk(key,value){
   if(value==null || !Number.isFinite(Number(value))) return "unavailable";
-  const thresholds={kaub:[30,77],pfelling:[230,290],kienstock:[90,161]};
+  const thresholds={kaub:[30,77],pfelling:[230,340],kienstock:[90,161]}; // Pfelling 340 is a conservative dashboard WATCH threshold, NOT an official navigation limit.
   if(!thresholds[key]) return "unrated";
   const [critical,reference]=thresholds[key];
   return value<critical?"red":value<reference?"yellow":"green";

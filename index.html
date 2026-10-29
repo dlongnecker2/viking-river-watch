@@ -599,7 +599,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <span id="ship-location-time" class="small"></span>
     </div>
 
-    <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
+    <p class="small"><strong>Two-ship map:</strong> Viking Egdir (your first ship) and Viking Ve are displayed as separate named markers whenever verified coordinates are available. Missing positions are never estimated from the itinerary.</p>\n    <p id="egdir-map-status" class="small">Checking Viking Egdir position data…</p>\n    <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
     <div style="margin-top:12px">
       <h3 style="margin-bottom:8px">Live AIS trackers</h3>
       <p class="small">VesselFinder does not allow this ship map to be embedded reliably, so I removed the broken frame. Use the tracker buttons below for the newest plotted AIS position.</p>
@@ -978,6 +978,7 @@ loadWeather();
 let veMap=null;
 let veShipMarker=null;
 let veAreaLayer=null;
+let egdirShipMarker=null;
 
 function initVikingVeMap(){
   if(typeof L==="undefined" || !document.getElementById("ve-map")) return;
@@ -1012,6 +1013,7 @@ function initVikingVeMap(){
   veMap.fitBounds(L.latLngBounds(route),{padding:[20,20]});
 }
 initVikingVeMap();
+
 
 async function loadRiverWatchData(){
   try{
@@ -1057,6 +1059,31 @@ async function loadRiverWatchData(){
         n.textContent=prefix+d.viking.summary.substring(0,700);
       }
     }
+    // Plot Egdir separately only when the data feed supplies verified coordinates.
+    // Never place a vessel at its advertised destination or scheduled port.
+    const egdir=d.ship_egdir || d.ships?.egdir;
+    const egdirValid=egdir && egdir.latitude!=null && egdir.longitude!=null &&
+      Number.isFinite(Number(egdir.latitude)) && Number.isFinite(Number(egdir.longitude)) &&
+      Math.abs(Number(egdir.latitude))<=90 && Math.abs(Number(egdir.longitude))<=180 &&
+      (egdir.coordinate_quality==="live_machine_readable" || egdir.coordinate_quality==="historical_manually_verified");
+    if(veMap && egdirValid){
+      const ll=[Number(egdir.latitude),Number(egdir.longitude)];
+      const icon=L.divIcon({className:"ve-ship-icon",html:"<span style='background:#176c42;border:2px solid white;border-radius:50%;padding:5px;font-size:19px'>🚢</span>",iconSize:[40,40],iconAnchor:[20,20]});
+      if(!egdirShipMarker){
+        egdirShipMarker=L.marker(ll,{icon,zIndexOffset:1100}).addTo(veMap);
+        egdirShipMarker.bindTooltip("Viking Egdir — your first ship",{permanent:true,direction:"top",offset:[0,-15],className:"ve-ship-tooltip"});
+      } else egdirShipMarker.setLatLng(ll);
+      const time=egdir.position_time||"timestamp unavailable";
+      egdirShipMarker.bindPopup("<strong>Viking Egdir — your first ship</strong><br>"+
+        (egdir.coordinate_quality==="live_machine_readable"?"Reported AIS position":"Historical verified position — not live")+
+        "<br><small>"+String(time).replace(/[<>&]/g,"")+"</small>");
+    } else if(egdirShipMarker && veMap){
+      veMap.removeLayer(egdirShipMarker);egdirShipMarker=null;
+    }
+    const egdirMapStatus=document.getElementById("egdir-map-status");
+    if(egdirMapStatus) egdirMapStatus.textContent=egdirValid?
+      "Viking Egdir plotted from "+(egdir.coordinate_quality==="live_machine_readable"?"reported AIS":"historical verified")+" coordinates ("+(egdir.position_time||"time unavailable")+").":
+      "Viking Egdir: exact verified coordinates not yet available in this site's data feed; no guessed position is shown. Use the live AIS links above.";
     if(d.ship){
       const go=document.getElementById("get-live-operations"), gs=document.getElementById("get-live-status");
       if(go) go.textContent="Viking Ve historical tracking (NOT your new embarkation ship; Viking Egdir confirmed for Nov 3): "+(d.ship.status||"status unavailable")+". Latest area: "+(d.ship.area||"unavailable")+". AIS destination field: "+(d.ship.destination||"not reported")+" (may be stale).";

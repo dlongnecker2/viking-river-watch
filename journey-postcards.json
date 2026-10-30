@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "description": "Publicly shared daily postcards. Only add photos and notes explicitly approved for public sharing. Photos should use committed repository-relative URLs, e.g. photos/2026-11-03-amsterdam.jpg. Do not publish private cabin or exact real-time location.",
+  "entries": []
+}

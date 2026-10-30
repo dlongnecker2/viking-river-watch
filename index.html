@@ -350,6 +350,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 #landmark-photo-title { font-size:1.2rem; }
 #landmark-photo-panel:target { scroll-margin-top:20px; }
 </style>
+<style>
+#landmark-map .leaflet-popup { display:none !important; }
+</style>
 </head>
 <body>
 <header>
@@ -1337,11 +1340,10 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   chosen.forEach(p=>{
    const marker=L.marker([p.lat,p.lon]).addTo(layer);
    const photoId="landmark-photo-"+landmarks.indexOf(p);
-   // Keep the map unobstructed: full-size photos and descriptions live below it.
-   marker.bindPopup("<strong>"+p.name+"</strong><p>Photo and description appear below the map.</p>",{maxWidth:220,autoPan:true});
+   // No Leaflet popup: landmark details render in the photo panel below the map.
    marker.on("click",()=>{
      // Close the floating popup so it never obscures the map or photo.
-     marker.closePopup();
+     map.closePopup();
      document.getElementById("landmark-summary").textContent=p.name+" — "+p.info;
      document.getElementById("landmark-photo-panel").style.display="block";
      document.getElementById("landmark-photo-title").textContent=p.name;

@@ -422,6 +422,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     </div>
     <p><strong>Latest river readings:</strong> <span id="outlook-rivers">Waiting for current gauges…</span></p>
     <p><strong>Data freshness:</strong> <span id="outlook-freshness">Checking last update…</span></p>
+    <p><strong>Feed health:</strong> <span id="outlook-feed-health">Checking individual sources…</span></p>
     <p class="travel-note"><strong>Source:</strong> Viking's October 27 departure-specific letter. River gauges do not confirm sailing or transfers. Any new private Viking notice must be added separately.</p>
   </div>
 
@@ -1093,6 +1094,14 @@ async function loadRiverWatchData(){
     const d=await response.json();
     const gaugeItems=[["Kaub",d.germany?.kaub],["Würzburg",d.germany?.wuerzburg],["Pfelling",d.germany?.pfelling],["Wachau",d.austria?.kienstock]];
     document.getElementById("outlook-rivers").textContent=gaugeItems.map(([name,g])=>name+": "+(g?.value_cm!=null?g.value_cm+" cm":"unavailable")).join(" · ");
+    const health=d.feed_health||{};
+    const feedStatus=document.getElementById("outlook-feed-health");
+    if(feedStatus){
+      const german=health.german_gauges||((d.germany?.kaub?.value_cm!=null||d.germany?.pfelling?.value_cm!=null)?"ok":"unavailable");
+      const austrian=health.austrian_gauges||((d.austria?.kienstock?.value_cm!=null)?"ok":"unavailable");
+      const ais=health.egdir_ais||(d.ship_egdir?.coordinate_quality==="live_machine_readable"?"ok":"historical_only");
+      feedStatus.textContent="German gauges: "+(german==="ok"?"reporting":"unavailable")+" · Austrian gauges: "+(austrian==="ok"?"reporting":"unavailable")+" · Egdir AIS: "+(ais==="ok"?"timestamped observation":"historical position only");
+    }
     const updatedAt=d.updated_utc?new Date(d.updated_utc):null;
     const ageHours=updatedAt&&Number.isFinite(updatedAt.getTime())?(Date.now()-updatedAt.getTime())/3600000:null;
     document.getElementById("outlook-freshness").textContent=ageHours==null?"Feed timestamp unavailable":(ageHours>4?"STALE — ":"")+"Last successful refresh "+updatedAt.toLocaleString()+"; checks scheduled every 2 hours";

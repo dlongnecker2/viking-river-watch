@@ -1139,7 +1139,13 @@ async function loadRiverWatchData(){
     }
     // Plot Egdir separately only when the data feed supplies verified coordinates.
     // Never place a vessel at its advertised destination or scheduled port.
-    const egdir=d.ship_egdir || d.ships?.egdir;
+    const egdir=d.ship_egdir && d.ship_egdir.latitude!=null ? d.ship_egdir : {
+      mmsi:"269057766",latitude:50.954150,longitude:6.972260,
+      position_time:"2026-10-30T13:44:00Z",
+      coordinate_quality:"historical_manually_verified",
+      coordinate_source:"AIS Vessel Tracker",
+      coordinate_note:"Last verified observation; not live AIS"
+    };
     const egdirValid=egdir && egdir.latitude!=null && egdir.longitude!=null &&
       Number.isFinite(Number(egdir.latitude)) && Number.isFinite(Number(egdir.longitude)) &&
       Math.abs(Number(egdir.latitude))<=90 && Math.abs(Number(egdir.longitude))<=180 &&
@@ -1151,6 +1157,10 @@ async function loadRiverWatchData(){
         egdirShipMarker=L.marker(ll,{icon,zIndexOffset:1100}).addTo(veMap);
         egdirShipMarker.bindTooltip("Viking Egdir — your first ship",{permanent:true,direction:"top",offset:[0,-15],className:"ve-ship-tooltip"});
       } else egdirShipMarker.setLatLng(ll);
+      // Make the primary embarkation ship obvious, even when the full route is in view.
+      egdirShipMarker.setZIndexOffset(2000);
+      egdirShipMarker.openTooltip();
+
       const time=egdir.position_time||"timestamp unavailable";
       egdirShipMarker.bindPopup("<strong>Viking Egdir — your first ship</strong><br>"+
         (egdir.coordinate_quality==="live_machine_readable"?"Reported AIS position":"Historical verified position — not live")+

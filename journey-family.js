@@ -28,6 +28,26 @@ const progress=today<stops[0][0]?0:today>stops[stops.length-1][0]?100:Math.round
 $("journey-progress-fill").style.width=progress+"%";
 $("journey-progress-label").textContent=today<stops[0][0]?"Departing October 31":today>stops[stops.length-1][0]?"Journey complete":("Day "+(current+1)+" of "+stops.length);
 $("journey-today").textContent=current>=0?stops[current][1]:today<stops[0][0]?"Amsterdam next":"Trip completed";
+const routeCoordinates=[
+[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[51.8853,4.6369],[50.9375,6.9603],[50.3569,7.5889],[49.7039,9.2644],[49.7913,9.9534],[49.8988,10.9028],[49.4521,11.0767],[49.0134,12.1016],[48.5667,13.4319],[48.2279,15.3319],[48.2082,16.3738],[48.2082,16.3738],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402]
+];
+if(typeof L!=="undefined"&&$("family-route-map")){
+ const m=L.map("family-route-map",{scrollWheelZoom:false}).setView([50,11],5);
+ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:17,attribution:"&copy; OpenStreetMap contributors"}).addTo(m);
+ const unique=[];
+ stops.forEach((stop,i)=>{
+  const coord=routeCoordinates[i];
+  if(!unique.length||coord[0]!==unique[unique.length-1][0]||coord[1]!==unique[unique.length-1][1])unique.push(coord);
+  if(i===0||i===19)return;
+  const status=stop[0]<today?"Scheduled date passed":stop[0]===today?"Scheduled today":"Upcoming scheduled stop";
+  L.circleMarker(coord,{radius:stop[0]===today?8:5,color:stop[0]<today?"#168447":stop[0]===today?"#267fc2":"#647b87",fillOpacity:1}).addTo(m).bindPopup("<strong>"+stop[1]+"</strong><br>"+status+" — "+stop[0]);
+ });
+ for(let i=1;i<unique.length;i++){
+  const originalIndex=routeCoordinates.findIndex(c=>c[0]===unique[i][0]&&c[1]===unique[i][1]);
+  L.polyline([unique[i-1],unique[i]],{color:stops[originalIndex][0]<today?"#168447":"#647b87",weight:4,dashArray:stops[originalIndex][0]<today?null:"7 7"}).addTo(m);
+ }
+ m.fitBounds(L.latLngBounds(unique),{padding:[22,22]});
+}
 const route=$("journey-route");
 stops.forEach(([date,place])=>{
  const card=document.createElement("div");card.className="journey-stop "+(date<today?"past":date===today?"today":"future");

@@ -388,7 +388,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
  <div class="journey-heading"><div><div class="kicker">SHARE OUR GRAND EUROPEAN ADVENTURE</div><h2>🌍 Follow Our Journey</h2><p>Amsterdam → Budapest · October 31 – November 19, 2026</p></div><button class="travel-button" id="journey-share" type="button">Share with family</button></div>
  <div class="journey-stats"><div><span>TRIP PROGRESS</span><strong id="journey-progress-label">Preparing to depart</strong><div class="journey-track"><div id="journey-progress-fill"></div></div></div><div><span>PLANNED LOCATION</span><strong id="journey-today">Amsterdam next</strong></div><div><span>OUR ASSIGNED SHIP</span><strong id="journey-ship">Viking Egdir</strong></div></div>
  <p class="travel-muted">Locations follow the published schedule and any recorded changes—not live personal tracking. Viking may revise the route.</p>
- <h3>🗺️ Where we've been & where we're going</h3><div class="journey-route-scroll"><div id="journey-route" class="journey-route"></div></div><p class="travel-muted">Green: scheduled dates already passed · Blue: today · Gray: upcoming. A passed date does not confirm a visit.</p>
+ <h3>🗺️ Where we've been & where we're going</h3><div id="family-route-map" style="height:310px;border-radius:12px;margin:12px 0" role="region" aria-label="Map of our scheduled European journey"></div><div class="journey-route-scroll"><div id="journey-route" class="journey-route"></div></div><p class="travel-muted">Green: scheduled dates already passed · Blue: today · Gray: upcoming. A passed date does not confirm a visit.</p>
  <div class="journey-columns"><div><h3>📷 Our daily postcards</h3><p class="travel-muted">Photos and notes we choose to share from the trip.</p><div id="journey-postcards">No postcards shared yet. Check back after we arrive in Europe!</div></div><div><h3>☀️ Tomorrow's adventure</h3><div id="journey-tomorrow">Looking up the next planned destination…</div></div></div>
  </section>
 <section class="travel-tools" id="travel-command-center" aria-label="Cruise travel command center">
@@ -1425,6 +1425,6 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   }catch(e){console.warn("Cruise assignment config unavailable",e);}
 })();
 </script>
-<script src="journey-family.js?v=1" defer></script>
+<script src="journey-family.js?v=2" defer></script>
 </body>
 </html>

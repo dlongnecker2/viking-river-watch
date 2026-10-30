@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-30T06:26:27.084386Z",
+  "updated_utc": "2026-10-30T08:21:29.505005Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 45.0,
-      "timestamp": "2026-10-30T07:15:00+01:00",
+      "value_cm": 44.0,
+      "timestamp": "2026-10-30T09:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 261.0,
-      "timestamp": "2026-10-30T07:15:00+01:00",
+      "value_cm": 259.0,
+      "timestamp": "2026-10-30T09:15:00+01:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 251.0,
-      "hour_change_cm": 1.0
+      "value_cm": 255.0,
+      "hour_change_cm": 3.0
     },
     "kienstock": {
-      "value_cm": 177.0,
-      "hour_change_cm": -1.0
+      "value_cm": 178.0,
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 160.0,
+      "value_cm": 157.0,
       "hour_change_cm": -1.0
     },
-    "source_time": "10/30/2026 7:12 AM"
+    "source_time": "10/30/2026 9:12 AM"
   },
   "viking": {
     "checked": false
@@ -41,7 +41,7 @@
     "source": "https://www.shipfinder.com/vessels/details/269057517",
     "mmsi": "269057517",
     "area": "Europe Inland",
-    "reported_ago": "9 min ago",
+    "reported_ago": "1 hour ago",
     "destination": "WIEN",
     "status": "Under way",
     "draught": "1.7 m",

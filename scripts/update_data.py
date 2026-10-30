@@ -165,28 +165,27 @@ def vesselfinder():
 
 
 def egdir_position():
-    """Obtain timestamped Egdir AIS coordinates; retain a labeled verified observation if unavailable."""
+    """Try dated public AIS; retain the last verified observation, never invent a live fix."""
     mmsi = "269057766"
     url = "https://aisvesseltracker.com/vessel/viking-egdir-mmsi-269057766-imo-0"
     fallback = {
         "checked": False, "mmsi": mmsi, "latitude": 50.954150,
         "longitude": 6.972260, "position_time": "2026-10-30T13:44:00Z",
         "coordinate_quality": "historical_manually_verified",
-        "coordinate_source": "AIS Vessel Tracker, observation Oct 30 13:44 UTC",
-        "coordinate_note": "Last verified AIS observation; not a live position.",
+        "coordinate_source": "AIS Vessel Tracker, October 30 observation",
+        "coordinate_note": "Last verified observation; not a live AIS position.",
         "source": url
     }
     try:
         raw = get_text(url)
-        plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+        plain = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
         if "VIKING EGDIR" not in plain.upper():
             return fallback
-        match = re.search(r"Latitude\\s+(-?\\d{1,2}\\.\\d+)\\s+Longitude\\s+(-?\\d{1,3}\\.\\d+)", plain, re.I)
-        stamp = re.search(r"Last Update \\(UTC\\)\\s+(30 Oct 2026, 13:44 UTC|\\d{1,2} [A-Za-z]{3} 20\\d{2}, \\d{2}:\\d{2} UTC)", plain, re.I)
+        match = re.search(r"Latitude\s+(-?\d{1,2}\.\d+)\s+Longitude\s+(-?\d{1,3}\.\d+)", plain, re.I)
+        stamp = re.search(r"Last Update\s*\(UTC\)\s*(\d{1,2} [A-Za-z]{3} 20\d{2}, \d{2}:\d{2} UTC)", plain, re.I)
         if match and stamp:
             lat, lon = float(match.group(1)), float(match.group(2))
-            from datetime import datetime as _dt
-            observed = _dt.strptime(stamp.group(1), "%d %b %Y, %H:%M UTC").replace(tzinfo=timezone.utc)
+            observed = datetime.strptime(stamp.group(1), "%d %b %Y, %H:%M UTC").replace(tzinfo=timezone.utc)
             if 45 <= lat <= 55 and 3 <= lon <= 20 and observed <= datetime.now(timezone.utc):
                 return {
                     "checked": True, "mmsi": mmsi, "latitude": lat, "longitude": lon,
@@ -270,7 +269,7 @@ except Exception as e:
 # AIS sources do not expose coordinates. Never infer coordinates from destination
 # or itinerary text. This point was verified by hovering directly over Viking Ve
 # on the CruiseMapper live map on 2026-10-06.
-if ship.get("latitude") is None or ship.get("longitude") is None:
+if ship.get("latitude") is None or ship.get("longitude") is None or not ship.get("position_time"):
     ship["latitude"] = 48.18211
     ship["longitude"] = 15.07668
     ship["position_time"] = "2026-10-06 (manually verified map position)"
@@ -278,7 +277,7 @@ if ship.get("latitude") is None or ship.get("longitude") is None:
     ship["coordinate_quality"] = "last_verified"
     ship["coordinate_note"] = "Last verified plotted position; retained until a newer machine-readable AIS coordinate is available."
 else:
-    ship["coordinate_quality"] = "live_machine_readable"
+    ship["coordinate_quality"] = "timestamped_reported"
     ship["coordinate_source"] = ship.get("source", "public AIS source")
 
 ship["marine_traffic_url"] = "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"

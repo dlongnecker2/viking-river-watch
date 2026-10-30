@@ -322,6 +322,25 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 .viking-personal-notice{max-width:1160px;margin:16px auto 8px;padding:20px 24px;border:3px solid #b54729;border-radius:16px;background:#fff5ee;color:#542d22;line-height:1.6;box-shadow:0 3px 12px rgba(0,0,0,.08)}
 .notice-heading{font-size:20px;font-weight:900;color:#9c341c}.viking-personal-notice ul{padding-left:22px}.viking-personal-notice li{margin:8px 0}.viking-personal-notice p{margin:9px 0}.notice-caution{font-size:13px;border-top:1px solid #dcb4a6;padding-top:10px}
 @media(max-width:650px){.viking-personal-notice{margin:10px;padding:15px}.notice-heading{font-size:17px}}
+
+/* 2026 travel command center */
+.travel-tools{max-width:1160px;margin:16px auto;padding:0 12px}
+.travel-tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.travel-card{background:#fff;border:1px solid #d5e4e5;border-radius:14px;padding:17px;box-shadow:0 2px 8px #123c4a10}
+.travel-card h2{font-size:19px;margin:0 0 10px}
+.travel-card p{line-height:1.5;margin:7px 0}
+.travel-clock{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.travel-muted{color:#526b74;font-size:13px}
+.travel-pill{display:inline-block;background:#edf4f7;border-radius:20px;padding:5px 10px;font-weight:700;font-size:12px;margin:4px 4px 4px 0}
+.travel-button{display:inline-block;border:0;background:#126b55;color:white;padding:10px 13px;border-radius:9px;font-weight:750;cursor:pointer;text-decoration:none}
+.travel-button.secondary{background:#eaf1f3;color:#214751}
+.travel-note{border-left:4px solid #bf7b23;padding:9px 12px;background:#fff9e9;margin:9px 0;font-size:13px}
+.landmark-panel{max-width:1160px;margin:18px auto;padding:18px;background:white;border-radius:15px;box-shadow:0 2px 8px #123c4a10}
+#landmark-map{height:390px;border-radius:12px;margin:12px 0}
+.landmark-filters{display:flex;gap:8px;flex-wrap:wrap}
+.landmark-filters button{border:1px solid #b7d0d4;border-radius:20px;background:white;padding:7px 12px;cursor:pointer}
+.landmark-filters button[aria-pressed="true"]{background:#176c42;color:white}
+@media(max-width:600px){#landmark-map{height:310px}.travel-clock{font-size:23px}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -346,6 +365,48 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <div class="top-journey-main"><div><div class="top-city" id="top-journey-city">Amsterdam</div><div id="top-journey-detail" class="top-sub">Scheduled itinerary location · not GPS tracking</div></div><div class="top-weather" id="top-weather"><strong>Loading current weather…</strong><span>Live weather at the scheduled destination</span></div></div>
   <div class="top-destination"><div class="top-destination-title">🏛️ About today’s destination</div><p id="top-destination-description">Loading destination highlights…</p></div><div class="top-excursions"><div class="top-excursions-title" id="top-excursions-title">📅 Excursions for your scheduled day</div><div id="top-excursions-list">Loading excursions…</div><div class="top-excursions-note">Times from your October 20 Viking excursion schedule and confirmed private plans. All times are local; verify meeting times in the Viking Daily.</div></div><div class="top-footer" id="top-weather-time">Weather supplied by Open-Meteo. Updates when the page opens and every 15 minutes while open.</div>
 </div>
+
+<section class="travel-tools" id="travel-command-center" aria-label="Cruise travel command center">
+ <div class="travel-tools-grid">
+  <article class="travel-card" id="family-view">
+   <h2>👨‍👩‍👧‍👦 Follow Our Adventure</h2>
+   <p><strong id="family-day">Checking today's European itinerary…</strong></p>
+   <p id="family-location">Scheduled destination will appear here.</p>
+   <p id="family-ship">First confirmed ship: Viking Egdir, boarding November 3.</p>
+   <p class="travel-muted">Itinerary location is planned, not a live GPS location. Ship positions below are AIS observations only when verified.</p>
+   <button class="travel-button" type="button" id="family-share">Copy family-friendly link</button>
+   <button class="travel-button secondary" type="button" id="family-toggle" aria-expanded="false">Family view</button>
+  </article>
+  <article class="travel-card">
+   <h2>🕰️ Europe ↔ Washington</h2>
+   <div class="travel-muted">Central European local time</div><div class="travel-clock" id="europe-clock">--:--</div>
+   <div class="travel-muted">Olympia / Seattle local time</div><div class="travel-clock" id="washington-clock">--:--</div>
+   <p id="call-hours" class="travel-muted">Checking time difference…</p>
+  </article>
+  <article class="travel-card" id="travel-change-tracker">
+   <h2>🚌 Ship swaps & travel changes</h2>
+   <div class="travel-pill">Confirmed: Egdir boarding Nov 3</div>
+   <div class="travel-pill">Expected: Rhine ship swap</div>
+   <div class="travel-pill">Possible: Danube ship swap</div>
+   <p><strong>Oct 27 — direct Viking letter:</strong> Egdir replaces Ve. Viking expects a Rhine sister-ship transfer between Kinderdijk and Frankfurt (~280 miles by coach); Koblenz excursions canceled.</p>
+   <p><strong>Still conditional:</strong> a second transfer between Nuremberg and Passau (~140 miles), additional hotels, and further excursion changes.</p>
+   <div class="travel-note"><strong>Unknown:</strong> names of receiving ships, exact swap times, and final transfer/hotel arrangements. These are not confirmed by river gauges or AIS.</div>
+   <p class="travel-muted">Source: your October 27, 2026 Viking notice. This tracker does not automatically receive private Viking emails.</p>
+  </article>
+ </div>
+</section>
+<section class="landmark-panel" id="river-landmarks">
+ <h2>🏰 Castles & landmarks along our route</h2>
+ <p class="travel-muted">Explore historic sights and tap a pin for a short story. These are landmark locations, not confirmed sightseeing stops.</p>
+ <div class="landmark-filters">
+  <button type="button" data-landmark-filter="all" aria-pressed="true">All sights</button>
+  <button type="button" data-landmark-filter="rhine" aria-pressed="false">Rhine</button>
+  <button type="button" data-landmark-filter="main" aria-pressed="false">Main / Franconia</button>
+  <button type="button" data-landmark-filter="danube" aria-pressed="false">Danube</button>
+ </div>
+ <div id="landmark-map" role="region" aria-label="Interactive map of European river landmarks"></div>
+ <p id="landmark-summary" class="travel-muted">Select a marker to learn about a landmark.</p>
+</section>
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
 <div class="container">
@@ -599,7 +660,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <span id="ship-location-time" class="small"></span>
     </div>
 
-    <p class="small"><strong>Two-ship map:</strong> Viking Egdir (your first ship) and Viking Ve are displayed as separate named markers whenever verified coordinates are available. Missing positions are never estimated from the itinerary.</p>\n    <p id="egdir-map-status" class="small">Checking Viking Egdir position data…</p>\n    <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
+    <p class="small"><strong>Two-ship map:</strong> Viking Egdir (your first ship) and Viking Ve are displayed as separate named markers whenever verified coordinates are available. Missing positions are never estimated from the itinerary.</p>
+    <p id="egdir-map-status" class="small">Checking Viking Egdir position data…</p>
+    <div id="ve-map" class="ve-map" aria-label="Viking Ve route map"></div>
     <div style="margin-top:12px">
       <h3 style="margin-bottom:8px">Live AIS trackers</h3>
       <p class="small">VesselFinder does not allow this ship map to be embedded reliably, so I removed the broken frame. Use the tracker buttons below for the newest plotted AIS position.</p>
@@ -757,7 +820,83 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 
 <footer>Dennis's Viking Grand European Tour River Watch<br>Amsterdam → Budapest • 2026</footer><div style="max-width:1100px;margin:0 auto 30px;padding:0 22px;color:#687b82;font-size:12px;line-height:1.5"><strong>Data sources:</strong> Germany: PEGELONLINE / Bavarian Environment Agency (Kaub, Würzburg, Pfelling). Austria/Hungary: Danube FIS Portal. Viking operations: automatically refreshed from the latest available Viking Current Sailings data. Gauge values use each station’s own local datum; do not compare raw centimeters between stations.</div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="">
+/* Travel command center: independent of the AIS data feed */
+(function(){
+ const europeZone="Europe/Amsterdam",homeZone="America/Los_Angeles";
+ const dateFormat=(zone,opts)=>new Intl.DateTimeFormat("en-US",{timeZone:zone,...opts});
+ function clockTick(){
+   const now=new Date(),opts={weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",hour12:true};
+   document.getElementById("europe-clock").textContent=dateFormat(europeZone,opts).format(now);
+   document.getElementById("washington-clock").textContent=dateFormat(homeZone,opts).format(now);
+   const hour=Number(dateFormat(europeZone,{hour:"numeric",hourCycle:"h23"}).format(now));
+   document.getElementById("call-hours").textContent=hour>=17&&hour<22?"Good window to call Europe (5–10 PM there).":"Time zones change with daylight saving; clocks automatically adjust.";
+ }
+ clockTick();setInterval(clockTick,30000);
+ const days=[
+ ["2026-10-31","Flying to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],
+ ["2026-11-03","Amsterdam — Viking Egdir boarding"],["2026-11-04","Kinderdijk"],
+ ["2026-11-05","Cologne / revised Rhine program"],["2026-11-06","Middle Rhine / revised transfer"],
+ ["2026-11-07","Miltenberg area"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],
+ ["2026-11-10","Nuremberg"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],
+ ["2026-11-13","Wachau / Melk"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],
+ ["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],
+ ["2026-11-19","Return travel"]
+ ];
+ const europeDay=dateFormat(europeZone,{year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const obj=Object.fromEntries(europeDay.map(x=>[x.type,x.value]));
+ const day=obj.year+"-"+obj.month+"-"+obj.day;
+ const selected=days.find(x=>x[0]===day);
+ const scheduledLocation=selected?selected[1]:day<days[0][0]?"Trip begins October 31":day>days[days.length-1][0]?"Trip completed":"See detailed itinerary below";
+ document.getElementById("family-day").textContent=selected?"Today, "+dateFormat(europeZone,{weekday:"long",month:"long",day:"numeric"}).format(new Date()) : "Grand European Tour • October 31–November 19";
+ document.getElementById("family-location").textContent="Scheduled: "+scheduledLocation+". Viking's revised routing may differ.";
+ document.getElementById("family-ship").textContent=day<"2026-11-03"?"First confirmed ship: Viking Egdir, boarding November 3.":"First confirmed ship: Viking Egdir. Later replacement ships have not been named.";
+ const share=document.getElementById("family-share");
+ share.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(window.location.href.split("#")[0]+"#family-view");share.textContent="Link copied ✓";}catch(e){share.textContent="Copy the page address from your browser";}});
+ const toggle=document.getElementById("family-toggle");
+ toggle.addEventListener("click",()=>{
+  const enabled=document.body.classList.toggle("family-mode");
+  toggle.setAttribute("aria-expanded",String(enabled));
+  toggle.textContent=enabled?"Show full river report":"Family view";
+  document.querySelectorAll("body > .container, body > .freshness-bar, body > .viking-personal-notice, body > .landmark-panel").forEach(el=>el.style.display=enabled?"none":"");
+  document.querySelectorAll(".travel-card").forEach(el=>{if(el.id==="travel-change-tracker")el.style.display=enabled?"none":"";});
+  document.getElementById("river-landmarks").style.display=enabled?"none":"";
+ });
+ if(window.location.hash==="#family-view")document.getElementById("family-view").scrollIntoView({block:"start"});
+ const landmarks=[
+  {name:"Kinderdijk windmills",area:"rhine",lat:51.8837,lon:4.6380,info:"A UNESCO-listed landscape of 18th-century windmills built to manage water in the low-lying Dutch polders."},
+  {name:"Cologne Cathedral",area:"rhine",lat:50.9413,lon:6.9583,info:"Gothic cathedral begun in 1248 and completed in 1880, famous for its twin spires."},
+  {name:"Marksburg Castle",area:"rhine",lat:50.2714,lon:7.6495,info:"A remarkably well-preserved medieval hilltop castle above Braubach on the Middle Rhine."},
+  {name:"Lorelei Rock",area:"rhine",lat:50.1396,lon:7.7307,info:"Legendary narrow bend of the Rhine celebrated in German poetry and river folklore."},
+  {name:"Miltenberg Old Town",area:"main",lat:49.7039,lon:9.2644,info:"Franconian town known for half-timbered buildings and its historic Main River waterfront."},
+  {name:"Würzburg Residence",area:"main",lat:49.7928,lon:9.9388,info:"UNESCO-listed Baroque palace, celebrated for Balthasar Neumann's staircase and Tiepolo fresco."},
+  {name:"Bamberg Old Town",area:"main",lat:49.8917,lon:10.8919,info:"UNESCO World Heritage city spanning hills and islands, with a celebrated medieval center."},
+  {name:"Regensburg Stone Bridge",area:"danube",lat:49.0231,lon:12.0974,info:"12th-century stone bridge and landmark of medieval Danube commerce."},
+  {name:"Passau Three Rivers",area:"danube",lat:48.5758,lon:13.4711,info:"The Danube, Inn and Ilz meet at the tip of Passau's old town."},
+  {name:"Melk Abbey",area:"danube",lat:48.2280,lon:15.3330,info:"Magnificent Baroque Benedictine abbey overlooking the Danube and Wachau Valley."},
+  {name:"Schönbrunn Palace",area:"danube",lat:48.1845,lon:16.3122,info:"Former Habsburg imperial summer residence in Vienna, with grand gardens."},
+  {name:"Hungarian Parliament",area:"danube",lat:47.5070,lon:19.0450,info:"Neo-Gothic landmark on Budapest's Danube waterfront, completed in 1904."}
+ ];
+ if(typeof L==="undefined"){document.getElementById("landmark-summary").textContent="Interactive map unavailable. Check your connection and reload.";return;}
+ const map=L.map("landmark-map",{scrollWheelZoom:false}).setView([49.8,11.2],5);
+ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+ const layer=L.layerGroup().addTo(map);
+ function show(area){
+  layer.clearLayers();const chosen=landmarks.filter(p=>area==="all"||p.area===area);
+  chosen.forEach(p=>{
+   const marker=L.marker([p.lat,p.lon]).addTo(layer);
+   marker.bindPopup("<strong>"+p.name+"</strong><p>"+p.info+"</p>");
+   marker.on("click",()=>document.getElementById("landmark-summary").textContent=p.name+" — "+p.info);
+  });
+  map.fitBounds(L.latLngBounds(chosen.map(p=>[p.lat,p.lon])),{padding:[30,30],maxZoom:9});
+ }
+ document.querySelectorAll("[data-landmark-filter]").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll("[data-landmark-filter]").forEach(x=>x.setAttribute("aria-pressed",String(x===btn)));
+  show(btn.dataset.landmarkFilter);
+ }));
+ show("all");
+})();
+</script>
 <script>
 
 // Date-based itinerary progress; explicitly not a claim of actual GPS position.

@@ -42,6 +42,8 @@ def pegelonline():
     out = {}
     for key, name in [("kaub","KAUB"),("wuerzburg","WUERZBURG"),("pfelling","PFELLING")]:
         out[key] = current_w(find_station(stations, name))
+    if not any(v and v.get("value_cm") is not None for v in out.values()):
+        raise ValueError("No German gauge readings returned")
     return out
 
 def viadonau():
@@ -57,6 +59,9 @@ def viadonau():
     tm = re.search(r"(\d{1,2}/\d{1,2}/\d{4})\s+(\d{1,2}:\d{2}\s*[AP]M)", plain, re.I)
     if tm:
         out["source_time"] = tm.group(1)+" "+tm.group(2)
+    if not any(out.get(n, {}).get("value_cm") is not None for n in names if isinstance(out.get(n.lower()), dict)):
+        if not any(isinstance(out.get(n.lower()), dict) for n in names):
+            raise ValueError("No Austrian gauge readings parsed")
     return out
 
 def shipfinder():
@@ -291,6 +296,14 @@ except Exception as e:
 
 
 data["errors"] = errors
+# The refresh timestamp is not proof that every source succeeded.
+data["feed_health"] = {
+    "german_gauges": "ok" if any(isinstance(v,dict) and v.get("value_cm") is not None for v in data.get("germany",{}).values()) else "unavailable",
+    "austrian_gauges": "ok" if any(isinstance(v,dict) and v.get("value_cm") is not None for v in data.get("austria",{}).values()) else "unavailable",
+    "viking_public_notice": "ok" if data.get("viking",{}).get("checked") else "unavailable",
+    "egdir_ais": "ok" if data.get("ship_egdir",{}).get("coordinate_quality") == "live_machine_readable" else "historical_only",
+    "errors_count": len(errors)
+}
 
 with open("data.json","w",encoding="utf-8") as f:
     json.dump(data,f,indent=2,ensure_ascii=False)

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-30",
+  "active_ship": {
+    "name": "Viking Egdir",
+    "mmsi": "269057766",
+    "effective_date": "2026-11-03",
+    "note": "Confirmed by Viking's October 27 letter for Amsterdam embarkation; no subsequent transfer recorded."
+  },
+  "ship_history": [
+    {
+      "name": "Viking Ve",
+      "mmsi": "269057517",
+      "role": "original assignment, replaced before departure"
+    },
+    {
+      "name": "Viking Egdir",
+      "mmsi": "269057766",
+      "role": "confirmed first embarkation ship",
+      "effective_date": "2026-11-03"
+    }
+  ],
+  "itinerary_update": {
+    "effective_date": "2026-10-27",
+    "summary": "Rhine sister-ship swap expected between Kinderdijk and Frankfurt, Koblenz excursions canceled; possible Danube swap between Nuremberg and Passau.",
+    "source": "Viking personal letter dated October 27, 2026"
+  },
+  "transfer_history": [],
+  "notes": "When user confirms a new ship from onboard, update active_ship, append previous ship to ship_history if not already recorded, add transfer_history, and revise itinerary_update. Never infer AIS position from itinerary; obtain verified coordinates independently."
+}

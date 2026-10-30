@@ -1273,18 +1273,18 @@ setInterval(loadRiverWatchData,2*60*60*1000);
  });
  if(window.location.hash==="#family-view")document.getElementById("family-view").scrollIntoView({block:"start"});
  const landmarks=[
-  {name:"Kinderdijk windmills",area:"rhine",lat:51.8837,lon:4.6380,info:"A UNESCO-listed landscape of 18th-century windmills built to manage water in the low-lying Dutch polders."},
-  {name:"Cologne Cathedral",area:"rhine",lat:50.9413,lon:6.9583,info:"Gothic cathedral begun in 1248 and completed in 1880, famous for its twin spires."},
-  {name:"Marksburg Castle",area:"rhine",lat:50.2714,lon:7.6495,info:"A remarkably well-preserved medieval hilltop castle above Braubach on the Middle Rhine."},
-  {name:"Lorelei Rock",area:"rhine",lat:50.1396,lon:7.7307,info:"Legendary narrow bend of the Rhine celebrated in German poetry and river folklore."},
-  {name:"Miltenberg Old Town",area:"main",lat:49.7039,lon:9.2644,info:"Franconian town known for half-timbered buildings and its historic Main River waterfront."},
-  {name:"Würzburg Residence",area:"main",lat:49.7928,lon:9.9388,info:"UNESCO-listed Baroque palace, celebrated for Balthasar Neumann's staircase and Tiepolo fresco."},
-  {name:"Bamberg Old Town",area:"main",lat:49.8917,lon:10.8919,info:"UNESCO World Heritage city spanning hills and islands, with a celebrated medieval center."},
-  {name:"Regensburg Stone Bridge",area:"danube",lat:49.0231,lon:12.0974,info:"12th-century stone bridge and landmark of medieval Danube commerce."},
-  {name:"Passau Three Rivers",area:"danube",lat:48.5758,lon:13.4711,info:"The Danube, Inn and Ilz meet at the tip of Passau's old town."},
-  {name:"Melk Abbey",area:"danube",lat:48.2280,lon:15.3330,info:"Magnificent Baroque Benedictine abbey overlooking the Danube and Wachau Valley."},
-  {name:"Schönbrunn Palace",area:"danube",lat:48.1845,lon:16.3122,info:"Former Habsburg imperial summer residence in Vienna, with grand gardens."},
-  {name:"Hungarian Parliament",area:"danube",lat:47.5070,lon:19.0450,info:"Neo-Gothic landmark on Budapest's Danube waterfront, completed in 1904."}
+  {name:"Kinderdijk windmills",area:"rhine",lat:51.8837,lon:4.6380,info:"A UNESCO-listed landscape of 18th-century windmills built to manage water in the low-lying Dutch polders.",wiki:"Kinderdijk"},
+  {name:"Cologne Cathedral",area:"rhine",lat:50.9413,lon:6.9583,info:"Gothic cathedral begun in 1248 and completed in 1880, famous for its twin spires.",wiki:"Cologne Cathedral"},
+  {name:"Marksburg Castle",area:"rhine",lat:50.2714,lon:7.6495,info:"A remarkably well-preserved medieval hilltop castle above Braubach on the Middle Rhine.",wiki:"Marksburg"},
+  {name:"Lorelei Rock",area:"rhine",lat:50.1396,lon:7.7307,info:"Legendary narrow bend of the Rhine celebrated in German poetry and river folklore.",wiki:"Lorelei"},
+  {name:"Miltenberg Old Town",area:"main",lat:49.7039,lon:9.2644,info:"Franconian town known for half-timbered buildings and its historic Main River waterfront.",wiki:"Miltenberg"},
+  {name:"Würzburg Residence",area:"main",lat:49.7928,lon:9.9388,info:"UNESCO-listed Baroque palace, celebrated for Balthasar Neumann's staircase and Tiepolo fresco.",wiki:"Würzburg Residence"},
+  {name:"Bamberg Old Town",area:"main",lat:49.8917,lon:10.8919,info:"UNESCO World Heritage city spanning hills and islands, with a celebrated medieval center.",wiki:"Bamberg"},
+  {name:"Regensburg Stone Bridge",area:"danube",lat:49.0231,lon:12.0974,info:"12th-century stone bridge and landmark of medieval Danube commerce.",wiki:"Stone Bridge (Regensburg)"},
+  {name:"Passau Three Rivers",area:"danube",lat:48.5758,lon:13.4711,info:"The Danube, Inn and Ilz meet at the tip of Passau's old town.",wiki:"Passau"},
+  {name:"Melk Abbey",area:"danube",lat:48.2280,lon:15.3330,info:"Magnificent Baroque Benedictine abbey overlooking the Danube and Wachau Valley.",wiki:"Melk Abbey"},
+  {name:"Schönbrunn Palace",area:"danube",lat:48.1845,lon:16.3122,info:"Former Habsburg imperial summer residence in Vienna, with grand gardens.",wiki:"Schönbrunn Palace"},
+  {name:"Hungarian Parliament",area:"danube",lat:47.5070,lon:19.0450,info:"Neo-Gothic landmark on Budapest's Danube waterfront, completed in 1904.",wiki:"Hungarian Parliament Building"}
  ];
  if(typeof L==="undefined"){document.getElementById("landmark-summary").textContent="Interactive map unavailable. Check your connection and reload.";return;}
  const map=L.map("landmark-map",{scrollWheelZoom:false}).setView([49.8,11.2],5);
@@ -1324,7 +1324,31 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   layer.clearLayers();const chosen=landmarks.filter(p=>area==="all"||p.area===area);
   chosen.forEach(p=>{
    const marker=L.marker([p.lat,p.lon]).addTo(layer);
-   marker.bindPopup("<strong>"+p.name+"</strong><p>"+p.info+"</p>");
+   const photoId="landmark-photo-"+landmarks.indexOf(p);
+   marker.bindPopup("<strong>"+p.name+"</strong><div id='"+photoId+"' style='margin-top:8px;color:#52636a'>Loading photo…</div><p>"+p.info+"</p>",{maxWidth:340,minWidth:230});
+   marker.on("popupopen",async()=>{
+     const box=document.getElementById(photoId);if(!box)return;
+     if(p.photoUrl){
+       const img=document.createElement("img");img.src=p.photoUrl;img.alt="Photograph of "+p.name;img.loading="lazy";img.style.cssText="width:100%;max-height:210px;object-fit:cover;border-radius:7px";
+       box.replaceChildren(img);return;
+     }
+     try{
+       const api="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=700&titles="+encodeURIComponent(p.wiki);
+       const response=await fetch(api);
+       if(!response.ok)throw Error("Photo lookup unavailable");
+       const data=await response.json();
+       const page=Object.values(data.query?.pages||{})[0];
+       const src=page?.thumbnail?.source;
+       if(!src)throw Error("No photo returned");
+       p.photoUrl=src;
+       const img=document.createElement("img");img.src=src;img.alt="Photograph of "+p.name;img.loading="lazy";img.style.cssText="width:100%;max-height:210px;object-fit:cover;border-radius:7px";
+       const credit=document.createElement("div");credit.style.cssText="font-size:11px;margin-top:3px";credit.textContent="Photo: Wikimedia Commons / Wikipedia";
+       box.replaceChildren(img,credit);
+     }catch(e){
+       const link=document.createElement("a");link.href="https://en.wikipedia.org/wiki/"+encodeURIComponent(p.wiki).replace(/%20/g,"_");link.target="_blank";link.rel="noopener noreferrer";link.textContent="View landmark photos on Wikipedia";
+       box.replaceChildren(link);
+     }
+   });
    marker.on("click",()=>document.getElementById("landmark-summary").textContent=p.name+" — "+p.info);
   });
   map.fitBounds(L.latLngBounds(chosen.map(p=>[p.lat,p.lon])),{padding:[30,30],maxZoom:9});

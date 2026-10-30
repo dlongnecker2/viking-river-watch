@@ -405,7 +405,12 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <button type="button" data-landmark-filter="danube" aria-pressed="false">Danube</button>
  </div>
  <div id="landmark-map" role="region" aria-label="Interactive map of European river landmarks"></div>
- <p id="landmark-summary" class="travel-muted">Select a marker to learn about a landmark.</p>
+ <div id="landmark-photo-panel" style="display:none;margin-top:15px;padding:14px;border:1px solid #cbdfe5;border-radius:12px;background:#f7fbfd">
+ <strong id="landmark-photo-title"></strong>
+ <div id="landmark-photo-content" style="margin-top:10px">Loading photograph…</div>
+ <p id="landmark-photo-description" style="margin:10px 0 0"></p>
+ </div>
+ <p id="landmark-summary" class="travel-muted">Select a marker to see a photo and learn about a landmark. Photo feature updated October 30.</p>
 </section>
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
@@ -1349,7 +1354,25 @@ setInterval(loadRiverWatchData,2*60*60*1000);
        box.replaceChildren(link);
      }
    });
-   marker.on("click",()=>document.getElementById("landmark-summary").textContent=p.name+" — "+p.info);
+   marker.on("click",()=>{
+     document.getElementById("landmark-summary").textContent=p.name+" — "+p.info;
+     document.getElementById("landmark-photo-panel").style.display="block";
+     document.getElementById("landmark-photo-title").textContent=p.name;
+     document.getElementById("landmark-photo-description").textContent=p.info;
+     const panel=document.getElementById("landmark-photo-content");
+     panel.textContent="Loading photo…";
+     const url="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=900&titles="+encodeURIComponent(p.wiki);
+     fetch(url).then(r=>{if(!r.ok)throw Error("Photo service unavailable");return r.json();}).then(data=>{
+       const src=Object.values(data.query?.pages||{})[0]?.thumbnail?.source;
+       if(!src)throw Error("No image for this landmark");
+       const img=document.createElement("img");img.src=src;img.alt=p.name;img.loading="lazy";img.style.cssText="width:100%;max-width:680px;max-height:370px;object-fit:contain;border-radius:8px;display:block";
+       const credit=document.createElement("small");credit.textContent="Photograph via Wikipedia / Wikimedia Commons";
+       panel.replaceChildren(img,credit);
+     }).catch(()=>{
+       const link=document.createElement("a");link.href="https://en.wikipedia.org/wiki/"+encodeURIComponent(p.wiki).replace(/%20/g,"_");link.target="_blank";link.rel="noopener noreferrer";link.textContent="See photographs of "+p.name+" on Wikipedia";
+       panel.replaceChildren(link);
+     });
+   });
   });
   map.fitBounds(L.latLngBounds(chosen.map(p=>[p.lat,p.lon])),{padding:[30,30],maxZoom:9});
  }

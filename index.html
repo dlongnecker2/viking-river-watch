@@ -343,6 +343,13 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 @media(max-width:600px){#landmark-map{height:310px}.travel-clock{font-size:23px}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+/* Landmark photo display: readable on phones and desktops */
+#landmark-photo-panel { display:none; max-width:100%; box-sizing:border-box; }
+#landmark-photo-content img { width:100%; max-width:680px; max-height:440px; object-fit:contain; border-radius:9px; margin:0 auto 8px; }
+#landmark-photo-title { font-size:1.2rem; }
+#landmark-photo-panel:target { scroll-margin-top:20px; }
+</style>
 </head>
 <body>
 <header>
@@ -1330,31 +1337,11 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   chosen.forEach(p=>{
    const marker=L.marker([p.lat,p.lon]).addTo(layer);
    const photoId="landmark-photo-"+landmarks.indexOf(p);
-   marker.bindPopup("<strong>"+p.name+"</strong><div id='"+photoId+"' style='margin-top:8px;color:#52636a'>Loading photo…</div><p>"+p.info+"</p>",{maxWidth:340,minWidth:230});
-   marker.on("popupopen",async()=>{
-     const box=document.getElementById(photoId);if(!box)return;
-     if(p.photoUrl){
-       const img=document.createElement("img");img.src=p.photoUrl;img.alt="Photograph of "+p.name;img.loading="lazy";img.style.cssText="width:100%;max-height:210px;object-fit:cover;border-radius:7px";
-       box.replaceChildren(img);return;
-     }
-     try{
-       const api="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=700&titles="+encodeURIComponent(p.wiki);
-       const response=await fetch(api);
-       if(!response.ok)throw Error("Photo lookup unavailable");
-       const data=await response.json();
-       const page=Object.values(data.query?.pages||{})[0];
-       const src=page?.thumbnail?.source;
-       if(!src)throw Error("No photo returned");
-       p.photoUrl=src;
-       const img=document.createElement("img");img.src=src;img.alt="Photograph of "+p.name;img.loading="lazy";img.style.cssText="width:100%;max-height:210px;object-fit:cover;border-radius:7px";
-       const credit=document.createElement("div");credit.style.cssText="font-size:11px;margin-top:3px";credit.textContent="Photo: Wikimedia Commons / Wikipedia";
-       box.replaceChildren(img,credit);
-     }catch(e){
-       const link=document.createElement("a");link.href="https://en.wikipedia.org/wiki/"+encodeURIComponent(p.wiki).replace(/%20/g,"_");link.target="_blank";link.rel="noopener noreferrer";link.textContent="View landmark photos on Wikipedia";
-       box.replaceChildren(link);
-     }
-   });
+   // Keep the map unobstructed: full-size photos and descriptions live below it.
+   marker.bindPopup("<strong>"+p.name+"</strong><p>Photo and description appear below the map.</p>",{maxWidth:220,autoPan:true});
    marker.on("click",()=>{
+     // Close the floating popup so it never obscures the map or photo.
+     marker.closePopup();
      document.getElementById("landmark-summary").textContent=p.name+" — "+p.info;
      document.getElementById("landmark-photo-panel").style.display="block";
      document.getElementById("landmark-photo-title").textContent=p.name;

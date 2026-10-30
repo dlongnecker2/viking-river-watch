@@ -353,7 +353,15 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <style>
 #landmark-map .leaflet-popup { display:none !important; }
 </style>
-</head>
+<style>
+.journey-home{max-width:1160px;margin:22px auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 2px 10px #18323b16;color:#18323b}
+.journey-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.journey-heading h2{font-size:clamp(24px,3vw,34px);margin:7px 0}
+.journey-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}.journey-stats>div{background:#edf5f2;border-radius:12px;padding:15px;min-width:0}.journey-stats span{font-size:11px;letter-spacing:.08em;color:#56717a;display:block;margin-bottom:8px}.journey-stats strong{display:block;font-size:18px;overflow-wrap:anywhere}
+.journey-track{height:9px;border-radius:12px;background:#c6d7d4;margin-top:12px;overflow:hidden}#journey-progress-fill{height:100%;width:0;background:#168447;transition:width .3s}
+.journey-route-scroll{overflow-x:auto;padding:8px 0}.journey-route{display:flex;gap:8px;min-width:max-content;padding-bottom:7px}.journey-stop{width:112px;border-radius:11px;padding:10px;background:#eef1f3;border-top:5px solid #a8b5bb;font-size:12px}.journey-stop.past{border-color:#168447;background:#edf7ef}.journey-stop.today{border-color:#267fc2;background:#eaf3fd}.journey-stop strong{display:block;font-size:13px;margin-top:4px}
+.journey-columns{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;margin-top:15px}.journey-postcard{border:1px solid #dce6e8;border-radius:12px;padding:14px;margin:10px 0}.journey-postcard img{max-width:100%;width:100%;max-height:350px;object-fit:contain;border-radius:8px;background:#edf2f3}.journey-postcard h4{margin:8px 0}.journey-tomorrow-photo{width:100%;max-height:220px;object-fit:cover;border-radius:9px;margin-top:10px}
+@media(max-width:700px){.journey-home{margin:12px;padding:16px}.journey-stats{grid-template-columns:1fr}.journey-columns{grid-template-columns:1fr}}
+</style></head>
 <body>
 <header>
   <h1>🚢 Viking River Watch</h1>
@@ -376,6 +384,13 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <div class="top-destination"><div class="top-destination-title">🏛️ About today’s destination</div><p id="top-destination-description">Loading destination highlights…</p></div><div class="top-excursions"><div class="top-excursions-title" id="top-excursions-title">📅 Excursions for your scheduled day</div><div id="top-excursions-list">Loading excursions…</div><div class="top-excursions-note">Times from your October 20 Viking excursion schedule and confirmed private plans. All times are local; verify meeting times in the Viking Daily.</div></div><div class="top-footer" id="top-weather-time">Weather supplied by Open-Meteo. Updates when the page opens and every 15 minutes while open.</div>
 </div>
 
+<section id="family-journey-home" class="journey-home" aria-label="Family travel journal">
+ <div class="journey-heading"><div><div class="kicker">SHARE OUR GRAND EUROPEAN ADVENTURE</div><h2>🌍 Follow Our Journey</h2><p>Amsterdam → Budapest · October 31 – November 19, 2026</p></div><button class="travel-button" id="journey-share" type="button">Share with family</button></div>
+ <div class="journey-stats"><div><span>TRIP PROGRESS</span><strong id="journey-progress-label">Preparing to depart</strong><div class="journey-track"><div id="journey-progress-fill"></div></div></div><div><span>PLANNED LOCATION</span><strong id="journey-today">Amsterdam next</strong></div><div><span>OUR ASSIGNED SHIP</span><strong id="journey-ship">Viking Egdir</strong></div></div>
+ <p class="travel-muted">Locations follow the published schedule and any recorded changes—not live personal tracking. Viking may revise the route.</p>
+ <h3>🗺️ Where we've been & where we're going</h3><div class="journey-route-scroll"><div id="journey-route" class="journey-route"></div></div><p class="travel-muted">Green: scheduled dates already passed · Blue: today · Gray: upcoming. A passed date does not confirm a visit.</p>
+ <div class="journey-columns"><div><h3>📷 Our daily postcards</h3><p class="travel-muted">Photos and notes we choose to share from the trip.</p><div id="journey-postcards">No postcards shared yet. Check back after we arrive in Europe!</div></div><div><h3>☀️ Tomorrow's adventure</h3><div id="journey-tomorrow">Looking up the next planned destination…</div></div></div>
+ </section>
 <section class="travel-tools" id="travel-command-center" aria-label="Cruise travel command center">
  <div class="travel-tools-grid">
   <article class="travel-card" id="family-view">
@@ -1410,5 +1425,6 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   }catch(e){console.warn("Cruise assignment config unavailable",e);}
 })();
 </script>
+<script src="journey-family.js?v=1" defer></script>
 </body>
 </html>

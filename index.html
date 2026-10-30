@@ -397,7 +397,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 </section>
 <section class="landmark-panel" id="river-landmarks">
  <h2>🏰 Castles & landmarks along our route</h2>
- <p class="travel-muted">Explore historic sights and tap a pin for a short story. These are landmark locations, not confirmed sightseeing stops.</p>
+ <p class="travel-muted">Explore historic sights and tap a pin for a short story. These are landmark locations, not confirmed sightseeing stops.</p><p id="journey-map-status" class="travel-note">📍 Before departure: your next destination is Amsterdam. The green marker follows the planned itinerary, not your live GPS location.</p><button class="travel-button secondary" type="button" id="find-journey-map">📍 Show our scheduled location</button>
  <div class="landmark-filters">
   <button type="button" data-landmark-filter="all" aria-pressed="true">All sights</button>
   <button type="button" data-landmark-filter="rhine" aria-pressed="false">Rhine</button>
@@ -1254,6 +1254,36 @@ setInterval(loadRiverWatchData,2*60*60*1000);
  const map=L.map("landmark-map",{scrollWheelZoom:false}).setView([49.8,11.2],5);
  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
  const layer=L.layerGroup().addTo(map);
+ const journeyStops=[
+ ["2026-10-31",null],["2026-11-01",[52.3676,4.9041,"Amsterdam"]],["2026-11-02",[52.3676,4.9041,"Amsterdam"]],
+ ["2026-11-03",[52.3676,4.9041,"Amsterdam"]],["2026-11-04",[51.8853,4.6369,"Kinderdijk"]],
+ ["2026-11-05",[50.9375,6.9603,"Cologne (planned)"]],["2026-11-06",[50.3569,7.5889,"Middle Rhine (planned)"]],
+ ["2026-11-07",[49.7039,9.2644,"Miltenberg (planned)"]],["2026-11-08",[49.7913,9.9534,"Würzburg"]],
+ ["2026-11-09",[49.8988,10.9028,"Bamberg"]],["2026-11-10",[49.4521,11.0767,"Nuremberg"]],
+ ["2026-11-11",[49.0134,12.1016,"Regensburg"]],["2026-11-12",[48.5667,13.4319,"Passau"]],
+ ["2026-11-13",[48.2279,15.3319,"Melk / Wachau"]],["2026-11-14",[48.2082,16.3738,"Vienna"]],
+ ["2026-11-15",[48.2082,16.3738,"Vienna"]],["2026-11-16",[47.4979,19.0402,"Budapest"]],
+ ["2026-11-17",[47.4979,19.0402,"Budapest"]],["2026-11-18",[47.4979,19.0402,"Budapest"]]
+ ];
+ const tripDateParts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Amsterdam",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+ const tripParts=Object.fromEntries(tripDateParts.map(x=>[x.type,x.value]));
+ const tripDay=tripParts.year+"-"+tripParts.month+"-"+tripParts.day;
+ const upcoming=tripDay<"2026-11-01";
+ const journey=upcoming?journeyStops[1][1]:journeyStops.find(x=>x[0]===tripDay)?.[1];
+ let journeyMarker=null;
+ if(journey){
+   const markerIcon=L.divIcon({className:"journey-location-icon",html:"<div style='background:#087c4a;color:white;border:3px solid white;border-radius:24px;padding:7px 12px;font-size:13px;font-weight:900;white-space:nowrap;box-shadow:0 3px 9px #0006'>📍 "+(upcoming?"NEXT: AMSTERDAM":"PLANNED: "+journey[2].toUpperCase())+"</div>",iconSize:[190,39],iconAnchor:[95,45]});
+   journeyMarker=L.marker([journey[0],journey[1]],{icon:markerIcon,zIndexOffset:1500}).addTo(map);
+   journeyMarker.bindPopup("<strong>"+(upcoming?"Next destination":"Scheduled itinerary")+" — "+journey[2]+"</strong><br>Not live GPS. Viking's actual routing may differ.");
+   document.getElementById("journey-map-status").textContent=upcoming?"📍 Next destination: Amsterdam. You have not departed yet.":"📍 Scheduled for "+tripDay+": "+journey[2]+". This is not a live GPS position; ship swaps may change the route.";
+ } else {
+   document.getElementById("journey-map-status").textContent="📍 No scheduled European location for this date. Check the itinerary above.";
+ }
+ document.getElementById("find-journey-map").addEventListener("click",()=>{
+   if(journeyMarker){map.setView(journeyMarker.getLatLng(),8);journeyMarker.openPopup();}
+   else document.getElementById("journey-map-status").scrollIntoView({block:"center"});
+ });
+
  function show(area){
   layer.clearLayers();const chosen=landmarks.filter(p=>area==="all"||p.area===area);
   chosen.forEach(p=>{

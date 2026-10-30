@@ -410,12 +410,19 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
 <div class="container">
-  <div class="outlook">
-    <div class="kicker">Personal cruise monitor</div>
-    <h2>Your Cruise Outlook</h2>
-    <span class="status">● MONITORING CONDITIONS</span>
-    <p>Tracking the Rhine, Main, Main-Danube Canal and Danube for conditions that could affect our Viking Grand European Tour.</p>
-    <p><strong>Next update:</strong> Every 2 hours</p>
+  <div class="outlook" id="cruise-operations-dashboard">
+    <div class="kicker">Personal cruise operations summary</div>
+    <h2>🚢 Your Cruise Outlook</h2>
+    <span class="status" style="background:#fff0cf;color:#805000">● MODIFIED ITINERARY CONFIRMED</span>
+    <p><strong>First ship:</strong> Viking Egdir — November 3 embarkation in Amsterdam, confirmed October 27.</p>
+    <div class="grid" style="margin:15px 0">
+      <div class="travel-card"><strong>🚌 Rhine — expected swap</strong><p>Viking expects a sister-ship swap between Kinderdijk and Frankfurt, with approximately 280 miles by coach. Koblenz excursions canceled.</p></div>
+      <div class="travel-card"><strong>⚠️ Danube — possible swap</strong><p>Another swap between Nuremberg and Passau is possible, not confirmed. Replacement ships have not been named.</p></div>
+      <div class="travel-card"><strong>📍 Today's scheduled destination</strong><p id="outlook-destination">Checking itinerary…</p><span class="travel-muted">Planned schedule, not GPS or confirmed revised routing</span></div>
+    </div>
+    <p><strong>Latest river readings:</strong> <span id="outlook-rivers">Waiting for current gauges…</span></p>
+    <p><strong>Data freshness:</strong> <span id="outlook-freshness">Checking last update…</span></p>
+    <p class="travel-note"><strong>Source:</strong> Viking's October 27 departure-specific letter. River gauges do not confirm sailing or transfers. Any new private Viking notice must be added separately.</p>
   </div>
 
   <div class="route-visual">
@@ -1084,6 +1091,12 @@ async function loadRiverWatchData(){
   try{
     const response=await fetch("data.json?nocache="+Date.now(),{cache:"no-store"});
     const d=await response.json();
+    const gaugeItems=[["Kaub",d.germany?.kaub],["Würzburg",d.germany?.wuerzburg],["Pfelling",d.germany?.pfelling],["Wachau",d.austria?.kienstock]];
+    document.getElementById("outlook-rivers").textContent=gaugeItems.map(([name,g])=>name+": "+(g?.value_cm!=null?g.value_cm+" cm":"unavailable")).join(" · ");
+    const updatedAt=d.updated_utc?new Date(d.updated_utc):null;
+    const ageHours=updatedAt&&Number.isFinite(updatedAt.getTime())?(Date.now()-updatedAt.getTime())/3600000:null;
+    document.getElementById("outlook-freshness").textContent=ageHours==null?"Feed timestamp unavailable":(ageHours>4?"STALE — ":"")+"Last successful refresh "+updatedAt.toLocaleString()+"; checks scheduled every 2 hours";
+
     const updated=document.getElementById("report-last-updated");
     if(updated && d.updated_utc){
       const stamp=new Date(d.updated_utc);
@@ -1223,6 +1236,7 @@ setInterval(loadRiverWatchData,2*60*60*1000);
  const scheduledLocation=selected?selected[1]:day<days[0][0]?"Trip begins October 31":day>days[days.length-1][0]?"Trip completed":"See detailed itinerary below";
  document.getElementById("family-day").textContent=selected?"Today, "+dateFormat(europeZone,{weekday:"long",month:"long",day:"numeric"}).format(new Date()) : "Grand European Tour • October 31–November 19";
  document.getElementById("family-location").textContent="Scheduled: "+scheduledLocation+". Viking's revised routing may differ.";
+ document.getElementById("outlook-destination").textContent=scheduledLocation;
  document.getElementById("family-ship").textContent=day<"2026-11-03"?"First confirmed ship: Viking Egdir, boarding November 3.":"First confirmed ship: Viking Egdir. Later replacement ships have not been named.";
  const share=document.getElementById("family-share");
  share.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(window.location.href.split("#")[0]+"#family-view");share.textContent="Link copied ✓";}catch(e){share.textContent="Copy the page address from your browser";}});

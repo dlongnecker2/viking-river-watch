@@ -814,7 +814,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
     <div class="kicker">Live weather • updates whenever you open this page</div>
     <h2>🌤️ Current Weather + 7-Day Forecast Along Our Route</h2>
     <p>This section pulls fresh weather directly when the page loads. While we're on the cruise, it will always show the <strong>current conditions and next 7 days</strong> for every destination — no manual update required.</p>
-    <div id="weather-status" class="small">Loading current forecasts…</div>
+    <div id="weather-status" class="small">Loading current forecasts…</div><button type="button" id="weather-retry" class="travel-button secondary" style="margin:8px 0" onclick="loadWeather()">↻ Refresh forecasts</button>
     <div style="overflow-x:auto">
       <table id="weather-table">
         <thead>
@@ -1028,42 +1028,56 @@ function paintSvgGauge(id,key,value){
 }
 
 async function loadWeather(){
-  const tbody=document.querySelector("#weather-table tbody");
-  const status=document.getElementById("weather-status");
-  tbody.innerHTML="";
-  try{
-    const rows = await Promise.all(weatherStops.map(async s=>{
-      const u="https://api.open-meteo.com/v1/forecast?latitude="+s.lat+"&longitude="+s.lon+
-        "&current=temperature_2m,weather_code,precipitation&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&temperature_unit=celsius&precipitation_unit=mm&forecast_days=7&timezone=auto";
-      const r=await fetch(u);
-      if(!r.ok) throw new Error("weather request failed");
-      const d=await r.json();
-      return {s,d};
-    }));
-    for(const {s,d} of rows){
-      const tr=document.createElement("tr");
-      const next3=[1,2,3].map(i=>{
-        if(!d.daily.time[i]) return "";
-        const dt=new Date(d.daily.time[i]+"T12:00:00");
-        const day=dt.toLocaleDateString(undefined,{weekday:"short"});
-        return day+" "+f(d.daily.temperature_2m_max[i])+"°/"+f(d.daily.temperature_2m_min[i])+"°";
-      }).filter(Boolean).join("<br>");
-      const rainMax=Math.max(...d.daily.precipitation_probability_max.slice(0,7).map(v=>v??0));
-      const rainSum=d.daily.precipitation_sum.slice(0,7).reduce((a,b)=>a+(b||0),0);
-      tr.innerHTML=
-        "<td><strong>"+s.name+"</strong></td>"+
-        "<td>"+f(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
-        "<td>"+f(d.daily.temperature_2m_max[0])+"° / "+f(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
-        "<td>"+next3+"</td>"+
-        "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+(rainSum/25.4).toFixed(2)+" in / 7 days</span></td>";
-      tbody.appendChild(tr);
-    }
-    status.textContent="Live forecast loaded: "+new Date().toLocaleString();
-  } catch(e){
-    status.textContent="Weather could not load right now. Refresh the page to try again.";
-  }
+ const tbody=document.querySelector("#weather-table tbody");
+ const status=document.getElementById("weather-status");
+ if(!tbody||!status)return;
+ tbody.replaceChildren();
+ status.textContent="Loading forecasts for "+weatherStops.length+" destinations…";
+ let succeeded=0,failed=0;
+ // Small batches prevent the public weather API from rejecting a 13-request burst.
+ for(let offset=0;offset<weatherStops.length;offset+=2){
+  const batch=weatherStops.slice(offset,offset+2);
+  const results=await Promise.allSettled(batch.map(async stop=>{
+   const url="https://api.open-meteo.com/v1/forecast?latitude="+stop.lat+"&longitude="+stop.lon+
+    "&current=temperature_2m,weather_code,precipitation&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&temperature_unit=fahrenheit&precipitation_unit=inch&forecast_days=7&timezone=auto";
+   let error;
+   for(let attempt=0;attempt<2;attempt++){
+    try{
+     const response=await fetch(url,{cache:"no-store"});
+     if(!response.ok)throw Error("Weather service HTTP "+response.status);
+     const data=await response.json();
+     if(!data.current||!data.daily||!Array.isArray(data.daily.time))throw Error("Incomplete forecast");
+     return {stop,data};
+    }catch(e){error=e;}
+   }
+   throw error;
+  }));
+  results.forEach((result,index)=>{
+   const stop=batch[index];
+   const tr=document.createElement("tr");
+   if(result.status==="fulfilled"){
+    const d=result.value.data; succeeded++;
+    const next3=[1,2,3].filter(i=>d.daily.time[i]).map(i=>{
+     const dt=new Date(d.daily.time[i]+"T12:00:00");
+     return dt.toLocaleDateString(undefined,{weekday:"short"})+" "+f(d.daily.temperature_2m_max[i])+"°/"+f(d.daily.temperature_2m_min[i])+"°";
+    }).join("<br>");
+    const rainMax=Math.max(...d.daily.precipitation_probability_max.slice(0,7).map(v=>v??0));
+    const rainSum=d.daily.precipitation_sum.slice(0,7).reduce((x,y)=>x+(y||0),0);
+    tr.innerHTML="<td><strong>"+stop.name+"</strong></td>"+
+     "<td>"+f(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
+     "<td>"+f(d.daily.temperature_2m_max[0])+"° / "+f(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
+     "<td>"+next3+"</td>"+
+     "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+rainSum.toFixed(2)+" in / 7 days</span></td>";
+   }else{
+    failed++;
+    tr.innerHTML="<td><strong>"+stop.name+"</strong></td><td colspan='4'>Forecast temporarily unavailable for this destination.</td>";
+   }
+   tbody.appendChild(tr);
+  });
+  status.textContent="Weather loaded for "+succeeded+" of "+weatherStops.length+" destinations"+(failed?" ("+failed+" unavailable)":"")+" · "+new Date().toLocaleTimeString();
+ }
+ if(succeeded===0)status.textContent="Weather provider unavailable at the moment. Try Refresh forecasts below.";
 }
-loadWeather();
 
 
 let veMap=null;

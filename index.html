@@ -412,6 +412,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <div class="container">
   <div class="outlook" id="cruise-operations-dashboard">
     <div class="kicker">Personal cruise operations summary</div>
+    <p><strong>Currently assigned ship:</strong> <span id="active-ship-name">Viking Egdir</span> <span id="active-ship-since" class="small"></span></p>
+    <p id="active-ship-note" class="small">Confirmed embarkation November 3; later ship changes can be recorded without overwriting the original assignment.</p>
+    <p><strong>Latest itinerary amendment:</strong> <span id="active-itinerary-amendment">No onboard update recorded yet.</span></p>
     <h2>🚢 Your Cruise Outlook</h2>
     <span class="status" style="background:#fff0cf;color:#805000">● MODIFIED ITINERARY CONFIRMED</span>
     <p><strong>First ship:</strong> Viking Egdir — November 3 embarkation in Amsterdam, confirmed October 27.</p>
@@ -1334,5 +1337,28 @@ setInterval(loadRiverWatchData,2*60*60*1000);
 })();
 </script>
 
+<script>
+/* Cruise assignment configuration: edit ONLY cruise-assignment.json for a ship swap. */
+(async function(){
+  try{
+    const response=await fetch("cruise-assignment.json?nocache="+Date.now(),{cache:"no-store"});
+    if(!response.ok)throw Error("assignment file unavailable");
+    const a=await response.json();
+    const name=String(a.active_ship?.name||"Viking Egdir");
+    const shipEl=document.getElementById("active-ship-name");
+    if(shipEl)shipEl.textContent=name;
+    const since=document.getElementById("active-ship-since");
+    if(since)since.textContent=a.active_ship?.effective_date?"(since "+a.active_ship.effective_date+")":"";
+    const note=document.getElementById("active-ship-note");
+    if(note)note.textContent=a.active_ship?.note||"Ship assignment subject to Viking's operational changes.";
+    const amendment=document.getElementById("active-itinerary-amendment");
+    if(amendment)amendment.textContent=a.itinerary_update?.summary||"No onboard update recorded yet.";
+    if(a.active_ship?.name && a.active_ship.name!=="Viking Egdir"){
+      const status=document.getElementById("egdir-map-status");
+      if(status)status.insertAdjacentText("afterbegin","Current assigned ship: "+name+". Egdir is a previous ship; its plotted position is historical. ");
+    }
+  }catch(e){console.warn("Cruise assignment config unavailable",e);}
+})();
+</script>
 </body>
 </html>

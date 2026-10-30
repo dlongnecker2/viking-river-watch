@@ -7,29 +7,29 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 39.0,
+      "value_cm": 39,
       "timestamp": "2026-10-30T15:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 254.0,
+      "value_cm": 254,
       "timestamp": "2026-10-30T15:15:00+01:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 250.0,
-      "hour_change_cm": 1.0
+      "value_cm": 250,
+      "hour_change_cm": 1
     },
     "kienstock": {
-      "value_cm": 172.0,
-      "hour_change_cm": 0.0
+      "value_cm": 172,
+      "hour_change_cm": 0
     },
     "wildungsmauer": {
-      "value_cm": 153.0,
-      "hour_change_cm": -1.0
+      "value_cm": 153,
+      "hour_change_cm": -1
     },
     "source_time": "10/30/2026 3:12 PM"
   },
@@ -55,9 +55,15 @@
     "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
   "ship_egdir": {
-    "checked": false,
+    "checked": true,
     "mmsi": "269057766",
-    "source": "https://www.shipfinder.com/vessels/details/269057766"
+    "latitude": 50.95415,
+    "longitude": 6.97226,
+    "position_time": "2026-10-30T13:44:00Z",
+    "coordinate_quality": "historical_manually_verified",
+    "coordinate_source": "AIS Vessel Tracker",
+    "coordinate_note": "Verified AIS observation on October 30 at 13:44 UTC; not continuous live GPS",
+    "source": "https://aisvesseltracker.com/vessel/viking-egdir-mmsi-269057766-imo-0"
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>",

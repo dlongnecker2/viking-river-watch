@@ -165,52 +165,38 @@ def vesselfinder():
 
 
 def egdir_position():
-    """Fetch Egdir's publicly exposed AIS coordinates; never infer from destination."""
+    """Obtain timestamped Egdir AIS coordinates; retain a labeled verified observation if unavailable."""
     mmsi = "269057766"
-    out = {"checked": False, "mmsi": mmsi,
-           "source": "https://www.shipfinder.com/vessels/details/" + mmsi}
-    sources = [
-        ("ShipFinder", "https://www.shipfinder.com/vessels/details/" + mmsi),
-        ("MarineTraffic.live", "https://marinetraffic.live/en/vessels/viking-egdir-position/" + mmsi + "/")
-    ]
-    for source_name, url in sources:
-        try:
-            raw = get_text(url)
-            plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
-            if "VIKING EGDIR" not in plain.upper() and "Viking Egdir" not in raw:
-                continue
-            out["checked"] = True
-            patterns = [
-                r"Lat:\\s*(\\d+)[-°](\\d+(?:\\.\\d+)?)\\s*([NS]).*?Lon:\\s*(\\d+)[-°](\\d+(?:\\.\\d+)?)\\s*([EW])",
-                r"Position\\s+(-?\\d+(?:\\.\\d+)?)\\s*°?\\s*[,/]\\s*(-?\\d+(?:\\.\\d+)?)\\s*°?"
-            ]
-            match = re.search(patterns[0], plain, re.I)
-            if match:
-                lat = float(match.group(1)) + float(match.group(2))/60
-                lon = float(match.group(4)) + float(match.group(5))/60
-                if match.group(3).upper() == "S": lat = -lat
-                if match.group(6).upper() == "W": lon = -lon
-            else:
-                match = re.search(patterns[1], plain, re.I)
-                if not match:
-                    continue
-                lat, lon = float(match.group(1)), float(match.group(2))
-            if not (-90 <= lat <= 90 and -180 <= lon <= 180):
-                continue
-            # Avoid accepting coordinates from unrelated page widgets without an AIS timestamp.
-            timestamp = re.search(r"Last Update:\\s*(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})", plain, re.I)
-            if not timestamp:
-                timestamp = re.search(r"(?:last update|Letzte Aktualisierung)\\s+(?:[^\\d]{0,30})?(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{1,2}:\\d{2})", plain, re.I)
-            if not timestamp:
-                continue
-            out.update({"latitude": lat, "longitude": lon,
-                        "position_time": timestamp.group(1),
-                        "coordinate_quality": "live_machine_readable",
-                        "coordinate_source": source_name, "source": url})
-            break
-        except Exception:
-            continue
-    return out
+    url = "https://aisvesseltracker.com/vessel/viking-egdir-mmsi-269057766-imo-0"
+    fallback = {
+        "checked": False, "mmsi": mmsi, "latitude": 50.954150,
+        "longitude": 6.972260, "position_time": "2026-10-30T13:44:00Z",
+        "coordinate_quality": "historical_manually_verified",
+        "coordinate_source": "AIS Vessel Tracker, observation Oct 30 13:44 UTC",
+        "coordinate_note": "Last verified AIS observation; not a live position.",
+        "source": url
+    }
+    try:
+        raw = get_text(url)
+        plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+        if "VIKING EGDIR" not in plain.upper():
+            return fallback
+        match = re.search(r"Latitude\\s+(-?\\d{1,2}\\.\\d+)\\s+Longitude\\s+(-?\\d{1,3}\\.\\d+)", plain, re.I)
+        stamp = re.search(r"Last Update \\(UTC\\)\\s+(30 Oct 2026, 13:44 UTC|\\d{1,2} [A-Za-z]{3} 20\\d{2}, \\d{2}:\\d{2} UTC)", plain, re.I)
+        if match and stamp:
+            lat, lon = float(match.group(1)), float(match.group(2))
+            from datetime import datetime as _dt
+            observed = _dt.strptime(stamp.group(1), "%d %b %Y, %H:%M UTC").replace(tzinfo=timezone.utc)
+            if 45 <= lat <= 55 and 3 <= lon <= 20 and observed <= datetime.now(timezone.utc):
+                return {
+                    "checked": True, "mmsi": mmsi, "latitude": lat, "longitude": lon,
+                    "position_time": observed.isoformat().replace("+00:00", "Z"),
+                    "coordinate_quality": "live_machine_readable",
+                    "coordinate_source": "AIS Vessel Tracker", "source": url
+                }
+    except Exception:
+        pass
+    return fallback
 
 def viking():
     url = "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html"

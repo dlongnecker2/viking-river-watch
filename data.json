@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-31T16:13:03.209511Z",
+  "updated_utc": "2026-10-31T16:14:55.217210Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -49,10 +49,10 @@
     "age_hours": 0.1,
     "feed_errors": [
       "ais_shipfinder: AIS observation timestamp invalid or older than 30 days",
-      "ais_aprs: APRS vessel identity mismatch",
+      "ais_aprs: APRS has no dated readable position",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ],
-    "verification_time_utc": "2026-10-31T16:13:05.367268Z",
+    "verification_time_utc": "2026-10-31T16:14:57.897965Z",
     "fresh_within_2_hours": true,
     "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
@@ -64,15 +64,15 @@
     "position_time": "2026-10-31T14:10:43Z",
     "coordinate_quality": "live_machine_readable",
     "coordinate_source": "ShipFinder (timestamp treated as UTC)",
-    "coordinate_note": "AIS report age 2.0 hours; not continuous GPS.",
+    "coordinate_note": "AIS report age 2.1 hours; not continuous GPS.",
     "source": "https://www.shipfinder.com/ship/detail/mmsi/269057766",
-    "age_hours": 2.0,
+    "age_hours": 2.1,
     "feed_errors": [
-      "ais_aprs: APRS vessel identity mismatch",
+      "ais_aprs: APRS has no dated readable position",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ],
-    "verification_time_utc": "2026-10-31T16:13:05.408937Z",
-    "fresh_within_2_hours": true
+    "verification_time_utc": "2026-10-31T16:14:57.955108Z",
+    "fresh_within_2_hours": false
   },
   "errors": [
     "Viking: <HTTPError 403: 'Forbidden'>"

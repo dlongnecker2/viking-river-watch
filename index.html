@@ -1193,7 +1193,7 @@ async function loadRiverWatchData(){
     const egdirValid=egdir && egdir.latitude!=null && egdir.longitude!=null &&
       Number.isFinite(Number(egdir.latitude)) && Number.isFinite(Number(egdir.longitude)) &&
       Math.abs(Number(egdir.latitude))<=90 && Math.abs(Number(egdir.longitude))<=180 &&
-      (egdir.coordinate_quality==="live_machine_readable" || egdir.coordinate_quality==="historical_manually_verified");
+      (egdir.coordinate_quality==="live_machine_readable" || egdir.coordinate_quality==="historical_timestamped");
     if(veMap && egdirValid){
       const ll=[Number(egdir.latitude),Number(egdir.longitude)];
       const icon=L.divIcon({className:"ve-ship-icon",html:"<span style='background:#176c42;border:2px solid white;border-radius:50%;padding:5px;font-size:19px'>🚢</span>",iconSize:[40,40],iconAnchor:[20,20]});
@@ -1207,14 +1207,14 @@ async function loadRiverWatchData(){
 
       const time=egdir.position_time||"timestamp unavailable";
       egdirShipMarker.bindPopup("<strong>Viking Egdir — your first ship</strong><br>"+
-        (egdir.coordinate_quality==="live_machine_readable"?"Reported AIS position":"Historical verified position — not live")+
+        (egdir.coordinate_quality==="live_machine_readable"?"Recent AIS observation — not continuous live tracking":"Older AIS observation — NOT LIVE")+
         "<br><small>"+String(time).replace(/[<>&]/g,"")+"</small>");
     } else if(egdirShipMarker && veMap){
       veMap.removeLayer(egdirShipMarker);egdirShipMarker=null;
     }
     const egdirMapStatus=document.getElementById("egdir-map-status");
     if(egdirMapStatus) egdirMapStatus.textContent=egdirValid?
-      "Viking Egdir plotted from "+(egdir.coordinate_quality==="live_machine_readable"?"reported AIS":"historical verified")+" coordinates ("+(egdir.position_time||"time unavailable")+").":
+      "Viking Egdir plotted from "+(egdir.coordinate_quality==="live_machine_readable"?"recent timestamped AIS":"older timestamped AIS")+" coordinates ("+(egdir.position_time||"time unavailable")+").":
       "Viking Egdir: exact verified coordinates not yet available in this site's data feed; no guessed position is shown. Use the live AIS links above.";
     if(d.ship){
       const go=document.getElementById("get-live-operations"), gs=document.getElementById("get-live-status");
@@ -1224,12 +1224,12 @@ async function loadRiverWatchData(){
       set("ship-area",d.ship.area,"Not available");
       set("ship-status",d.ship.status,"Not available");
       set("ship-destination",d.ship.destination,"Not reported");
-      set("ship-reported",d.ship.reported_ago,"Not available");
+      set("ship-reported",d.ship.position_time?new Date(d.ship.position_time).toLocaleString():"Not available","Not available");
 
       const b=document.getElementById("ship-location-banner");
       const bt=document.getElementById("ship-location-time");
       const posTime=d.ship.position_time||d.ship.reported_ago||"time unavailable";
-      const hasCoords=d.ship.latitude!=null && d.ship.longitude!=null &&
+      const hasCoords=["live_machine_readable","historical_timestamped"].includes(d.ship.coordinate_quality) && d.ship.latitude!=null && d.ship.longitude!=null &&
                       Number.isFinite(Number(d.ship.latitude)) && Number.isFinite(Number(d.ship.longitude));
 
       if(veMap && hasCoords){
@@ -1242,9 +1242,9 @@ async function loadRiverWatchData(){
         } else {
           veShipMarker.setLatLng(ll);
         }
-        veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.coordinate_quality==="live_machine_readable"?"Machine-readable position":"Historical manually verified position — not live AIS")+"<br><small>"+posTime+"</small>");
-        if(b) b.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Reported position":"Historical position — NOT LIVE")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
-        if(bt) bt.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Machine-readable position: ":"Last manually verified position (NOT live AIS): ")+posTime;
+        veShipMarker.bindPopup("<strong>Viking Ve</strong><br>"+(d.ship.coordinate_quality==="live_machine_readable"?"Recent AIS report — not continuous live tracking":"Older AIS report — NOT LIVE")+"<br><small>"+posTime+"</small>");
+        if(b) b.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Recent reported position":"Historical position — NOT LIVE")+" — "+ll[0].toFixed(4)+", "+ll[1].toFixed(4);
+        if(bt) bt.textContent=(d.ship.coordinate_quality==="live_machine_readable"?"Recent AIS observation: ":"Historical AIS observation (NOT live): ")+posTime;
       } else {
         if(veShipMarker){ veMap.removeLayer(veShipMarker); veShipMarker=null; }
         if(b) b.textContent="Exact AIS position unavailable — no inferred location shown";

@@ -202,6 +202,91 @@ def egdir_position():
         pass
     return fallback
 
+# AIS positions are accepted only with vessel identity, coordinates and a dated observation.
+# A successful website request is NOT evidence of a new AIS report.
+def parse_utc(value):
+    if not value:
+        return None
+    value = value.strip()
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%SZ", "%b %d, %Y %H:%M UTC", "%d %b %Y, %H:%M UTC"):
+        try:
+            return datetime.strptime(value, fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            pass
+    return None
+
+def ais_shipfinder(mmsi, name):
+    url = "https://www.shipfinder.com/ship/detail/mmsi/" + mmsi
+    raw = get_text(url)
+    plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+    if name.upper() not in plain.upper() or mmsi not in plain:
+        raise ValueError("ShipFinder vessel identity mismatch")
+    # ShipFinder displays degrees and decimal minutes, not decimal degrees.
+    match = re.search(r"(\\d{1,2})-(\\d{1,2}\\.\\d+)\\s*([NS])\\s*[,;/ ]+\\s*(\\d{1,3})-(\\d{1,2}\\.\\d+)\\s*([EW])", plain, re.I)
+    if not match:
+        match = re.search(r"Lat\\s*:?\\s*(\\d{1,2})[-°](\\d{1,2}\\.\\d+)\\s*([NS]).{0,90}?Lon\\s*:?\\s*(\\d{1,3})[-°](\\d{1,2}\\.\\d+)\\s*([EW])", plain, re.I)
+    stamp = re.search(r"(?:reported at|Last Update\\s*:?)\\s*(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})", plain, re.I)
+    if not match or not stamp:
+        raise ValueError("ShipFinder did not expose timestamped coordinates")
+    lat = (int(match[1]) + float(match[2])/60) * (-1 if match[3].upper()=="S" else 1)
+    lon = (int(match[4]) + float(match[5])/60) * (-1 if match[6].upper()=="W" else 1)
+    observed = parse_utc(stamp[1])
+    return make_ais_position(mmsi, lat, lon, observed, url, "ShipFinder (timestamp treated as UTC)")
+
+def ais_trackipi(mmsi, name):
+    url = "https://www.trackipi.com/et/vessel/mmsi-" + mmsi + "/"
+    raw = get_text(url)
+    plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+    if name.upper() not in plain.upper() or mmsi not in plain:
+        raise ValueError("Trackipi vessel identity mismatch")
+    match = re.search(r"(?:Latitud|Latitude|Laiuskraad)\\s*(-?\\d{1,2}\\.\\d+)\\s*[,; ]+\\s*(?:Longitud|Longitude|Pikkuskraad)\\s*(-?\\d{1,3}\\.\\d+)", plain, re.I)
+    # Trackipi's prose can put labels between coordinates and timestamp.
+    if not match:
+        match = re.search(r"\\(\\s*(?:Latitud|Latitude|Laiuskraad)\\s*(-?\\d{1,2}\\.\\d+)\\s*[,;]\\s*(?:Longitud|Longitude|Pikkuskraad)\\s*(-?\\d{1,3}\\.\\d+)\\s*\\)", plain, re.I)
+    stamp = re.search(r"(?:Position report|Positsiooniaruanne|Laporan Kedudukan)\\s*(?:Oct|okt)\\s*(\\d{1,2}),?\\s*(2026)\\s*(\\d{2}:\\d{2})\\s*UTC", plain, re.I)
+    if not match or not stamp:
+        raise ValueError("Trackipi did not expose timestamped coordinates")
+    observed = parse_utc(stamp[2]+"-10-"+stamp[1].zfill(2)+" "+stamp[3]+":00")
+    return make_ais_position(mmsi, float(match[1]), float(match[2]), observed, url, "Trackipi UTC report")
+
+def make_ais_position(mmsi, lat, lon, observed, source, label):
+    now=datetime.now(timezone.utc)
+    if observed is None or observed > now + __import__("datetime").timedelta(minutes=15) or observed < now - __import__("datetime").timedelta(days=30):
+        raise ValueError("AIS observation timestamp invalid or older than 30 days")
+    if not (45 <= lat <= 55 and 3 <= lon <= 20):
+        raise ValueError("AIS coordinates outside expected European river region")
+    age=(now-observed).total_seconds()/3600
+    return {"checked":True,"mmsi":mmsi,"latitude":round(lat,6),"longitude":round(lon,6),
+            "position_time":observed.isoformat().replace("+00:00","Z"),
+            "coordinate_quality":"live_machine_readable" if age<=6 else "historical_timestamped",
+            "coordinate_source":label,"coordinate_note":"AIS report age %.1f hours; not continuous GPS."%max(age,0),
+            "source":source,"age_hours":round(max(age,0),1)}
+
+def latest_ais(mmsi, name, previous=None):
+    candidates=[]
+    failures=[]
+    for reader in (ais_shipfinder, ais_trackipi):
+        try:
+            candidates.append(reader(mmsi,name))
+        except Exception as e:
+            failures.append(reader.__name__+": "+str(e))
+    if previous and previous.get("mmsi")==mmsi and previous.get("latitude") is not None:
+        stamp=parse_utc(previous.get("position_time","").replace("T"," ").replace("Z",""))
+        if stamp:
+            try:
+                candidates.append(make_ais_position(mmsi,float(previous["latitude"]),float(previous["longitude"]),stamp,
+                    previous.get("source","Previous verified AIS report"),previous.get("coordinate_source","Previous AIS report")))
+            except ValueError:
+                pass
+    if not candidates:
+        return {"checked":False,"mmsi":mmsi,"coordinate_quality":"unavailable",
+                "coordinate_note":"No dated AIS coordinates available; position deliberately omitted.",
+                "source":"https://www.shipfinder.com/ship/detail/mmsi/"+mmsi,"feed_errors":failures}
+    best=max(candidates,key=lambda x:x["position_time"])
+    best["feed_errors"]=failures
+    best["checked"]=len(failures)<2
+    return best
+
 def viking():
     url = "https://www.vikingrivercruises.com/my-trip/current-sailings/index.html"
     raw = get_text(url)
@@ -246,53 +331,18 @@ except Exception as e:
     errors.append("Viking: "+repr(e))
     data["viking"] = {"checked": False}
 
+# Preserve the latest dated observation across temporary public AIS outages.
 try:
-    ship = vesselfinder()
-except Exception as e:
-    errors.append("VesselFinder: "+repr(e))
-    ship = {"checked": False, "mmsi": "269057517"}
-
-try:
-    sf = shipfinder()
-    for k, v in sf.items():
-        if v is not None and k not in ("checked",):
-            ship[k] = v
-    ship["checked"] = True
-except Exception as e:
-    errors.append("ShipFinder: "+repr(e))
-
-try:
-    radar = shipradar()
-    for k, v in radar.items():
-        if v is not None and k not in ("checked","latitude","longitude","position_time"):
-            ship[k] = v
-    ship["checked"] = True
-except Exception as e:
-    errors.append("ShipRadar: "+repr(e))
-
-# Keep the last manually verified plotted position when public machine-readable
-# AIS sources do not expose coordinates. Never infer coordinates from destination
-# or itinerary text. This point was verified by hovering directly over Viking Ve
-# on the CruiseMapper live map on 2026-10-06.
-if ship.get("latitude") is None or ship.get("longitude") is None or not ship.get("position_time"):
-    ship["latitude"] = 48.18211
-    ship["longitude"] = 15.07668
-    ship["position_time"] = "2026-10-06 (manually verified map position)"
-    ship["coordinate_source"] = "CruiseMapper live-map hover"
-    ship["coordinate_quality"] = "last_verified"
-    ship["coordinate_note"] = "Last verified plotted position; retained until a newer machine-readable AIS coordinate is available."
-else:
-    ship["coordinate_quality"] = "timestamped_reported"
-    ship["coordinate_source"] = ship.get("source", "public AIS source")
-
-ship["marine_traffic_url"] = "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
-
-data["ship"] = ship
-try:
-    data["ship_egdir"] = egdir_position()
-except Exception as e:
-    errors.append("Egdir AIS: "+repr(e))
-    data["ship_egdir"] = {"checked": False, "mmsi": "269057766"}
+    with open("data.json",encoding="utf-8") as f:
+        previous_data=json.load(f)
+except (OSError,ValueError):
+    previous_data={}
+data["ship"]=latest_ais("269057517","VIKING VE",previous_data.get("ship"))
+data["ship"]["marine_traffic_url"]="https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
+data["ship_egdir"]=latest_ais("269057766","VIKING EGDIR",previous_data.get("ship_egdir"))
+for label,key in (("Viking Ve","ship"),("Viking Egdir","ship_egdir")):
+    if data[key].get("coordinate_quality")=="unavailable":
+        errors.append(label+": no dated AIS observation available")
 
 
 data["errors"] = errors

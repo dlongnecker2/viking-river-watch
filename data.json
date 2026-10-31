@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-31T02:17:02.711277Z",
+  "updated_utc": "2026-10-31T02:17:35.076154Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -44,6 +44,7 @@
     "source": "https://www.shipfinder.com/ship/detail/mmsi/269057517",
     "feed_errors": [
       "ais_shipfinder: ShipFinder did not expose timestamped coordinates",
+      "ais_aprs: APRS vessel identity mismatch",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ],
     "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
@@ -61,6 +62,7 @@
     "age_hours": 12.6,
     "feed_errors": [
       "ais_shipfinder: ShipFinder did not expose timestamped coordinates",
+      "ais_aprs: APRS vessel identity mismatch",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ]
   },

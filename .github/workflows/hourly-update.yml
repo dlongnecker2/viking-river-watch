@@ -2,7 +2,7 @@ name: River and Ship Position Watch
 
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "17 */2 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -43,6 +43,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git diff --cached --quiet || git commit -m "Hourly river and AIS position refresh"
+          git diff --cached --quiet || git commit -m "Two-hour river and AIS verification"
           git pull --rebase origin main
           git push

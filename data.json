@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-31T02:17:52.585229Z",
+  "updated_utc": "2026-10-31T03:16:02.087877Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -7,31 +7,31 @@
   },
   "germany": {
     "kaub": {
-      "value_cm": 36.0,
-      "timestamp": "2026-10-31T03:15:00+01:00",
+      "value_cm": 35.0,
+      "timestamp": "2026-10-31T04:00:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
       "value_cm": 248.0,
-      "timestamp": "2026-10-31T03:00:00+01:00",
+      "timestamp": "2026-10-31T04:00:00+01:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
-      "value_cm": 248.0,
-      "hour_change_cm": -4.0
+      "value_cm": 241.0,
+      "hour_change_cm": -7.0
     },
     "kienstock": {
       "value_cm": 160.0,
-      "hour_change_cm": 1.0
+      "hour_change_cm": 0.0
     },
     "wildungsmauer": {
-      "value_cm": 144.0,
-      "hour_change_cm": -1.0
+      "value_cm": 142.0,
+      "hour_change_cm": -2.0
     },
-    "source_time": "10/31/2026 3:11 AM"
+    "source_time": "10/31/2026 4:12 AM"
   },
   "viking": {
     "checked": false
@@ -57,9 +57,9 @@
     "position_time": "2026-10-30T13:44:00Z",
     "coordinate_quality": "historical_timestamped",
     "coordinate_source": "AIS Vessel Tracker, October 30 observation",
-    "coordinate_note": "AIS report age 12.6 hours; not continuous GPS.",
+    "coordinate_note": "AIS report age 13.5 hours; not continuous GPS.",
     "source": "https://aisvesseltracker.com/vessel/viking-egdir-mmsi-269057766-imo-0",
-    "age_hours": 12.6,
+    "age_hours": 13.5,
     "feed_errors": [
       "ais_shipfinder: ShipFinder did not expose timestamped coordinates",
       "ais_aprs: APRS vessel identity mismatch",

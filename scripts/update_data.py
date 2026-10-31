@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-import json, re, html
+import json, re, html, os
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 UA = {"User-Agent":"Mozilla/5.0 VikingRiverWatch/1.0"}
 
 def get_text(url):
+    browser_cache=os.environ.get("AIS_BROWSER_CACHE","ais-browser-results.json")
+    if "ship" in url.lower() or "trackipi" in url.lower() or "aprs.fi" in url.lower():
+        try:
+            with open(browser_cache,encoding="utf-8") as f: cached=json.load(f)
+            if url in cached and cached[url].get("html"):
+                return cached[url]["html"]
+        except (OSError,ValueError): pass
     req = Request(url, headers=UA)
     with urlopen(req, timeout=30) as r:
         return r.read().decode("utf-8", errors="replace")

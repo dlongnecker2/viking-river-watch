@@ -319,7 +319,7 @@ def latest_ais(mmsi, name, previous=None):
     best["feed_errors"]=failures
     best["verification_time_utc"]=datetime.now(timezone.utc).isoformat().replace("+00:00","Z")
     best["fresh_within_2_hours"]=best.get("age_hours",999)<=2
-    best["checked"]=any(c.get("coordinate_source") not in (previous or {}).get("coordinate_source","") for c in candidates) if previous else bool(candidates)
+    best["checked"]=len(failures)<4
     return best
 
 def viking():

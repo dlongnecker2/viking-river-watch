@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "scripts/update_data.py"
+      - "scripts/ais_browser.py"
       - ".github/workflows/hourly-update.yml"
 
 permissions:
@@ -25,6 +26,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install browser automation
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Read public AIS pages in Chromium
+        run: python scripts/ais_browser.py
 
       - name: Fetch current river and Viking data
         run: python scripts/update_data.py

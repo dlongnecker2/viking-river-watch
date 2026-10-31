@@ -225,14 +225,14 @@ def parse_utc(value):
 def ais_shipfinder(mmsi, name):
     url = "https://www.shipfinder.com/ship/detail/mmsi/" + mmsi
     raw = get_text(url)
-    plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+    plain = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
     if name.upper() not in plain.upper() or mmsi not in plain:
         raise ValueError("ShipFinder vessel identity mismatch")
     # ShipFinder displays degrees and decimal minutes, not decimal degrees.
-    match = re.search(r"(\\d{1,2})-(\\d{1,2}\\.\\d+)\\s*([NS])\\s*[,;/ ]+\\s*(\\d{1,3})-(\\d{1,2}\\.\\d+)\\s*([EW])", plain, re.I)
+    match = re.search(r"(\d{1,2})-(\d{1,2}\.\d+)\s*([NS])\s*[,;/ ]+\s*(\d{1,3})-(\d{1,2}\.\d+)\s*([EW])", plain, re.I)
     if not match:
-        match = re.search(r"Lat\\s*:?\\s*(\\d{1,2})[-°](\\d{1,2}\\.\\d+)\\s*([NS]).{0,90}?Lon\\s*:?\\s*(\\d{1,3})[-°](\\d{1,2}\\.\\d+)\\s*([EW])", plain, re.I)
-    stamp = re.search(r"(?:reported at|Last Update\\s*:?)\\s*(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})", plain, re.I)
+        match = re.search(r"Lat\s*:?\s*(\d{1,2})[-°](\d{1,2}\.\d+)\s*([NS]).{0,90}?Lon\s*:?\s*(\d{1,3})[-°](\d{1,2}\.\d+)\s*([EW])", plain, re.I)
+    stamp = re.search(r"(?:reported at|Last Update\s*:?)\s*(20\d{2}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", plain, re.I)
     if not match or not stamp:
         raise ValueError("ShipFinder did not expose timestamped coordinates")
     lat = (int(match[1]) + float(match[2])/60) * (-1 if match[3].upper()=="S" else 1)
@@ -243,14 +243,14 @@ def ais_shipfinder(mmsi, name):
 def ais_trackipi(mmsi, name):
     url = "https://www.trackipi.com/et/vessel/mmsi-" + mmsi + "/"
     raw = get_text(url)
-    plain = re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
+    plain = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw)))
     if name.upper() not in plain.upper() or mmsi not in plain:
         raise ValueError("Trackipi vessel identity mismatch")
-    match = re.search(r"(?:Latitud|Latitude|Laiuskraad)\\s*(-?\\d{1,2}\\.\\d+)\\s*[,; ]+\\s*(?:Longitud|Longitude|Pikkuskraad)\\s*(-?\\d{1,3}\\.\\d+)", plain, re.I)
+    match = re.search(r"(?:Latitud|Latitude|Laiuskraad)\s*(-?\d{1,2}\.\d+)\s*[,; ]+\s*(?:Longitud|Longitude|Pikkuskraad)\s*(-?\d{1,3}\.\d+)", plain, re.I)
     # Trackipi's prose can put labels between coordinates and timestamp.
     if not match:
-        match = re.search(r"\\(\\s*(?:Latitud|Latitude|Laiuskraad)\\s*(-?\\d{1,2}\\.\\d+)\\s*[,;]\\s*(?:Longitud|Longitude|Pikkuskraad)\\s*(-?\\d{1,3}\\.\\d+)\\s*\\)", plain, re.I)
-    stamp = re.search(r"(?:Position report|Positsiooniaruanne|Laporan Kedudukan)\\s*(?:Oct|okt)\\s*(\\d{1,2}),?\\s*(2026)\\s*(\\d{2}:\\d{2})\\s*UTC", plain, re.I)
+        match = re.search(r"\(\s*(?:Latitud|Latitude|Laiuskraad)\s*(-?\d{1,2}\.\d+)\s*[,;]\s*(?:Longitud|Longitude|Pikkuskraad)\s*(-?\d{1,3}\.\d+)\s*\)", plain, re.I)
+    stamp = re.search(r"(?:Position report|Positsiooniaruanne|Laporan Kedudukan)\s*(?:Oct|okt)\s*(\d{1,2}),?\s*(2026)\s*(\d{2}:\d{2})\s*UTC", plain, re.I)
     if not match or not stamp:
         raise ValueError("Trackipi did not expose timestamped coordinates")
     observed = parse_utc(stamp[2]+"-10-"+stamp[1].zfill(2)+" "+stamp[3]+":00")
@@ -272,11 +272,11 @@ def make_ais_position(mmsi, lat, lon, observed, source, label):
 def ais_aprs(mmsi, name):
     url="https://aprs.fi/info/i/"+mmsi
     raw=get_text(url)
-    plain=re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
+    plain=re.sub(r"\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
     if mmsi not in plain or name.upper() not in plain.upper():
         raise ValueError("APRS vessel identity mismatch")
-    match=re.search(r"(\\d{1,2})°\\s*(\\d{1,2}\\.\\d+)['’]?\\s*([NS])\\s+(\\d{1,3})°\\s*(\\d{1,2}\\.\\d+)['’]?\\s*([EW])",plain,re.I)
-    stamp=re.search(r"Last position\\s*:\\s*(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})\\s*UTC",plain,re.I)
+    match=re.search(r"(\d{1,2})°\s*(\d{1,2}\.\d+)['’]?\s*([NS])\s+(\d{1,3})°\s*(\d{1,2}\.\d+)['’]?\s*([EW])",plain,re.I)
+    stamp=re.search(r"Last position\s*:\s*(20\d{2}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\s*UTC",plain,re.I)
     if not match or not stamp:
         raise ValueError("APRS has no dated readable position")
     lat=(int(match[1])+float(match[2])/60)*(-1 if match[3].upper()=="S" else 1)
@@ -286,11 +286,11 @@ def ais_aprs(mmsi, name):
 def ais_myshiptracking(mmsi, name):
     url="https://myshiptracking.com/vessels/"+name.lower().replace(" ","-")+"-mmsi-"+mmsi+"-imo-0"
     raw=get_text(url)
-    plain=re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
+    plain=re.sub(r"\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
     if mmsi not in plain or name.upper() not in plain.upper():
         raise ValueError("MyShipTracking vessel identity mismatch")
     # The site publishes both decimal coordinates and a complete AIS date/time.
-    match=re.search(r"coordinates\\s+(-?\\d{1,2}\\.\\d+)°?\\s*/\\s*(-?\\d{1,3}\\.\\d+)°?\\s+as reported on\\s+(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2})",plain,re.I)
+    match=re.search(r"coordinates\s+(-?\d{1,2}\.\d+)°?\s*/\s*(-?\d{1,3}\.\d+)°?\s+as reported on\s+(20\d{2}-\d{2}-\d{2}\s+\d{2}:\d{2})",plain,re.I)
     if not match:
         raise ValueError("MyShipTracking position/timestamp unavailable")
     return make_ais_position(mmsi,float(match[1]),float(match[2]),parse_utc(match[3]+":00"),url,"MyShipTracking dated AIS")
@@ -317,7 +317,9 @@ def latest_ais(mmsi, name, previous=None):
                 "source":"https://www.shipfinder.com/ship/detail/mmsi/"+mmsi,"feed_errors":failures}
     best=max(candidates,key=lambda x:x["position_time"])
     best["feed_errors"]=failures
-    best["checked"]=len(failures)<4
+    best["verification_time_utc"]=datetime.now(timezone.utc).isoformat().replace("+00:00","Z")
+    best["fresh_within_2_hours"]=best.get("age_hours",999)<=2
+    best["checked"]=any(c.get("coordinate_source") not in (previous or {}).get("coordinate_source","") for c in candidates) if previous else bool(candidates)
     return best
 
 def viking():

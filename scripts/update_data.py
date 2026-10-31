@@ -262,10 +262,24 @@ def make_ais_position(mmsi, lat, lon, observed, source, label):
             "coordinate_source":label,"coordinate_note":"AIS report age %.1f hours; not continuous GPS."%max(age,0),
             "source":source,"age_hours":round(max(age,0),1)}
 
+def ais_aprs(mmsi, name):
+    url="https://aprs.fi/info/i/"+mmsi
+    raw=get_text(url)
+    plain=re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
+    if mmsi not in plain or name.upper() not in plain.upper():
+        raise ValueError("APRS vessel identity mismatch")
+    match=re.search(r"(\\d{1,2})°\\s*(\\d{1,2}\\.\\d+)['’]?\\s*([NS])\\s+(\\d{1,3})°\\s*(\\d{1,2}\\.\\d+)['’]?\\s*([EW])",plain,re.I)
+    stamp=re.search(r"Last position\\s*:\\s*(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2})\\s*UTC",plain,re.I)
+    if not match or not stamp:
+        raise ValueError("APRS has no dated readable position")
+    lat=(int(match[1])+float(match[2])/60)*(-1 if match[3].upper()=="S" else 1)
+    lon=(int(match[4])+float(match[5])/60)*(-1 if match[6].upper()=="W" else 1)
+    return make_ais_position(mmsi,lat,lon,parse_utc(stamp[1]),url,"APRS.fi timestamped AIS")
+
 def latest_ais(mmsi, name, previous=None):
     candidates=[]
     failures=[]
-    for reader in (ais_shipfinder, ais_trackipi):
+    for reader in (ais_shipfinder, ais_aprs, ais_trackipi):
         try:
             candidates.append(reader(mmsi,name))
         except Exception as e:
@@ -284,7 +298,7 @@ def latest_ais(mmsi, name, previous=None):
                 "source":"https://www.shipfinder.com/ship/detail/mmsi/"+mmsi,"feed_errors":failures}
     best=max(candidates,key=lambda x:x["position_time"])
     best["feed_errors"]=failures
-    best["checked"]=len(failures)<2
+    best["checked"]=len(failures)<3
     return best
 
 def viking():

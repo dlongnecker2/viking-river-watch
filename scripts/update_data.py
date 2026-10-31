@@ -276,10 +276,22 @@ def ais_aprs(mmsi, name):
     lon=(int(match[4])+float(match[5])/60)*(-1 if match[6].upper()=="W" else 1)
     return make_ais_position(mmsi,lat,lon,parse_utc(stamp[1]),url,"APRS.fi timestamped AIS")
 
+def ais_myshiptracking(mmsi, name):
+    url="https://myshiptracking.com/vessels/"+name.lower().replace(" ","-")+"-mmsi-"+mmsi+"-imo-0"
+    raw=get_text(url)
+    plain=re.sub(r"\\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",raw)))
+    if mmsi not in plain or name.upper() not in plain.upper():
+        raise ValueError("MyShipTracking vessel identity mismatch")
+    # The site publishes both decimal coordinates and a complete AIS date/time.
+    match=re.search(r"coordinates\\s+(-?\\d{1,2}\\.\\d+)°?\\s*/\\s*(-?\\d{1,3}\\.\\d+)°?\\s+as reported on\\s+(20\\d{2}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2})",plain,re.I)
+    if not match:
+        raise ValueError("MyShipTracking position/timestamp unavailable")
+    return make_ais_position(mmsi,float(match[1]),float(match[2]),parse_utc(match[3]+":00"),url,"MyShipTracking dated AIS")
+
 def latest_ais(mmsi, name, previous=None):
     candidates=[]
     failures=[]
-    for reader in (ais_shipfinder, ais_aprs, ais_trackipi):
+    for reader in (ais_shipfinder, ais_myshiptracking, ais_aprs, ais_trackipi):
         try:
             candidates.append(reader(mmsi,name))
         except Exception as e:
@@ -298,7 +310,7 @@ def latest_ais(mmsi, name, previous=None):
                 "source":"https://www.shipfinder.com/ship/detail/mmsi/"+mmsi,"feed_errors":failures}
     best=max(candidates,key=lambda x:x["position_time"])
     best["feed_errors"]=failures
-    best["checked"]=len(failures)<3
+    best["checked"]=len(failures)<4
     return best
 
 def viking():

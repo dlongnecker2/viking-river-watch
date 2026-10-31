@@ -1062,13 +1062,13 @@ async function loadWeather(){
     const d=result.value.data; succeeded++;
     const next3=[1,2,3].filter(i=>d.daily.time[i]).map(i=>{
      const dt=new Date(d.daily.time[i]+"T12:00:00");
-     return dt.toLocaleDateString(undefined,{weekday:"short"})+" "+f(d.daily.temperature_2m_max[i])+"°/"+f(d.daily.temperature_2m_min[i])+"°";
+     return dt.toLocaleDateString(undefined,{weekday:"short"})+" "+Math.round(d.daily.temperature_2m_max[i])+"°/"+Math.round(d.daily.temperature_2m_min[i])+"°";
     }).join("<br>");
     const rainMax=Math.max(...d.daily.precipitation_probability_max.slice(0,7).map(v=>v??0));
     const rainSum=d.daily.precipitation_sum.slice(0,7).reduce((x,y)=>x+(y||0),0);
     tr.innerHTML="<td><strong>"+stop.name+"</strong></td>"+
-     "<td>"+f(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
-     "<td>"+f(d.daily.temperature_2m_max[0])+"° / "+f(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
+     "<td>"+Math.round(d.current.temperature_2m)+"°F<br><span class='small'>"+wx(d.current.weather_code)+"</span></td>"+
+     "<td>"+Math.round(d.daily.temperature_2m_max[0])+"° / "+Math.round(d.daily.temperature_2m_min[0])+"°<br><span class='small'>"+wx(d.daily.weather_code[0])+"</span></td>"+
      "<td>"+next3+"</td>"+
      "<td><strong>"+rainMax+"%</strong> max chance<br><span class='small'>"+rainSum.toFixed(2)+" in / 7 days</span></td>";
    }else{

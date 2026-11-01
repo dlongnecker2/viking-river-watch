@@ -1,5 +1,12 @@
 {
   "schema_version": 1,
   "description": "Publicly shared daily postcards. Only add photos and notes explicitly approved for public sharing. Photos should use committed repository-relative URLs, e.g. photos/2026-11-03-amsterdam.jpg. Do not publish private cabin or exact real-time location.",
-  "entries": []
+  "entries": [
+    {
+      "date": "2026-10-31",
+      "place": "Leaving Seattle",
+      "note": "Our Grand European Adventure begins! Four travelers, one unforgettable journey. Next stop: London, then Amsterdam, where our Viking adventure awaits!",
+      "photo_alt": "Four travelers smiling together at Seattle airport before their flight to Europe."
+    }
+  ]
 }

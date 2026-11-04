@@ -77,7 +77,7 @@ Promise.allSettled([
 ]).then(([assignment,postcards])=>{
  if(assignment.status==="fulfilled"){
   const a=assignment.value;
-  if(a.active_ship?.name)$("journey-ship").textContent=a.active_ship.name;
+  if(a.scheduled_ship?.name&&a.scheduled_ship.effective_date<=today)$("journey-ship").textContent=a.scheduled_ship.name;else if(a.active_ship?.name)$("journey-ship").textContent=a.active_ship.name;
   if(Array.isArray(a.itinerary_overrides)){
    // Date-specific itinerary changes are displayed as revised, not inferred from AIS.
    a.itinerary_overrides.forEach(change=>{

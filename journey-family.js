@@ -94,7 +94,7 @@ Promise.allSettled([
  entries.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(entry=>{
   const card=document.createElement("article");card.className="journey-postcard";
   const h=document.createElement("h4");h.textContent=(entry.date||"")+" · "+(entry.place||"Our journey");card.append(h);
-  if(entry.photo){const img=document.createElement("img");img.src=entry.photo;img.alt=entry.photo_alt||entry.place||"Trip photo";img.loading="lazy";card.append(img);}
+  const pictures=Array.isArray(entry.photos)&&entry.photos.length?entry.photos:(entry.photo?[entry.photo]:[]);for(const picture of pictures){const img=document.createElement("img");img.src=picture;img.alt=entry.photo_alt||entry.place||"Trip photo";img.loading="lazy";card.append(img);}
   const para=document.createElement("p");para.textContent=entry.note||"";card.append(para);panel.append(card);
  });
 });

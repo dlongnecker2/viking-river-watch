@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-30",
+  "last_updated": "2026-11-04",
   "active_ship": {
     "name": "Viking Egdir",
     "mmsi": "269057766",
     "effective_date": "2026-11-03",
-    "note": "Confirmed by Viking's October 27 letter for Amsterdam embarkation; no subsequent transfer recorded."
+    "note": "Current ship through November 4; scheduled transfer to Viking Vidar November 5 per onboard Viking Daily."
   },
   "ship_history": [
     {
@@ -18,13 +18,53 @@
       "mmsi": "269057766",
       "role": "confirmed first embarkation ship",
       "effective_date": "2026-11-03"
+    },
+    {
+      "name": "Viking Vidar",
+      "role": "confirmed receiving sister ship; boarding scheduled",
+      "effective_date": "2026-11-05"
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-10-27",
-    "summary": "Rhine sister-ship swap expected between Kinderdijk and Frankfurt, Koblenz excursions canceled; possible Danube swap between Nuremberg and Passau.",
-    "source": "Viking personal letter dated October 27, 2026"
+    "effective_date": "2026-11-05",
+    "summary": "Confirmed scheduled sister-ship transfer from Viking Egdir via Cologne to Viking Vidar in Aschaffenburg on November 5. Further Danube swap remains unconfirmed.",
+    "source": "Onboard Viking Daily for Thursday November 5, 2026"
   },
-  "transfer_history": [],
-  "notes": "When user confirms a new ship from onboard, update active_ship, append previous ship to ship_history if not already recorded, add transfer_history, and revise itinerary_update. Never infer AIS position from itinerary; obtain verified coordinates independently."
+  "transfer_history": [
+    {
+      "date": "2026-11-05",
+      "from_ship": "Viking Egdir",
+      "to_ship": "Viking Vidar",
+      "method": "coach",
+      "departure": "08:00",
+      "via": "Cologne, Germany",
+      "excursion": "Cologne Walking Tour 08:00–12:30; lunch at Peters Brauhaus Hahnentor",
+      "second_transfer": "14:00–16:30",
+      "meeting_point": "Peters Brauhaus Hahnentor",
+      "boarding_location": "Aschaffenburg, Germany",
+      "status": "confirmed scheduled by onboard Viking Daily Nov 5; not yet completed",
+      "source": "User-provided Viking Daily dated November 5, 2026"
+    }
+  ],
+  "notes": "When user confirms a new ship from onboard, update active_ship, append previous ship to ship_history if not already recorded, add transfer_history, and revise itinerary_update. Never infer AIS position from itinerary; obtain verified coordinates independently.",
+  "scheduled_ship": {
+    "name": "Viking Vidar",
+    "effective_date": "2026-11-05",
+    "boarding_location": "Aschaffenburg, Germany",
+    "source": "Viking Daily for Thursday November 5, 2026"
+  },
+  "itinerary_overrides": [
+    {
+      "date": "2026-11-05",
+      "destination": "Cologne walking tour; coach to Viking Vidar at Aschaffenburg",
+      "status": "confirmed scheduled",
+      "source": "Viking Daily November 5"
+    },
+    {
+      "date": "2026-11-06",
+      "destination": "Aboard Viking Vidar; Middle Rhine plans altered",
+      "status": "revised; specific activities unconfirmed",
+      "source": "Viking Daily November 5 and earlier customer letter"
+    }
+  ]
 }

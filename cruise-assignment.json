@@ -27,7 +27,7 @@
   ],
   "itinerary_update": {
     "effective_date": "2026-11-06",
-    "summary": "November 5 coach transfer Egdir to Vidar in Aschaffenburg. November 6 Viking Vidar scheduled Frankfurt arrival 07:00, coach excursion Bingen–Middle Rhine–Koblenz 08:00–17:00, all aboard 19:00, then departure. October 27 Koblenz cancellation superseded by onboard Viking Daily. Further Danube swap unconfirmed.",
+    "summary": "November 5 Egdir-to-Vidar transfer. November 6 Viking Vidar at Frankfurt; coach to Bingen, smaller sightseeing boat through Rhine Gorge, Koblenz walking tour, coach return. Further Danube swap unconfirmed.",
     "source": "Viking Daily Friday November 6, 2026 (provided November 5)"
   },
   "transfer_history": [
@@ -62,9 +62,9 @@
     },
     {
       "date": "2026-11-06",
-      "destination": "Frankfurt; coach excursion to Bingen, Rhine Valley and Koblenz",
+      "destination": "Frankfurt; coach to Bingen, smaller sightseeing boat through Middle Rhine Gorge, Koblenz, return by coach",
       "status": "confirmed scheduled",
-      "source": "Viking Daily November 6, 2026",
+      "source": "Viking Daily Nov 6 plus passenger clarification Nov 5",
       "ship": "Viking Vidar",
       "arrival": "07:00",
       "excursion": "08:00–17:00",
@@ -93,10 +93,11 @@
             "41D",
             "41E"
           ],
-          "route": "Coach from Frankfurt to Bingen; Middle Rhine scenic views and commentary; Koblenz walking tour; coach return to Frankfurt",
+          "route": "Coach from Frankfurt to Bingen; board smaller sightseeing boat to cruise the Middle Rhine Gorge toward Koblenz; Koblenz walking tour and free time; coach back to Frankfurt",
           "lunch": "Free time for lunch; €50 per participating guest credit to be issued after return home",
           "quietvox_required": true,
-          "meet": "Pier on shore; group on ticket"
+          "meet": "Pier on shore; group on ticket",
+          "transport_note": "Small excursion boat, not Viking Vidar; boat segment confirmed by passenger clarification, not explicitly stated in Viking Daily"
         }
       ],
       "activities": [

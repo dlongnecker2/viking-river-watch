@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-04",
+  "last_updated": "2026-11-05",
   "active_ship": {
     "name": "Viking Egdir",
     "mmsi": "269057766",
@@ -26,9 +26,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-05",
-    "summary": "Confirmed scheduled sister-ship transfer from Viking Egdir via Cologne to Viking Vidar in Aschaffenburg on November 5. Further Danube swap remains unconfirmed.",
-    "source": "Onboard Viking Daily for Thursday November 5, 2026"
+    "effective_date": "2026-11-06",
+    "summary": "November 5 coach transfer Egdir to Vidar in Aschaffenburg. November 6 Viking Vidar scheduled Frankfurt arrival 07:00, coach excursion Bingen–Middle Rhine–Koblenz 08:00–17:00, all aboard 19:00, then departure. October 27 Koblenz cancellation superseded by onboard Viking Daily. Further Danube swap unconfirmed.",
+    "source": "Viking Daily Friday November 6, 2026 (provided November 5)"
   },
   "transfer_history": [
     {
@@ -62,9 +62,80 @@
     },
     {
       "date": "2026-11-06",
-      "destination": "Aboard Viking Vidar; Middle Rhine plans altered",
-      "status": "revised; specific activities unconfirmed",
-      "source": "Viking Daily November 5 and earlier customer letter"
+      "destination": "Frankfurt; coach excursion to Bingen, Rhine Valley and Koblenz",
+      "status": "confirmed scheduled",
+      "source": "Viking Daily November 6, 2026",
+      "ship": "Viking Vidar",
+      "arrival": "07:00",
+      "excursion": "08:00–17:00",
+      "all_aboard": "19:00",
+      "departure": "shortly after 19:00",
+      "lunch_credit_eur": 50
+    }
+  ],
+  "daily_programs": [
+    {
+      "date": "2026-11-06",
+      "place": "Frankfurt am Main",
+      "ship": "Viking Vidar",
+      "arrival": "07:00",
+      "all_aboard": "19:00",
+      "departure": "shortly thereafter",
+      "excursions": [
+        {
+          "name": "Scenic Rhine Valley & Historic Koblenz",
+          "included": true,
+          "time": "08:00–17:00",
+          "groups": [
+            "41A",
+            "41B",
+            "41C",
+            "41D",
+            "41E"
+          ],
+          "route": "Coach from Frankfurt to Bingen; Middle Rhine scenic views and commentary; Koblenz walking tour; coach return to Frankfurt",
+          "lunch": "Free time for lunch; €50 per participating guest credit to be issued after return home",
+          "quietvox_required": true,
+          "meet": "Pier on shore; group on ticket"
+        }
+      ],
+      "activities": [
+        {
+          "time": "15:00–17:00",
+          "name": "Munch Moments"
+        },
+        {
+          "time": "17:00–17:30",
+          "name": "Drinks & Live Music"
+        },
+        {
+          "time": "17:45–18:30",
+          "name": "Classical Music Journey"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with Program Director David"
+        },
+        {
+          "time": "21:00",
+          "name": "Music with Andras"
+        }
+      ],
+      "dining": {
+        "restaurant": {
+          "breakfast": "06:30–09:00",
+          "lunch": "12:00–13:30",
+          "dinner": "19:00"
+        },
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:00–13:30",
+          "dinner": "19:15"
+        }
+      },
+      "sun_deck": "Closed during portions of Main River and Main–Danube Canal due to low bridge clearances",
+      "weather_from_daily": "Sunny; 34–52°F / 1–11°C",
+      "source": "Viking Daily November 6, 2026"
     }
   ]
 }

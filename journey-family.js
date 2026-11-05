@@ -2,9 +2,10 @@
 (function(){
 "use strict";
 const stops=[
-["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Middle Rhine (revised)"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],["2026-11-19","Return flight"]
+["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Frankfurt / Rhine Valley & Koblenz by coach"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],["2026-11-19","Return flight"]
 ];
 const tomorrowFacts={
+"Frankfurt / Rhine Valley & Koblenz by coach":["Viking Vidar arrives in Frankfurt at 7 AM. The 8 AM–5 PM coach excursion visits Bingen, the Middle Rhine and Koblenz; all aboard at 7 PM.","Upper_Middle_Rhine_Valley"],
 "Amsterdam":["Historic canals and narrow canal houses make Amsterdam one of Europe's most recognizable cities.","Amsterdam"],
 "Kinderdijk":["The UNESCO-listed windmills were built to help drain the Dutch lowlands.","Kinderdijk"],
 "Cologne":["Cologne Cathedral took more than 600 years to complete and dominates the Rhine skyline.","Cologne_Cathedral"],
@@ -29,7 +30,7 @@ $("journey-progress-fill").style.width=progress+"%";
 $("journey-progress-label").textContent=today<stops[0][0]?"Departing October 31":today>stops[stops.length-1][0]?"Journey complete":("Day "+(current+1)+" of "+stops.length);
 $("journey-today").textContent=current>=0?stops[current][1]:today<stops[0][0]?"Amsterdam next":"Trip completed";
 const routeCoordinates=[
-[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[51.8853,4.6369],[50.9375,6.9603],[50.3569,7.5889],[49.7039,9.2644],[49.7913,9.9534],[49.8988,10.9028],[49.4521,11.0767],[49.0134,12.1016],[48.5667,13.4319],[48.2279,15.3319],[48.2082,16.3738],[48.2082,16.3738],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402]
+[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[52.3676,4.9041],[51.8853,4.6369],[50.9375,6.9603],[50.1109,8.6821],[49.7039,9.2644],[49.7913,9.9534],[49.8988,10.9028],[49.4521,11.0767],[49.0134,12.1016],[48.5667,13.4319],[48.2279,15.3319],[48.2082,16.3738],[48.2082,16.3738],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402],[47.4979,19.0402]
 ];
 if(typeof L!=="undefined"&&$("family-route-map")){
  const m=L.map("family-route-map",{scrollWheelZoom:false}).setView([50,11],5);

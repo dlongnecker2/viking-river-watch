@@ -54,7 +54,31 @@
         "IMG_2719.jpeg",
         "IMG_2752.jpeg"
       ],
-      "photo_alt": "Scenes from our smaller-boat cruise through the Rhine Gorge, with castles along the river."
+      "photo_alt": "Koblenz group photo with Ehrenbreitstein Fortress across the Rhine; Pfalzgrafenstein Castle near Kaub with Gutenfels Castle above.",
+      "photo_captions": [
+        {
+          "photo": "IMG_2719.jpeg",
+          "caption": "Pfalzgrafenstein Castle near Kaub, with Gutenfels Castle above."
+        },
+        {
+          "photo": "IMG_2752.jpeg",
+          "caption": "Our group in Koblenz with Ehrenbreitstein Fortress across the Rhine."
+        }
+      ],
+      "landmarks": [
+        {
+          "name": "Pfalzgrafenstein Castle",
+          "location": "Kaub, Germany",
+          "approx_lat": 50.083,
+          "approx_lon": 7.765
+        },
+        {
+          "name": "Ehrenbreitstein Fortress",
+          "location": "Koblenz, Germany",
+          "approx_lat": 50.365,
+          "approx_lon": 7.614
+        }
+      ]
     }
   ]
 }

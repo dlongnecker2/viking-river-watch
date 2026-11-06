@@ -1,11 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-05",
+  "last_updated": "2026-11-06",
   "active_ship": {
-    "name": "Viking Egdir",
-    "mmsi": "269057766",
-    "effective_date": "2026-11-03",
-    "note": "Current ship through November 4; scheduled transfer to Viking Vidar November 5 per onboard Viking Daily."
+    "name": "Viking Vidar",
+    "effective_date": "2026-11-05",
+    "note": "Confirmed aboard Viking Vidar; Nov 7 Viking Daily schedules Miltenberg arrival at 09:00 and sailing to Würzburg after noon. Vidar MMSI not independently verified; do not infer location from Egdir or Ve AIS."
   },
   "ship_history": [
     {
@@ -21,14 +20,14 @@
     },
     {
       "name": "Viking Vidar",
-      "role": "confirmed receiving sister ship; boarding scheduled",
+      "role": "confirmed current ship per onboard Viking Daily",
       "effective_date": "2026-11-05"
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-06",
-    "summary": "November 5 Egdir-to-Vidar transfer. November 6 Viking Vidar at Frankfurt; coach to Bingen, smaller sightseeing boat through Rhine Gorge, Koblenz walking tour, coach return. Further Danube swap unconfirmed.",
-    "source": "Viking Daily Friday November 6, 2026 (provided November 5)"
+    "effective_date": "2026-11-07",
+    "summary": "Viking Vidar scheduled to arrive Miltenberg 09:00 Nov 7; included walking tour 09:15–11:00; all aboard 12:00; departure shortly thereafter toward Würzburg. Sun Deck closed for low bridge clearances on Main/Main–Danube Canal. No bus, hotel or ship swap listed for Nov 7. Future Danube arrangements unconfirmed.",
+    "source": "Viking Daily Saturday November 7, 2026, passenger photograph supplied November 6"
   },
   "transfer_history": [
     {
@@ -71,6 +70,17 @@
       "all_aboard": "19:00",
       "departure": "shortly after 19:00",
       "lunch_credit_eur": 50
+    },
+    {
+      "date": "2026-11-07",
+      "destination": "Miltenberg; Viking Vidar 09:00 arrival, walking tour 09:15–11:00, all aboard 12:00; sail toward Würzburg",
+      "status": "official onboard schedule, not yet completed",
+      "ship": "Viking Vidar",
+      "arrival": "09:00",
+      "excursion": "09:15–11:00",
+      "all_aboard": "12:00",
+      "departure": "shortly after 12:00",
+      "source": "Viking Daily November 7, 2026"
     }
   ],
   "daily_programs": [
@@ -137,6 +147,62 @@
       "sun_deck": "Closed during portions of Main River and Main–Danube Canal due to low bridge clearances",
       "weather_from_daily": "Sunny; 34–52°F / 1–11°C",
       "source": "Viking Daily November 6, 2026"
+    },
+    {
+      "date": "2026-11-07",
+      "place": "Miltenberg",
+      "ship": "Viking Vidar",
+      "arrival": "09:00",
+      "all_aboard": "12:00",
+      "departure": "shortly thereafter toward Würzburg",
+      "excursions": [
+        {
+          "name": "Miltenberg Walking Tour",
+          "included": true,
+          "time": "09:15–11:00",
+          "quietvox_required": true,
+          "meeting_point": "Per excursion ticket"
+        }
+      ],
+      "activities": [
+        {
+          "time": "15:00–17:00",
+          "name": "Munch Moments"
+        },
+        {
+          "time": "17:00",
+          "name": "Viking Explorer Society Cocktail Party"
+        },
+        {
+          "time": "17:30–18:45",
+          "name": "Drinks & Live Music"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with David"
+        },
+        {
+          "time": "21:00",
+          "name": "Team Trivia, followed by music and dancing with Vladimir"
+        }
+      ],
+      "dining": {
+        "restaurant": {
+          "breakfast": "07:00–09:30",
+          "lunch": "12:00–13:30",
+          "dinner": "19:00"
+        },
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:00–13:30",
+          "dinner": "19:15"
+        }
+      },
+      "sun_deck": "Closed due to low bridge clearances on Main River and Main–Danube Canal",
+      "weather_from_daily": "Cloudy, 35–45°F / 2–7°C",
+      "sunrise": "07:19",
+      "sunset": "16:53",
+      "source": "Viking Daily November 7, 2026"
     }
   ]
 }

@@ -10,7 +10,7 @@ const tomorrowFacts={
 "Kinderdijk":["The UNESCO-listed windmills were built to help drain the Dutch lowlands.","Kinderdijk"],
 "Cologne":["Cologne Cathedral took more than 600 years to complete and dominates the Rhine skyline.","Cologne_Cathedral"],
 "Middle Rhine (revised)":["The Rhine Gorge is known for castles, vineyards and the Lorelei bend. Viking's revised routing may differ.","Upper_Middle_Rhine_Valley"],
-"Miltenberg":["This Main River town is celebrated for its timber-framed historic center.","Miltenberg"],
+"Miltenberg":["Saturday, November 7: Viking Vidar is scheduled to arrive at 9:00 AM. Included Miltenberg walking tour 9:15–11:00 AM (bring charged QuietVox). All aboard by noon; ship departs shortly afterward for Würzburg. Sun Deck closed due to low bridge clearances.","Miltenberg"],
 "Würzburg":["The Würzburg Residence is a UNESCO-listed Baroque palace.","Würzburg_Residence"],
 "Bamberg":["Bamberg's historic center is a UNESCO World Heritage Site.","Bamberg"],
 "Nuremberg":["Nuremberg is known for its medieval castle and historic old town.","Nuremberg"],

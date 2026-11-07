@@ -11,7 +11,7 @@ const tomorrowFacts={
 "Cologne":["Cologne Cathedral took more than 600 years to complete and dominates the Rhine skyline.","Cologne_Cathedral"],
 "Middle Rhine (revised)":["The Rhine Gorge is known for castles, vineyards and the Lorelei bend. Viking's revised routing may differ.","Upper_Middle_Rhine_Valley"],
 "Miltenberg":["Saturday, November 7: Viking Vidar is scheduled to arrive at 9:00 AM. Included Miltenberg walking tour 9:15–11:00 AM (bring charged QuietVox). All aboard by noon; ship departs shortly afterward for Würzburg. Sun Deck closed due to low bridge clearances.","Miltenberg"],
-"Würzburg":["The Würzburg Residence is a UNESCO-listed Baroque palace.","Würzburg_Residence"],
+"Würzburg":["Sunday, November 8: Viking Vidar is scheduled to arrive at 7:00 AM. Included Würzburg Residenz and walking tour 10:00 AM–1:00 PM; optional Rothenburg ob der Tauber excursion 9:00 AM–5:30 PM. Bring charged QuietVox. All aboard 5:30 PM; ship departs shortly afterward toward Bamberg. Excursion buses do not indicate a ship-sailing substitution.","Würzburg_Residence"],
 "Bamberg":["Bamberg's historic center is a UNESCO World Heritage Site.","Bamberg"],
 "Nuremberg":["Nuremberg is known for its medieval castle and historic old town.","Nuremberg"],
 "Regensburg":["The medieval Stone Bridge crosses the Danube at Regensburg.","Regensburg"],

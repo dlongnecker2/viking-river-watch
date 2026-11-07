@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-06",
+  "last_updated": "2026-11-07",
   "active_ship": {
     "name": "Viking Vidar",
     "effective_date": "2026-11-05",
-    "note": "Confirmed aboard Viking Vidar; Nov 7 Viking Daily schedules Miltenberg arrival at 09:00 and sailing to Würzburg after noon. Vidar MMSI not independently verified; do not infer location from Egdir or Ve AIS."
+    "note": "Viking Vidar confirmed current ship by Nov 8 Viking Daily; scheduled Würzburg arrival 07:00 and departure toward Bamberg shortly after 17:30. No Nov 8 ship swap or hotel substitution announced. AIS position not independently verified."
   },
   "ship_history": [
     {
@@ -25,9 +25,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-07",
-    "summary": "Viking Vidar scheduled to arrive Miltenberg 09:00 Nov 7; included walking tour 09:15–11:00; all aboard 12:00; departure shortly thereafter toward Würzburg. Sun Deck closed for low bridge clearances on Main/Main–Danube Canal. No bus, hotel or ship swap listed for Nov 7. Future Danube arrangements unconfirmed.",
-    "source": "Viking Daily Saturday November 7, 2026, passenger photograph supplied November 6"
+    "effective_date": "2026-11-08",
+    "summary": "Sunday Nov 8: Viking Vidar scheduled to arrive Würzburg at 07:00. Included Würzburg Residenz and Walk 10:00–13:00; optional Rothenburg ob der Tauber 09:00–17:30. All aboard 17:30; depart shortly thereafter for Bamberg. No bus substitution for ship sailing or hotel swap announced. Excursion buses are normal. Danube risk around Pfelling Nov 11–12 remains unconfirmed.",
+    "source": "Viking Daily Sunday November 8, 2026, passenger photo supplied November 7"
   },
   "transfer_history": [
     {
@@ -81,6 +81,17 @@
       "all_aboard": "12:00",
       "departure": "shortly after 12:00",
       "source": "Viking Daily November 7, 2026"
+    },
+    {
+      "date": "2026-11-08",
+      "destination": "Würzburg; Viking Vidar arrives 07:00; all aboard 17:30; depart toward Bamberg",
+      "status": "official onboard schedule, not yet completed",
+      "ship": "Viking Vidar",
+      "arrival": "07:00",
+      "excursion": "Würzburg Residenz 10:00–13:00; Rothenburg optional 09:00–17:30",
+      "all_aboard": "17:30",
+      "departure": "shortly after 17:30",
+      "source": "Viking Daily November 8, 2026"
     }
   ],
   "daily_programs": [
@@ -203,6 +214,68 @@
       "sunrise": "07:19",
       "sunset": "16:53",
       "source": "Viking Daily November 7, 2026"
+    },
+    {
+      "date": "2026-11-08",
+      "place": "Würzburg",
+      "ship": "Viking Vidar",
+      "arrival": "07:00",
+      "all_aboard": "17:30",
+      "departure": "shortly thereafter toward Bamberg",
+      "excursions": [
+        {
+          "name": "Rothenburg ob der Tauber",
+          "included": false,
+          "time": "09:00–17:30",
+          "quietvox_required": true,
+          "meeting_point": "Pier on shore, group on ticket"
+        },
+        {
+          "name": "Würzburg Residenz and Walk",
+          "included": true,
+          "time": "10:00–13:00",
+          "quietvox_required": true,
+          "meeting_point": "Pier on shore; board any bus, groups allocated on arrival"
+        }
+      ],
+      "activities": [
+        {
+          "time": "15:00–17:00",
+          "name": "Munch Moments"
+        },
+        {
+          "time": "17:45–18:45",
+          "name": "Drinks & Live Music"
+        },
+        {
+          "time": "18:00",
+          "name": "Discover the World of Viking with David"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with David"
+        },
+        {
+          "time": "21:00",
+          "name": "Music with Vladimir"
+        }
+      ],
+      "dining": {
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:30–14:00",
+          "dinner": "19:15"
+        },
+        "restaurant": {
+          "breakfast": "07:00–09:30",
+          "lunch": "13:00–14:30",
+          "dinner": "19:00"
+        }
+      },
+      "weather_from_daily": "Partly sunny, 38–47°F / 3–8°C",
+      "sunrise": "07:20",
+      "sunset": "16:46",
+      "source": "Viking Daily November 8, 2026"
     }
   ]
 }

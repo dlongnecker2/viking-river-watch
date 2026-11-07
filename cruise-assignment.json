@@ -275,7 +275,21 @@
       "weather_from_daily": "Partly sunny, 38–47°F / 3–8°C",
       "sunrise": "07:20",
       "sunset": "16:46",
-      "source": "Viking Daily November 8, 2026"
+      "source": "Viking Daily November 8, 2026",
+      "selected_excursion": "Rothenburg ob der Tauber, 09:00–17:30 (user confirmed)",
+      "excursion_note": "User is booked on the optional Rothenburg full-day excursion, NOT the included Würzburg Residenz walk. Tour return coincides with 17:30 all-aboard; follow Viking guide.",
+      "rothenburg_top_ten": [
+        "Plönlein iconic photo stop",
+        "Marktplatz and Rathaus",
+        "Try Schneeball pastry",
+        "Walk a section of medieval town walls",
+        "St. Jakob's Church and Holy Blood Altarpiece",
+        "Käthe Wohlfahrt Christmas Village",
+        "Franconian bratwurst lunch",
+        "Burggarten Tauber Valley viewpoint",
+        "Apple strudel",
+        "Medieval Crime Museum (only if time permits)"
+      ]
     }
   ]
 }

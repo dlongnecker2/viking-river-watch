@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-07",
+  "last_updated": "2026-11-08",
   "active_ship": {
     "name": "Viking Vidar",
     "effective_date": "2026-11-05",
-    "note": "Viking Vidar confirmed current ship by Nov 8 Viking Daily; scheduled Würzburg arrival 07:00 and departure toward Bamberg shortly after 17:30. No Nov 8 ship swap or hotel substitution announced. AIS position not independently verified."
+    "note": "Viking Vidar named in Viking Daily for Monday Nov 9: scheduled Bamberg arrival approx 14:00, all aboard 18:00, sail toward Nuremberg shortly thereafter. No new swap/hotel plan in this document; sailing not yet independently confirmed."
   },
   "ship_history": [
     {
@@ -25,9 +25,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-08",
-    "summary": "Sunday Nov 8: Viking Vidar scheduled to arrive Würzburg at 07:00. Included Würzburg Residenz and Walk 10:00–13:00; optional Rothenburg ob der Tauber 09:00–17:30. All aboard 17:30; depart shortly thereafter for Bamberg. No bus substitution for ship sailing or hotel swap announced. Excursion buses are normal. Danube risk around Pfelling Nov 11–12 remains unconfirmed.",
-    "source": "Viking Daily Sunday November 8, 2026, passenger photo supplied November 7"
+    "effective_date": "2026-11-09",
+    "summary": "Monday Nov 9 Viking Vidar scheduled Bamberg arrival ~14:00, Bamberg Walking Tour (included) or Franconian Beer Culture (optional) 14:00–17:30; all aboard 18:00; depart shortly afterward toward Nuremberg. Excursion buses ~5-minute drive, not a ship transfer. Sun deck closed for low bridges.",
+    "source": "Passenger-supplied Viking Daily Monday November 9, 2026, photographed November 8"
   },
   "transfer_history": [
     {
@@ -92,6 +92,17 @@
       "all_aboard": "17:30",
       "departure": "shortly after 17:30",
       "source": "Viking Daily November 8, 2026"
+    },
+    {
+      "date": "2026-11-09",
+      "destination": "Bamberg, then sail toward Nuremberg",
+      "status": "official onboard schedule, future planned operation",
+      "ship": "Viking Vidar",
+      "arrival": "approximately 14:00",
+      "excursion": "Bamberg Walking Tour included OR Franconian Beer Culture optional, 14:00–17:30",
+      "all_aboard": "18:00",
+      "departure": "shortly after 18:00",
+      "source": "Viking Daily Nov 9, passenger photo Nov 8"
     }
   ],
   "daily_programs": [
@@ -290,6 +301,72 @@
         "Apple strudel",
         "Medieval Crime Museum (only if time permits)"
       ]
+    },
+    {
+      "date": "2026-11-09",
+      "place": "Bamberg",
+      "ship": "Viking Vidar",
+      "arrival": "approximately 14:00",
+      "all_aboard": "18:00",
+      "departure": "shortly thereafter toward Nuremberg",
+      "excursions": [
+        {
+          "name": "Bamberg Walking Tour",
+          "included": true,
+          "time": "14:00–17:30",
+          "bus": "Group 41L (Leisurely) board bus sign 41L; other groups may board any bus",
+          "transfer": "approximately 5-minute drive",
+          "quietvox_required": true
+        },
+        {
+          "name": "Franconian Beer Culture",
+          "included": false,
+          "time": "14:00–17:30",
+          "bus": "41F",
+          "transfer": "approximately 5-minute drive",
+          "quietvox_required": true
+        }
+      ],
+      "excursion_selection": "Not specified by passenger; do not assume which option booked",
+      "activities": [
+        {
+          "time": "10:30",
+          "name": "Enrichment Lecture: Bavaria, Germany's Special State, with Daniel Gürtler"
+        },
+        {
+          "time": "15:00–17:00",
+          "name": "Munch Moments"
+        },
+        {
+          "time": "17:30–18:45",
+          "name": "Drinks & Live Music"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with David"
+        },
+        {
+          "time": "21:00",
+          "name": "Music with Vladimir (time inferred from partially cut-off page; verify onboard)"
+        }
+      ],
+      "dining": {
+        "restaurant": {
+          "breakfast": "07:30–09:30",
+          "lunch": "12:00–13:30",
+          "dinner": "19:00"
+        },
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:00–13:30",
+          "dinner": "19:15"
+        }
+      },
+      "sun_deck": "Closed due to low bridge clearances on Main River/Main–Danube Canal",
+      "weather_from_daily": "Cloudy 37–47°F / 3–8°C",
+      "sunrise": "07:18",
+      "sunset": "16:41",
+      "source": "Viking Daily November 9, 2026 (user photo November 8)"
     }
   ]
 }

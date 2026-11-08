@@ -26,7 +26,7 @@
   ],
   "itinerary_update": {
     "effective_date": "2026-11-09",
-    "summary": "Monday Nov 9 Viking Vidar scheduled Bamberg arrival ~14:00, Bamberg Walking Tour (included) or Franconian Beer Culture (optional) 14:00–17:30; all aboard 18:00; depart shortly afterward toward Nuremberg. Excursion buses ~5-minute drive, not a ship transfer. Sun deck closed for low bridges.",
+    "summary": "Monday Nov 9 Viking Vidar scheduled Bamberg arrival ~14:00, BOOKED Bamberg Walking Tour (included); Franconian Beer Culture is NOT booked 14:00–17:30; all aboard 18:00; depart shortly afterward toward Nuremberg. Excursion buses ~5-minute drive, not a ship transfer. Sun deck closed for low bridges.",
     "source": "Passenger-supplied Viking Daily Monday November 9, 2026, photographed November 8"
   },
   "transfer_history": [
@@ -316,7 +316,8 @@
           "time": "14:00–17:30",
           "bus": "Group 41L (Leisurely) board bus sign 41L; other groups may board any bus",
           "transfer": "approximately 5-minute drive",
-          "quietvox_required": true
+          "quietvox_required": true,
+          "booked": true
         },
         {
           "name": "Franconian Beer Culture",
@@ -324,10 +325,11 @@
           "time": "14:00–17:30",
           "bus": "41F",
           "transfer": "approximately 5-minute drive",
-          "quietvox_required": true
+          "quietvox_required": true,
+          "booked": false
         }
       ],
-      "excursion_selection": "Not specified by passenger; do not assume which option booked",
+      "excursion_selection": "Bamberg Walking Tour (included), confirmed by passenger November 8",
       "activities": [
         {
           "time": "10:30",

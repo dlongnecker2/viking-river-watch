@@ -102,7 +102,7 @@ Promise.allSettled([
    img.decoding="async";
    img.style.display="block";
    img.style.minHeight="120px";
-   const safeName=picture.replace(/^\\/+/, "");
+   const safeName=picture.startsWith("/") ? picture.slice(1) : picture;
    const localURL=new URL(safeName,document.baseURI).href;
    const fallbackURL="https://raw.githubusercontent.com/dlongnecker2/viking-river-watch/main/"+safeName.split("/").map(encodeURIComponent).join("/");
    let triedFallback=false;

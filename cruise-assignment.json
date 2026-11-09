@@ -1,16 +1,18 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-08",
+  "last_updated": "2026-11-09",
   "active_ship": {
     "name": "Viking Vidar",
     "effective_date": "2026-11-05",
-    "note": "Viking Vidar named in Viking Daily for Monday Nov 9: scheduled Bamberg arrival approx 14:00, all aboard 18:00, sail toward Nuremberg shortly thereafter. No new swap/hotel plan in this document; sailing not yet independently confirmed."
+    "note": "Viking Vidar remains current ship until scheduled Nov 10 coach transfer from Nuremberg to Viking Ve at Passau Lindau; transfer is confirmed in Viking Daily but has not yet occurred."
   },
   "ship_history": [
     {
       "name": "Viking Ve",
       "mmsi": "269057517",
-      "role": "original assignment, replaced before departure"
+      "role": "originally assigned and now scheduled to rejoin on November 10 at Passau",
+      "effective_date": "2026-11-10",
+      "status": "future scheduled boarding, not yet confirmed completed"
     },
     {
       "name": "Viking Egdir",
@@ -25,9 +27,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-09",
-    "summary": "Monday Nov 9 Viking Vidar scheduled Bamberg arrival ~14:00, BOOKED Bamberg Walking Tour (included); Franconian Beer Culture is NOT booked 14:00–17:30; all aboard 18:00; depart shortly afterward toward Nuremberg. Excursion buses ~5-minute drive, not a ship transfer. Sun deck closed for low bridges.",
-    "source": "Passenger-supplied Viking Daily Monday November 9, 2026, photographed November 8"
+    "effective_date": "2026-11-10",
+    "summary": "Viking Vidar arrives Nuremberg 08:00. Luggage outside stateroom before 08:30; Nuremberg excursions 08:30–12:30 depending on selection, group lunch 12:00–13:15 at Heilig Geist Spital; bus transfer departs 13:30 (all guests aboard by 13:30) and arrives approx 16:30 at Viking Ve, Passau Lindau, 230 km/145 miles. Meet bus at Augustinerstrasse. Welcome aboard Viking Ve 17:45 onward. Take QuietVox receivers and earpieces; leave chargers. This is a confirmed scheduled ship swap, not proof it has occurred.",
+    "source": "Passenger-provided Viking Daily November 10, 2026"
   },
   "transfer_history": [
     {
@@ -43,14 +45,31 @@
       "boarding_location": "Aschaffenburg, Germany",
       "status": "confirmed scheduled by onboard Viking Daily Nov 5; not yet completed",
       "source": "User-provided Viking Daily dated November 5, 2026"
+    },
+    {
+      "date": "2026-11-10",
+      "from_ship": "Viking Vidar",
+      "to_ship": "Viking Ve",
+      "method": "coach",
+      "departure": "13:30",
+      "arrival": "approximately 16:30",
+      "from": "Nuremberg",
+      "to": "Passau Lindau",
+      "distance_km": 230,
+      "meeting_point": "Augustinerstrasse bus stop, Nuremberg",
+      "luggage": "Leave outside stateroom door before 08:30; keep valuables, medications and day bag with you",
+      "quietvox": "Take receivers and earpieces; leave chargers in stateroom",
+      "status": "confirmed scheduled by onboard Viking Daily; not yet completed",
+      "source": "Passenger-provided Viking Daily November 10, 2026"
     }
   ],
   "notes": "When user confirms a new ship from onboard, update active_ship, append previous ship to ship_history if not already recorded, add transfer_history, and revise itinerary_update. Never infer AIS position from itinerary; obtain verified coordinates independently.",
   "scheduled_ship": {
-    "name": "Viking Vidar",
-    "effective_date": "2026-11-05",
-    "boarding_location": "Aschaffenburg, Germany",
-    "source": "Viking Daily for Thursday November 5, 2026"
+    "name": "Viking Ve",
+    "effective_date": "2026-11-10",
+    "boarding_location": "Passau Lindau, Germany",
+    "source": "Passenger-provided Viking Daily Tuesday November 10, 2026",
+    "status": "scheduled transfer; boarding not yet confirmed"
   },
   "itinerary_overrides": [
     {
@@ -103,6 +122,18 @@
       "all_aboard": "18:00",
       "departure": "shortly after 18:00",
       "source": "Viking Daily Nov 9, passenger photo Nov 8"
+    },
+    {
+      "date": "2026-11-10",
+      "destination": "Nuremberg excursions and lunch; coach transfer to Viking Ve at Passau Lindau",
+      "status": "confirmed scheduled, not yet completed",
+      "ship": "Viking Vidar until transfer; Viking Ve planned after transfer",
+      "arrival": "08:00 Nuremberg",
+      "excursion": "Nuremberg Through History included 08:30–12:00 OR other booked tour",
+      "lunch": "12:00–13:15 Heilig Geist Spital",
+      "bus_departure": "13:30",
+      "bus_arrival": "approximately 16:30",
+      "source": "Viking Daily November 10, 2026"
     }
   ],
   "daily_programs": [
@@ -369,6 +400,82 @@
       "sunrise": "07:18",
       "sunset": "16:41",
       "source": "Viking Daily November 9, 2026 (user photo November 8)"
+    },
+    {
+      "date": "2026-11-10",
+      "place": "Nuremberg, Germany; transfer to Passau Lindau",
+      "ship": "Viking Vidar morning; Viking Ve scheduled afternoon",
+      "arrival": "08:00 Nuremberg",
+      "weather_from_daily": "Cloudy, 39–47°F / 4–8°C",
+      "sunrise": "07:12",
+      "sunset": "16:46",
+      "luggage_deadline": "before 08:30 outside stateroom door",
+      "excursions": [
+        {
+          "name": "Nuremberg Through History",
+          "included": true,
+          "time": "08:30–12:00",
+          "note": "Leisurely group ends after panoramic bus drive, extended free time before lunch"
+        },
+        {
+          "name": "Nuremberg World War II Tour",
+          "included": false,
+          "time": "08:30–12:30",
+          "note": "Tour bus will NOT travel to Passau; take belongings to lunch and transfer bus"
+        },
+        {
+          "name": "Surviving the War – Art in Nuremberg",
+          "included": false,
+          "time": "08:30–11:30"
+        }
+      ],
+      "selected_excursion": "Not confirmed; follow excursion ticket",
+      "lunch": {
+        "place": "Heilig Geist Spital Restaurant, Nuremberg",
+        "time": "12:00–13:15",
+        "note": "Dietary requests communicated to restaurant"
+      },
+      "transfer": {
+        "depart": "13:30",
+        "arrive": "approximately 16:30",
+        "to_ship": "Viking Ve",
+        "destination": "Passau Lindau",
+        "meeting_point": "Augustinerstrasse bus stop",
+        "distance_km": 230,
+        "quietvox": "Take receiver and earpiece; leave chargers"
+      },
+      "activities": [
+        {
+          "time": "17:45–18:30",
+          "name": "Drinks & Live Music in Lounge, Viking Ve"
+        },
+        {
+          "time": "18:30",
+          "name": "Welcome toast with Captain Cosmin, Hotel Manager Nino and Program Director David"
+        },
+        {
+          "time": "after welcome toast",
+          "name": "Port Talk with David, also available on stateroom TV"
+        },
+        {
+          "time": "21:00",
+          "name": "Evening music with Mitko"
+        }
+      ],
+      "dining": {
+        "vidar": {
+          "breakfast": "06:30–08:30"
+        },
+        "ashore": {
+          "lunch": "12:00–13:15 at Heilig Geist Spital"
+        },
+        "ve": {
+          "restaurant_dinner": "19:00",
+          "aquavit_dinner": "19:15"
+        }
+      },
+      "source": "Passenger-provided Viking Daily Tuesday November 10, 2026",
+      "status": "future confirmed onboard schedule"
     }
   ]
 }

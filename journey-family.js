@@ -95,7 +95,28 @@ Promise.allSettled([
  entries.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(entry=>{
   const card=document.createElement("article");card.className="journey-postcard";
   const h=document.createElement("h4");h.textContent=(entry.date||"")+" · "+(entry.place||"Our journey");card.append(h);
-  const pictures=Array.isArray(entry.photos)&&entry.photos.length?entry.photos:(entry.photo?[entry.photo]:[]);for(const picture of pictures){const img=document.createElement("img");img.src=picture;img.alt=entry.photo_alt||entry.place||"Trip photo";img.loading="lazy";card.append(img);}
+  const pictures=Array.isArray(entry.photos)&&entry.photos.length?entry.photos:(entry.photo?[entry.photo]:[]);for(const picture of pictures){
+   const img=document.createElement("img");
+   img.alt=entry.photo_alt||entry.place||"Trip photo";
+   img.loading="eager";
+   img.decoding="async";
+   img.style.display="block";
+   img.style.minHeight="120px";
+   const safeName=picture.replace(/^\\/+/, "");
+   const localURL=new URL(safeName,document.baseURI).href;
+   const fallbackURL="https://raw.githubusercontent.com/dlongnecker2/viking-river-watch/main/"+safeName.split("/").map(encodeURIComponent).join("/");
+   let triedFallback=false;
+   img.onerror=()=>{
+    if(!triedFallback){triedFallback=true;img.src=fallbackURL;return;}
+    img.style.display="none";
+    const warning=document.createElement("p");warning.className="travel-muted";
+    warning.textContent="Photo temporarily unavailable: "+safeName;
+    const link=document.createElement("a");link.href=fallbackURL;link.textContent="Open photo";link.target="_blank";link.rel="noopener noreferrer";
+    warning.append(" · ",link);card.insertBefore(warning,img.nextSibling);
+   };
+   img.src=localURL;
+   card.append(img);
+  }
   const para=document.createElement("p");para.textContent=entry.note||"";card.append(para);panel.append(card);
  });
 });

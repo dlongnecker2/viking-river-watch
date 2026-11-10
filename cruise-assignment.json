@@ -476,6 +476,61 @@
       },
       "source": "Passenger-provided Viking Daily Tuesday November 10, 2026",
       "status": "future confirmed onboard schedule"
+    },
+    {
+      "date": "2026-11-11",
+      "place": "Regensburg by coach from Viking Ve at Passau Lindau",
+      "ship": "Viking Ve (docked at Passau Lindau)",
+      "weather_from_daily": "Rain, 46–48°F / 8–9°C",
+      "sunrise": "07:14",
+      "sunset": "16:36",
+      "coach": {
+        "outbound": "08:30 depart ship Passau; approximately 10:15 arrive Regensburg Stadtamhof",
+        "return": "15:00 depart Regensburg Stadtamhof; approximately 16:45 return ship Passau",
+        "distance": "125 km / 71 miles per Viking Daily"
+      },
+      "excursions": [
+        {
+          "name": "Regensburg Walking Tour",
+          "included": true,
+          "published_time": "08:30–11:45",
+          "note": "Published excursion time overlaps 08:30 coach departure; confirm modified start with Viking staff"
+        },
+        {
+          "name": "Historic Regensburg & Jewish Heritage",
+          "included": true,
+          "published_time": "08:30–12:15"
+        },
+        {
+          "name": "Medieval Regensburg",
+          "included": false,
+          "booked": true,
+          "time": "13:00–15:00",
+          "meeting_point": "In front of Regensburg Cathedral, guide 41 E",
+          "note": "Bring personalized ticket, QuietVox receiver and earpiece; 15:00 return coach leaves Stadtamhof, so coordinate excursion ending and bus pickup with guide"
+        }
+      ],
+      "free_time": "12:00–15:00; lunch on own; €50 per person refund by check within 12 business days after return for passengers taking morning transfer and buying own lunch",
+      "activities": [
+        {
+          "time": "17:30–18:30",
+          "name": "Your Next Viking Journey onboard booking desk"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with David"
+        },
+        {
+          "time": "21:00",
+          "name": "Bavarian folklore live music, followed by Mitko"
+        }
+      ],
+      "dining": {
+        "restaurant": "Breakfast 07:00–09:30; lunch 12:00–13:30; dinner 19:00",
+        "aquavit": "Breakfast 06:00–10:00; lunch 12:00–13:30; dinner 19:15"
+      },
+      "source": "Passenger-provided Viking Daily Wednesday November 11, 2026",
+      "status": "confirmed published onboard schedule; future activities not yet completed"
     }
   ]
 }

@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-09",
+  "last_updated": "2026-11-11",
   "active_ship": {
-    "name": "Viking Vidar",
-    "effective_date": "2026-11-05",
-    "note": "Viking Vidar remains current ship until scheduled Nov 10 coach transfer from Nuremberg to Viking Ve at Passau Lindau; transfer is confirmed in Viking Daily but has not yet occurred."
+    "name": "Viking Ve",
+    "effective_date": "2026-11-10",
+    "note": "Passenger confirms aboard Viking Ve at Passau. Nov 12 Viking Daily schedules cast-off 18:00 toward Melk; captain told passengers Nov 11 that ship can navigate to Vienna. Budapest not yet confirmed."
   },
   "ship_history": [
     {
       "name": "Viking Ve",
       "mmsi": "269057517",
-      "role": "originally assigned and now scheduled to rejoin on November 10 at Passau",
+      "role": "current ship, boarded at Passau after Nuremberg coach transfer",
       "effective_date": "2026-11-10",
-      "status": "future scheduled boarding, not yet confirmed completed"
+      "status": "confirmed aboard"
     },
     {
       "name": "Viking Egdir",
@@ -27,9 +27,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-10",
-    "summary": "Viking Vidar arrives Nuremberg 08:00. Luggage outside stateroom before 08:30; Nuremberg excursions 08:30–12:30 depending on selection, group lunch 12:00–13:15 at Heilig Geist Spital; bus transfer departs 13:30 (all guests aboard by 13:30) and arrives approx 16:30 at Viking Ve, Passau Lindau, 230 km/145 miles. Meet bus at Augustinerstrasse. Welcome aboard Viking Ve 17:45 onward. Take QuietVox receivers and earpieces; leave chargers. This is a confirmed scheduled ship swap, not proof it has occurred.",
-    "source": "Passenger-provided Viking Daily November 10, 2026"
+    "effective_date": "2026-11-11",
+    "summary": "Nov 11 Regensburg visited by coach from Passau. Nov 12 Viking Ve remains at Passau Lindau, scheduled cast-off 18:00 toward Melk. Captain personally told passengers he can sail to Vienna. This does not confirm Budapest navigation or completed departure.",
+    "source": "Passenger-provided Viking Daily Nov 12 and firsthand captain announcement Nov 11"
   },
   "transfer_history": [
     {
@@ -59,7 +59,7 @@
       "meeting_point": "Augustinerstrasse bus stop, Nuremberg",
       "luggage": "Leave outside stateroom door before 08:30; keep valuables, medications and day bag with you",
       "quietvox": "Take receivers and earpieces; leave chargers in stateroom",
-      "status": "confirmed scheduled by onboard Viking Daily; not yet completed",
+      "status": "completed, passenger confirms aboard Viking Ve",
       "source": "Passenger-provided Viking Daily November 10, 2026"
     }
   ],
@@ -67,9 +67,9 @@
   "scheduled_ship": {
     "name": "Viking Ve",
     "effective_date": "2026-11-10",
+    "status": "boarding confirmed by passenger",
     "boarding_location": "Passau Lindau, Germany",
-    "source": "Passenger-provided Viking Daily Tuesday November 10, 2026",
-    "status": "scheduled transfer; boarding not yet confirmed"
+    "source": "Passenger aboard and Viking Daily November 12"
   },
   "itinerary_overrides": [
     {
@@ -134,6 +134,35 @@
       "bus_departure": "13:30",
       "bus_arrival": "approximately 16:30",
       "source": "Viking Daily November 10, 2026"
+    },
+    {
+      "date": "2026-11-11",
+      "destination": "Regensburg by coach from Viking Ve docked Passau",
+      "status": "confirmed by onboard Viking Daily",
+      "ship": "Viking Ve",
+      "source": "Viking Daily Nov 11"
+    },
+    {
+      "date": "2026-11-12",
+      "destination": "Passau; Viking Ve scheduled 18:00 cast-off toward Melk, Austria",
+      "status": "official onboard schedule; future departure",
+      "ship": "Viking Ve",
+      "departure": "18:00",
+      "source": "Viking Daily Nov 12 photographed by passenger"
+    },
+    {
+      "date": "2026-11-13",
+      "destination": "Melk / Wachau",
+      "status": "planned sailing destination; arrival not yet confirmed",
+      "ship": "Viking Ve",
+      "source": "Viking Daily Nov 12"
+    },
+    {
+      "date": "2026-11-14",
+      "destination": "Vienna",
+      "status": "captain says navigable; arrival not yet confirmed",
+      "ship": "Viking Ve",
+      "source": "Captain announcement to passengers Nov 11"
     }
   ],
   "daily_programs": [
@@ -531,6 +560,88 @@
       },
       "source": "Passenger-provided Viking Daily Wednesday November 11, 2026",
       "status": "confirmed published onboard schedule; future activities not yet completed"
+    },
+    {
+      "date": "2026-11-12",
+      "place": "Passau, Germany",
+      "ship": "Viking Ve",
+      "departure": "18:00 toward Melk, Austria (scheduled)",
+      "excursions": [
+        {
+          "name": "Salzburg Highlights",
+          "time": "08:15–17:45",
+          "included": false,
+          "passport_required": true
+        },
+        {
+          "name": "Passau Walking Tour",
+          "time": "08:30–10:30",
+          "included": true,
+          "return_buses": [
+            "11:45",
+            "12:45"
+          ]
+        },
+        {
+          "name": "Bavarian Cruise & Baroque Town Schärding",
+          "time": "13:45–18:00",
+          "included": false,
+          "passport_required": true
+        }
+      ],
+      "activities": [
+        {
+          "time": "15:00–17:00",
+          "name": "Munch Moments"
+        },
+        {
+          "time": "17:00–18:45",
+          "name": "Drinks & Live Music"
+        },
+        {
+          "time": "17:00–18:00",
+          "name": "Your Next Viking Journey with hotel manager Nino"
+        },
+        {
+          "time": "18:45",
+          "name": "Port Talk with David"
+        },
+        {
+          "time": "21:00",
+          "name": "Game night, followed by music and dancing with Mitko"
+        }
+      ],
+      "shuttle": {
+        "ship_to_town": [
+          "14:00",
+          "15:00",
+          "16:00",
+          "17:00"
+        ],
+        "town_to_ship": [
+          "14:30",
+          "15:30",
+          "16:30",
+          "17:30"
+        ]
+      },
+      "dining": {
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:15–13:45",
+          "dinner": "19:15"
+        },
+        "restaurant": {
+          "breakfast": "07:00–09:30",
+          "lunch": "12:15–13:45",
+          "dinner": "19:00"
+        }
+      },
+      "weather_from_daily": "Cloudy, 38–52°F / 3–11°C",
+      "sunrise": "07:09",
+      "sunset": "16:30",
+      "source": "Photographed Viking Daily Thursday November 12, 2026",
+      "navigation_note": "Captain told passengers November 11 he can sail to Vienna; Budapest not confirmed."
     }
   ]
 }

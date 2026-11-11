@@ -43,7 +43,7 @@
       "second_transfer": "14:00–16:30",
       "meeting_point": "Peters Brauhaus Hahnentor",
       "boarding_location": "Aschaffenburg, Germany",
-      "status": "confirmed scheduled by onboard Viking Daily Nov 5; not yet completed",
+      "status": "completed per passenger cruise history",
       "source": "User-provided Viking Daily dated November 5, 2026"
     },
     {
@@ -93,7 +93,7 @@
     {
       "date": "2026-11-07",
       "destination": "Miltenberg; Viking Vidar 09:00 arrival, walking tour 09:15–11:00, all aboard 12:00; sail toward Würzburg",
-      "status": "official onboard schedule, not yet completed",
+      "status": "historical Viking Daily schedule (date passed; completion not independently verified)",
       "ship": "Viking Vidar",
       "arrival": "09:00",
       "excursion": "09:15–11:00",
@@ -104,7 +104,7 @@
     {
       "date": "2026-11-08",
       "destination": "Würzburg; Viking Vidar arrives 07:00; all aboard 17:30; depart toward Bamberg",
-      "status": "official onboard schedule, not yet completed",
+      "status": "historical Viking Daily schedule (date passed; completion not independently verified)",
       "ship": "Viking Vidar",
       "arrival": "07:00",
       "excursion": "Würzburg Residenz 10:00–13:00; Rothenburg optional 09:00–17:30",
@@ -115,7 +115,7 @@
     {
       "date": "2026-11-09",
       "destination": "Bamberg, then sail toward Nuremberg",
-      "status": "official onboard schedule, future planned operation",
+      "status": "historical Viking Daily schedule (date passed; completion not independently verified)",
       "ship": "Viking Vidar",
       "arrival": "approximately 14:00",
       "excursion": "Bamberg Walking Tour included OR Franconian Beer Culture optional, 14:00–17:30",
@@ -126,7 +126,7 @@
     {
       "date": "2026-11-10",
       "destination": "Nuremberg excursions and lunch; coach transfer to Viking Ve at Passau Lindau",
-      "status": "confirmed scheduled, not yet completed",
+      "status": "historical Viking Daily schedule (date passed; completion not independently verified)",
       "ship": "Viking Vidar until transfer; Viking Ve planned after transfer",
       "arrival": "08:00 Nuremberg",
       "excursion": "Nuremberg Through History included 08:30–12:00 OR other booked tour",
@@ -559,7 +559,7 @@
         "aquavit": "Breakfast 06:00–10:00; lunch 12:00–13:30; dinner 19:15"
       },
       "source": "Passenger-provided Viking Daily Wednesday November 11, 2026",
-      "status": "confirmed published onboard schedule; future activities not yet completed"
+      "status": "historical onboard schedule"
     },
     {
       "date": "2026-11-12",

@@ -122,6 +122,27 @@
         "IMG_2972.jpeg"
       ],
       "photo_alt": "Two photos shared from our November 10 visit to Nuremberg and journey to Passau."
+    },
+    {
+      "date": "2026-11-11",
+      "place": "Regensburg, Germany — A Day in Bavaria",
+      "note": "Today we headed from Passau to Regensburg for another day of exploring Bavaria. Regensburg's old town is full of history, with beautiful churches, medieval streets and stories around every corner. We enjoyed seeing another side of Germany, then returned to Viking Ve in Passau. The captain also shared some encouraging news: he expects we can sail onward to Vienna! Tomorrow we're looking forward to Passau before the planned evening departure toward Melk, Austria. It's been quite a journey, and we're enjoying every stop along the way.",
+      "photo": "photos/IMG_2997.jpeg",
+      "photos": [
+        "photos/IMG_2997.jpeg",
+        "photos/IMG_3010.jpeg"
+      ],
+      "photo_alt": "Two photographs shared from our November 11 day exploring Regensburg, Germany.",
+      "photo_captions": [
+        {
+          "photo": "photos/IMG_2997.jpeg",
+          "caption": "A moment from our day in Regensburg, Bavaria."
+        },
+        {
+          "photo": "photos/IMG_3010.jpeg",
+          "caption": "More memories from our November 11 visit to Regensburg."
+        }
+      ]
     }
   ]
 }

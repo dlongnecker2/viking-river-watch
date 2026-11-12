@@ -4,7 +4,7 @@
   "active_ship": {
     "name": "Viking Ve",
     "effective_date": "2026-11-10",
-    "note": "Passenger confirms aboard Viking Ve at Passau. Nov 12 Viking Daily schedules cast-off 18:00 toward Melk; captain told passengers Nov 11 that ship can navigate to Vienna. Budapest not yet confirmed."
+    "note": "Passenger confirms aboard Viking Ve. November 13 Viking Daily schedules Melk, Krems and onward sailing to Vienna. Budapest navigation remains unconfirmed."
   },
   "ship_history": [
     {
@@ -28,7 +28,7 @@
   ],
   "itinerary_update": {
     "effective_date": "2026-11-11",
-    "summary": "Nov 11 Regensburg visited by coach from Passau. Nov 12 Viking Ve remains at Passau Lindau, scheduled cast-off 18:00 toward Melk. Captain personally told passengers he can sail to Vienna. This does not confirm Budapest navigation or completed departure.",
+    "summary": "November 13 Viking Daily: Viking Ve is scheduled to arrive in Melk at 8:30 AM, leave at 1:30 PM, arrive in Krems at 4:00 PM, and leave at 9:45 PM for Vienna. Budapest navigation remains unconfirmed.",
     "source": "Passenger-provided Viking Daily Nov 12 and firsthand captain announcement Nov 11"
   },
   "transfer_history": [
@@ -152,10 +152,10 @@
     },
     {
       "date": "2026-11-13",
-      "destination": "Melk / Wachau",
-      "status": "planned sailing destination; arrival not yet confirmed",
+      "destination": "Melk / Wachau / Krems",
+      "status": "scheduled by Viking Daily; arrivals not yet confirmed",
       "ship": "Viking Ve",
-      "source": "Viking Daily Nov 12"
+      "source": "Viking Daily Nov 13"
     },
     {
       "date": "2026-11-14",
@@ -642,6 +642,91 @@
       "sunset": "16:30",
       "source": "Photographed Viking Daily Thursday November 12, 2026",
       "navigation_note": "Captain told passengers November 11 he can sail to Vienna; Budapest not confirmed."
+    },
+    {
+      "date": "2026-11-13",
+      "place": "Melk / Wachau / Krems, Austria",
+      "ship": "Viking Ve",
+      "arrival": "08:30 Melk",
+      "departure": "13:30 Melk to Krems; 21:45 Krems to Vienna",
+      "krems_arrival": "16:00",
+      "excursions": [
+        {
+          "time": "09:15–11:30",
+          "name": "Melk Abbey & Organ Concert (included)",
+          "included": true,
+          "leisure_group_return_bus": "11:15"
+        },
+        {
+          "time": "16:00–18:15",
+          "name": "Wachau Valley Winery (optional)",
+          "included": false
+        },
+        {
+          "time": "17:00–20:30",
+          "name": "Dinner at Nikolaihof Winery (optional)",
+          "included": false
+        }
+      ],
+      "excursion_meeting": "Pier on shore; check group number on ticket. Bring personalized ticket, audio receiver and earpieces for Melk Abbey and Wachau Valley Winery.",
+      "activities": [
+        {
+          "time": "13:45",
+          "name": "Scenic sailing through the Wachau Valley with commentary from David"
+        },
+        {
+          "time": "15:30–16:30",
+          "name": "Your Next Viking Journey with Nino, at the desk next to the Restaurant"
+        },
+        {
+          "time": "17:00–19:00",
+          "name": "Drinks and live music in the Lounge"
+        },
+        {
+          "time": "19:00",
+          "name": "Vienna port talk with David in the Lounge or on stateroom TV"
+        },
+        {
+          "time": "19:15",
+          "name": "Taste of Germany dinner in the Restaurant (Aquavit opens at 19:30)"
+        },
+        {
+          "time": "20:45",
+          "name": "Viennese waltz show and a short lesson in the Lounge"
+        }
+      ],
+      "shuttle": {
+        "service": "16:15–19:15",
+        "ship_to_town": [
+          "16:15",
+          "16:45",
+          "17:15",
+          "17:45"
+        ],
+        "town_to_ship": [
+          "17:20",
+          "17:50",
+          "18:20",
+          "18:50"
+        ]
+      },
+      "dining": {
+        "aquavit": {
+          "breakfast": "06:00–10:00",
+          "lunch": "12:00–13:30",
+          "dinner": "19:30"
+        },
+        "restaurant": {
+          "breakfast": "07:00–09:30",
+          "lunch": "12:00–13:30",
+          "dinner": "19:15"
+        }
+      },
+      "weather_from_daily": "Morning rain, 30–44°F / −1–6°C",
+      "sunrise": "07:01",
+      "sunset": "16:21",
+      "source": "Passenger-provided Viking Daily Friday November 13, 2026",
+      "status": "scheduled onboard program"
     }
   ]
 }

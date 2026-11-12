@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const stops=[
-["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Frankfurt / Rhine Gorge boat & Koblenz"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg / coach transfer to Viking Ve at Passau (completed)"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],["2026-11-19","Return flight"]
+["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Frankfurt / Rhine Gorge boat & Koblenz"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg / coach transfer to Viking Ve at Passau (completed)"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau / Krems"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],["2026-11-19","Return flight"]
 ];
 const tomorrowFacts={
 "Frankfurt / Rhine Gorge boat & Koblenz":["Viking Vidar arrives in Frankfurt at 7 AM. The 8 AM–5 PM excursion travels by coach to Bingen, then by smaller sightseeing boat through the Rhine Gorge to Koblenz, returning to Frankfurt by coach; all aboard at 7 PM.","Upper_Middle_Rhine_Valley"],
@@ -16,7 +16,7 @@ const tomorrowFacts={
 "Nuremberg":["Tuesday Nov 10: Viking Vidar arrives Nuremberg at 8 AM. Put luggage outside your stateroom before 8:30 AM. Excursions begin at 8:30 AM; included Nuremberg Through History ends at noon (follow your excursion ticket). Group lunch at Heilig Geist Spital 12:00–1:15 PM. Meet the transfer bus at Augustinerstrasse; be aboard by 1:30 PM. Coach to Viking Ve at Passau Lindau (approx. 230 km / 145 miles), arriving around 4:30 PM. Keep valuables and medication with you, take QuietVox receiver and earpiece, and leave the charger. On Viking Ve: welcome drinks 5:45–6:30 PM, captain’s toast 6:30 PM, restaurant dinner 7 PM, music 9 PM. Ship swap completed; passenger confirms aboard Viking Ve at Passau.","Nuremberg"],
 "Regensburg":["The medieval Stone Bridge crosses the Danube at Regensburg.","Regensburg"],
 "Passau":["Three rivers—the Danube, Inn and Ilz—meet in Passau.","Passau"],
-"Melk / Wachau":["Melk Abbey stands high above the Danube in Austria's Wachau Valley.","Melk_Abbey"],
+"Melk / Wachau / Krems":["Viking Ve is scheduled to reach Melk at 8:30 AM. Our Melk Abbey and Organ Concert tour runs 9:15–11:30 AM. Scenic sailing begins at 1:45 PM, with arrival in Krems at 4:00 PM and departure for Vienna at 9:45 PM.","Melk_Abbey"],
 "Vienna":["Vienna is renowned for its imperial palaces and musical heritage.","Vienna"],
 "Budapest":["The Hungarian Parliament is one of the city's best-known Danube landmarks.","Hungarian_Parliament_Building"]
 };
@@ -58,10 +58,11 @@ stops.forEach(([date,place])=>{
 });
 const next=stops.find(x=>x[0]>today);
 if(next){
- const place=next[1].split(" / ")[0];const facts=tomorrowFacts[place]||["Check the Viking Daily for your confirmed plans.",null];
+ const place=next[1].split(" / ")[0];const facts=tomorrowFacts[next[1]]||tomorrowFacts[place]||["Check the Viking Daily for your confirmed plans.",null];
  const panel=$("journey-tomorrow");panel.replaceChildren();
  const h=document.createElement("h4");h.textContent=new Date(next[0]+"T12:00:00Z").toLocaleDateString("en-US",{month:"long",day:"numeric",timeZone:"UTC"})+" · "+next[1];
  const para=document.createElement("p");para.textContent=facts[0];panel.append(h,para);
+ if(next[0]==="2026-11-13"){const link=document.createElement("a");link.href="#viking-daily-nov13";link.textContent="Full Viking Daily schedule";panel.append(link);}
  const note=document.createElement("p");note.className="travel-muted";note.textContent="Scheduled itinerary only; Viking's transfers and excursions may change. Check the Viking Daily for actual plans.";panel.append(note);
  if(facts[1])fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=650&titles="+encodeURIComponent(facts[1])).then(r=>r.json()).then(data=>{
   const url=Object.values(data.query?.pages||{})[0]?.thumbnail?.source;if(!url)return;

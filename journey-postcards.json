@@ -143,6 +143,27 @@
           "caption": "More memories from our November 11 visit to Regensburg."
         }
       ]
+    },
+    {
+      "date": "2026-11-12",
+      "place": "Passau, Germany — Follow the Painted Cobblestones",
+      "note": "In Passau we followed a trail of brightly painted cobblestones past an ivy-covered wall and under a little stone arch. Then the four of us stopped for pretzels, and one of the pretzels decided to dance. A pretty good way to spend our last stop in Germany before heading down the Danube toward Austria.",
+      "photo": "photos/EE9E84B2-8FC0-4C85-AA3A-018D85D5D702.gif",
+      "photos": [
+        "photos/EE9E84B2-8FC0-4C85-AA3A-018D85D5D702.gif",
+        "photos/0CA550C9-0D32-4F6F-8547-70575FB7E00C.png"
+      ],
+      "photo_alt": "The four of us with Bavarian pretzels and an animated dancing pretzel, plus a cobblestone lane in Passau.",
+      "photo_captions": [
+        {
+          "photo": "photos/EE9E84B2-8FC0-4C85-AA3A-018D85D5D702.gif",
+          "caption": "Four friends, fresh pretzels, and one very enthusiastic photobomber."
+        },
+        {
+          "photo": "photos/0CA550C9-0D32-4F6F-8547-70575FB7E00C.png",
+          "caption": "A trail of painted cobblestones leads under a stone arch in Passau’s old town."
+        }
+      ]
     }
   ]
 }

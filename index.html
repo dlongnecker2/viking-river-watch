@@ -503,6 +503,19 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 </section>
 <div class="freshness-bar"><div><strong>⏱ Report last updated:</strong> <span id="report-last-updated">waiting for first two-hour refresh…</span></div><div class="small">River data checked every 2 hours • each observation has its own timestamp • weather refreshes on page open</div></div>
 
+<div class="container"><section class="section" id="budapest-extension">
+<h2>Budapest hotel extension · November 17–19</h2>
+<p>All times are local. Viking hospitality desk is in the hotel lobby.</p>
+<h3>Tuesday, November 17</h3>
+<p>Hospitality desk 9:00 AM–1:00 PM and 2:00–6:00 PM. Hotel check-in at 3:00 PM.</p>
+<ul><li>10:30 AM–3:00 PM: Szentendre &amp; Margit Kovács Museum (optional).</li><li>6:00–9:30 PM: Lively Jewish Quarter at Night (optional).</li></ul>
+<h3>Wednesday, November 18</h3>
+<p><strong>Our booked private Budapest night tour with Mary Carry: 7:00–10:00 PM.</strong></p>
+<p>Hospitality desk 8:00 AM–noon and 1:00–5:00 PM.</p>
+<ul><li>8:30 AM–1:30 PM: Highlights of Budapest (optional).</li><li>1:30–5:30 PM: Hungarian State Opera House &amp; the Jewels of Andrássy Avenue (optional).</li><li>8:00–10:00 PM: Viking’s optional Budapest by Night overlaps our booked tour.</li></ul>
+<h3>Thursday, November 19</h3>
+<p>Hospitality desk provides departure assistance. Leave luggage outside the hotel room for pickup. Check out by 10:00 AM. Confirm your personal airport transfer time at the desk. A breakfast box is available at the desk for departures before 7:00 AM.</p>
+</section></div>
 <div class="container"><section class="section" id="captain-nov12-update" style="border:2px solid #80c8a0;background:#effaf3"><h2>🚢 November 12 onboard notice: Passau to Melk</h2><p><strong>Captain's update (Nov 11):</strong> The captain told passengers Viking Ve can sail to <strong>Vienna</strong>. The onboard Viking Daily schedules departure from <strong>Passau Lindau at 6:00 PM Thursday, Nov 12</strong> toward <strong>Melk, Austria</strong>. Departure and Vienna arrival have not yet been observed; <strong>Budapest remains unconfirmed</strong>.</p><p><strong>Thursday excursions:</strong> Salzburg Highlights 8:15 AM–5:45 PM (passport); included Passau walk 8:30–10:30 AM (return buses 11:45 AM and 12:45 PM); Schärding 1:45–6:00 PM (passport). Town-to-ship shuttles: 2:30, 3:30, 4:30 and 5:30 PM. Port talk 6:45 PM.</p><p><small>Source: photographed Viking Daily dated Nov 12, 2026 and passenger's firsthand report of captain's Nov 11 announcement. Updated Nov 11 CET. Ship's live AIS position is independent of the published sailing plan.</small></p></section>
   <div class="outlook" id="cruise-operations-dashboard">
     <div class="kicker">Personal cruise operations summary</div>
@@ -873,7 +886,8 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <tr data-journey-start="2026-11-12" data-journey-end="2026-11-12" class="next"><td>Nov 12</td><td>Passau — Viking Ve departs 6 PM toward Melk (scheduled)</td><td><strong>Captain confirms navigability to Vienna; Achleiten watch</strong></td></tr>
       <tr data-journey-start="2026-11-13" data-journey-end="2026-11-13" class="next"><td>Nov 13</td><td><a href="#viking-daily-nov13">Melk / Wachau / Krems</a> — 8:30 AM Melk, 4:00 PM Krems, 9:45 PM cast-off for Vienna</td><td><strong>Danube — Kienstock / Wachau watch</strong></td></tr>
       <tr data-journey-start="2026-11-14" data-journey-end="2026-11-15" class="next"><td>Nov 14–15</td><td>Vienna</td><td><strong>Danube — Wildungsmauer watch</strong></td></tr>
-      <tr data-journey-start="2026-11-16" data-journey-end="2026-11-17" class="next"><td>Nov 16–17</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
+      <tr data-journey-start="2026-11-16" data-journey-end="2026-11-16" class="next"><td>Nov 16</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
+      <tr data-journey-start="2026-11-17" data-journey-end="2026-11-19"><td>Nov 17–19</td><td><a href="#budapest-extension">Budapest hotel extension</a></td><td>Nov 18: booked private night tour at 7:00 PM. Nov 19: airport transfer.</td></tr>
     </table>
   </div>
 
@@ -934,8 +948,8 @@ function updateJourneyProgress(){
     ["2026-11-11","Regensburg"],["2026-11-12","Passau"],
     ["2026-11-13","Melk / Wachau / Krems"],["2026-11-14","Vienna"],
     ["2026-11-15","Vienna"],["2026-11-16","Budapest"],
-    ["2026-11-17","Budapest — cruise concludes"],
-    ["2026-11-18","Budapest — post-cruise stay"],
+    ["2026-11-17","Budapest — disembark and hotel check-in"],
+    ["2026-11-18","Budapest — hotel extension and booked 7 PM private night tour"],
     ["2026-11-19","Return travel"]
   ];
   const banner=document.getElementById("journey-banner");
@@ -979,11 +993,14 @@ function renderTopExcursions(){
  if(!heading||!list)return;
  heading.textContent=active?"📅 ALL scheduled excursions for "+selected:"📅 November 2 — ALL scheduled excursions";
  list.replaceChildren();
+ if(active && ["17","18","19"].includes(key)){
+   const link=document.createElement("a");link.href="#budapest-extension";link.textContent="Budapest hotel extension schedule";list.append(link);
+ }
  const events=bookedExcursions[key]||[];
  if(!events.length){
    const note=document.createElement("div");
    note.textContent=key==="03"?"Embark Viking Egdir at Coenhaven Westerhoofd — no booked shore excursion.":key==="01"?"Travel day — no booked shore excursion.":"No excursion booked for this date.";
-   list.append(note);return;
+   if(!active || !["17","19"].includes(key))list.append(note);return;
  }
  if(["05","07","08","09","10","11","12","13","14","16"].includes(key)){const warning=document.createElement("div");warning.style.cssText="color:#a04a22;font-weight:800;margin:6px 0";warning.textContent=key==="05"?"Viking now plans a Cologne lunch stop during the Rhine transfer. These originally booked excursions are NOT reconfirmed.":"Current Viking Daily times where available; optional excursions shown are not necessarily booked. Confirm tickets and meeting places onboard.";list.append(warning);}
  for(const [time,name,duration] of events){
@@ -1344,7 +1361,7 @@ setInterval(loadRiverWatchData,2*60*60*1000);
  ["2026-11-07","Miltenberg area"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],
  ["2026-11-10","Nuremberg"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],
  ["2026-11-13","Melk / Wachau / Krems"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],
- ["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],
+ ["2026-11-16","Budapest"],["2026-11-17","Budapest hotel extension"],["2026-11-18","Budapest — booked 7 PM private night tour"],
  ["2026-11-19","Return travel"]
  ];
  const europeDay=dateFormat(europeZone,{year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
@@ -1477,7 +1494,7 @@ setInterval(loadRiverWatchData,2*60*60*1000);
   }catch(e){console.warn("Cruise assignment config unavailable",e);}
 })();
 </script>
-<script src="journey-family.js?v=4" defer></script>
+<script src="journey-family.js?v=5" defer></script>
 
 
 

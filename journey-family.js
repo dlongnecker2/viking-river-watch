@@ -2,9 +2,12 @@
 (function(){
 "use strict";
 const stops=[
-["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Frankfurt / Rhine Gorge boat & Koblenz"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg / coach transfer to Viking Ve at Passau (completed)"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau / Krems"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest"],["2026-11-18","Budapest"],["2026-11-19","Return flight"]
+["2026-10-31","Flight to Europe"],["2026-11-01","Amsterdam"],["2026-11-02","Amsterdam"],["2026-11-03","Amsterdam / embark"],["2026-11-04","Kinderdijk"],["2026-11-05","Cologne"],["2026-11-06","Frankfurt / Rhine Gorge boat & Koblenz"],["2026-11-07","Miltenberg"],["2026-11-08","Würzburg"],["2026-11-09","Bamberg"],["2026-11-10","Nuremberg / coach transfer to Viking Ve at Passau (completed)"],["2026-11-11","Regensburg"],["2026-11-12","Passau"],["2026-11-13","Melk / Wachau / Krems"],["2026-11-14","Vienna"],["2026-11-15","Vienna"],["2026-11-16","Budapest"],["2026-11-17","Budapest hotel check-in"],["2026-11-18","Budapest — booked 7 PM private night tour"],["2026-11-19","Budapest airport transfer and return flight"]
 ];
 const tomorrowFacts={
+"Budapest hotel check-in":["Hotel check-in at 3:00 PM. The Viking hospitality desk is in the lobby.","Budapest"],
+"Budapest — booked 7 PM private night tour":["Our private night tour with Mary Carry runs 7:00–10:00 PM.","Budapest"],
+"Budapest airport transfer and return flight":["Check out by 10:00 AM and confirm your personal airport transfer time at the hospitality desk.",null],
 "Frankfurt / Rhine Gorge boat & Koblenz":["Viking Vidar arrives in Frankfurt at 7 AM. The 8 AM–5 PM excursion travels by coach to Bingen, then by smaller sightseeing boat through the Rhine Gorge to Koblenz, returning to Frankfurt by coach; all aboard at 7 PM.","Upper_Middle_Rhine_Valley"],
 "Amsterdam":["Historic canals and narrow canal houses make Amsterdam one of Europe's most recognizable cities.","Amsterdam"],
 "Kinderdijk":["The UNESCO-listed windmills were built to help drain the Dutch lowlands.","Kinderdijk"],
@@ -63,6 +66,7 @@ if(next){
  const h=document.createElement("h4");h.textContent=new Date(next[0]+"T12:00:00Z").toLocaleDateString("en-US",{month:"long",day:"numeric",timeZone:"UTC"})+" · "+next[1];
  const para=document.createElement("p");para.textContent=facts[0];panel.append(h,para);
  if(next[0]==="2026-11-13"){const link=document.createElement("a");link.href="#viking-daily-nov13";link.textContent="Full Viking Daily schedule";panel.append(link);}
+ if(next[0]>="2026-11-17" && next[0]<="2026-11-19"){const link=document.createElement("a");link.href="#budapest-extension";link.textContent="Full Budapest hotel extension schedule";panel.append(link);}
  const note=document.createElement("p");note.className="travel-muted";note.textContent="Scheduled itinerary only; Viking's transfers and excursions may change. Check the Viking Daily for actual plans.";panel.append(note);
  if(facts[1])fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=650&titles="+encodeURIComponent(facts[1])).then(r=>r.json()).then(data=>{
   const url=Object.values(data.query?.pages||{})[0]?.thumbnail?.source;if(!url)return;

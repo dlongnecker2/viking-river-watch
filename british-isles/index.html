@@ -4,15 +4,15 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f7f8;color:#18323b;font:16px system-ui,sans-serif}header{background:#123c4a;color:white;text-align:center;padding:45px 16px 32px}h1{font-size:clamp(2.1rem,6vw,4rem);margin:.15em 0}h2{margin:0 0 .5em}p{line-height:1.5}header p{margin:.4em 0 1em}nav a{color:white;margin:0 .6em}main{max-width:1100px;margin:auto;padding:18px}section{background:white;border-radius:14px;padding:clamp(14px,3vw,25px);margin-bottom:18px;box-shadow:0 2px 8px #18323b16}a{color:#12536c}#count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:550px;margin:auto}#count div{background:#ffffff13;border:1px solid #ffffff45;border-radius:12px;padding:10px 0}#count b{display:block;font-size:clamp(1.35rem,4vw,2.5rem);font-variant-numeric:tabular-nums}#count span{font-size:.78rem}#map{height:clamp(360px,62vh,590px);background:#e2edf0;border-radius:10px}small{color:#48636e}header small{color:#d8ebf0}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 7px;border-bottom:1px solid #e2e7e9}tr:target{background:#dff3e8}td:first-child{white-space:nowrap}footer{text-align:center;padding:0 15px 30px}.pin{border-radius:50%;background:#123c4a;color:white;text-align:center;line-height:26px;border:2px solid white;font-weight:700;box-shadow:0 1px 5px #0005}.intro{margin:.4rem 0 1rem}.map-note{margin:.6em 0 0}@media(max-width:510px){td,th{font-size:.85rem;padding:10px 4px}td:last-child{width:31%}}
-</style></head><body><header>
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}.guide-grid li{margin:.5em 0}.forecast-card{border:1px solid #dce7e9;border-radius:12px;padding:14px}.forecast-card h3{margin:0 0 8px;font-size:1rem}.forecast-card p{margin:4px 0}.forecast-card td,.forecast-card th{font-size:.8rem;padding:7px 3px;white-space:nowrap}.forecast-card td:last-child{width:auto}select{max-width:100%;padding:8px;color:inherit;background:white;border:1px solid #8ba5ae;border-radius:6px;font:inherit}nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}nav a{margin:0 .25em}</style></head><body><header>
 <small>Viking Libra · July 14–28, 2028</small><h1>British Isles Explorer</h1><p>London (Greenwich) to Bergen</p>
 <div id="count" aria-label="Countdown to embarkation day"></div><p id="count-label">Until embarkation day in London</p>
-<nav aria-label="Page sections"><a href="#route">Route map</a><a href="#ports">Ports of call</a><a href="#travel">Travel days</a></nav></header>
+<nav aria-label="Page sections"><a href="#route">Route map</a><a href="#ports">Ports of call</a><a href="#port-guide">Port guide</a><a href="#travel">Travel days</a><a href="#weather">Weather</a></nav></header>
 <main><section id="route"><h2>Our cruise route</h2><p class="intro">Select a numbered marker to see the port and its schedule.</p><div id="map" aria-label="Interactive cruise route map"><p id="map-fallback">The complete route is listed in the ports of call below.</p></div><p class="map-note"><small>Markers are in sailing order. The line shows the approximate itinerary.</small></p></section>
 <section id="ports"><h2>Ports of call</h2><p class="intro"><small>July 2028 · Local port times from the Viking itinerary. Schedule subject to change.</small></p>
 <table><thead><tr><th scope="col">Date</th><th scope="col">Stop</th><th scope="col">Schedule</th></tr></thead><tbody><tr id="jul-14"><td>Jul 14</td><td><strong>London (Greenwich)</strong><br><small>England</small></td><td>Embarkation</td></tr><tr id="jul-15"><td>Jul 15</td><td><strong>London (Greenwich)</strong><br><small>England</small></td><td>Depart 6:43 p.m.</td></tr><tr id="jul-16"><td>Jul 16</td><td><strong>Dover</strong><br><small>England</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-17"><td>Jul 17</td><td><strong>English Channel</strong></td><td>Scenic sailing</td></tr><tr id="jul-18"><td>Jul 18</td><td><strong>Dublin (Dún Laoghaire)</strong><br><small>Ireland</small></td><td>8 a.m. – 8 p.m.</td></tr><tr id="jul-19"><td>Jul 19</td><td><strong>Holyhead</strong><br><small>Wales</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-20"><td>Jul 20</td><td><strong>Liverpool</strong><br><small>England</small></td><td>7 a.m. – 6 p.m.</td></tr><tr id="jul-21"><td>Jul 21</td><td><strong>Belfast</strong><br><small>Northern Ireland</small></td><td>8 a.m. – 6:30 p.m.</td></tr><tr id="jul-22"><td>Jul 22</td><td><strong>Ullapool</strong><br><small>Scotland</small></td><td>12:30 – 6:30 p.m.</td></tr><tr id="jul-23"><td>Jul 23</td><td><strong>Kirkwall</strong><br><small>Orkney, Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-24"><td>Jul 24</td><td><strong>Edinburgh (Newhaven)</strong><br><small>Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-25"><td>Jul 25</td><td><strong>Aberdeen</strong><br><small>Scotland</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-26"><td>Jul 26</td><td><strong>Lerwick</strong><br><small>Shetland, Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-27"><td>Jul 27</td><td><strong>Bergen</strong><br><small>Norway</small></td><td>Arrive 8 a.m. · Overnight aboard</td></tr><tr id="jul-28"><td>Jul 28</td><td><strong>Bergen</strong><br><small>Norway</small></td><td>Disembarkation</td></tr></tbody></table></section>
-<section id="travel"><h2>Before and after the cruise</h2><p><strong>July 11–14 · Seattle to London</strong><br>Fly July 11, arrive July 12, and spend two nights in London before boarding in Greenwich.</p><p><strong>July 28–30 · Bergen to Seattle</strong><br>Spend two nights in Bergen after disembarking, then fly home July 30.</p></section>
-</main><footer><a href="../">Our Grand European Tour</a></footer>
+<section id="port-guide"><h2 id="guide-title">Port guide</h2><p id="guide-date"></p><label for="guide-select">Explore a port </label><select id="guide-select"></select><div class="guide-grid"><div><h3>What to eat</h3><ul id="guide-food"></ul></div><div><h3>What to see</h3><ul id="guide-sights"></ul></div></div></section><section id="travel"><h2>Before and after the cruise</h2><p><strong>July 11–14 · Seattle to London</strong><br>Fly July 11, arrive July 12, and spend two nights in London before boarding in Greenwich.</p><p><strong>July 28–30 · Bergen to Seattle</strong><br>Spend two nights in Bergen after disembarking, then fly home July 30.</p></section>
+<section id="weather"><h2>Current weather at each port</h2><p class="intro">Today and the next two days at each port, using local dates and °F.</p><p id="weather-status" role="status">Loading forecasts…</p><div id="weather-grid" class="guide-grid"></div><p><small>Forecast data from <a href="https://open-meteo.com/">Open-Meteo</a>.</small></p></section></main><footer><a href="../">Our Grand European Tour</a></footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
 const target = Date.parse('2028-07-14T00:00:00+01:00');
 const units = ['Days','Hours','Minutes','Seconds'];
@@ -27,10 +27,12 @@ function tick() {
 }
 tick();
 setInterval(tick,1000);
-if (window.L) {
-  document.getElementById('map-fallback').remove();
+
+
   const ports = [[14,"London (Greenwich)","England","Embarkation",[51.48,-0.008]],[16,"Dover","England","8 a.m. – 6 p.m.",[51.116,1.325]],[18,"Dublin (Dún Laoghaire)","Ireland","8 a.m. – 8 p.m.",[53.295,-6.135]],[19,"Holyhead","Wales","8 a.m. – 6 p.m.",[53.311,-4.627]],[20,"Liverpool","England","7 a.m. – 6 p.m.",[53.406,-2.999]],[21,"Belfast","Northern Ireland","8 a.m. – 6:30 p.m.",[54.622,-5.884]],[22,"Ullapool","Scotland","12:30 – 6:30 p.m.",[57.894,-5.162]],[23,"Kirkwall","Orkney, Scotland","8 a.m. – 5 p.m.",[58.993,-2.96]],[24,"Edinburgh (Newhaven)","Scotland","8 a.m. – 5 p.m.",[55.98,-3.197]],[25,"Aberdeen","Scotland","8 a.m. – 6 p.m.",[57.145,-2.082]],[26,"Lerwick","Shetland, Scotland","8 a.m. – 5 p.m.",[60.155,-1.142]],[27,"Bergen","Norway","Arrive 8 a.m. · Overnight aboard",[60.396,5.317]]];
   const route = [[51.48,-0.008],[51.116,1.325],[50.72,1.06],[50.1,-3.1],[49.84,-5.6],[50.13,-6.65],[52,-6.45],[52.5,-5.7],[53.295,-6.135],[53.311,-4.627],[53.406,-2.999],[54.622,-5.884],[55,-5.45],[55.7,-6.55],[56.65,-7.15],[57.75,-6.55],[57.894,-5.162],[58.18,-5.65],[58.75,-5.15],[59.2,-3.75],[58.993,-2.96],[59.2,-2.15],[58.3,-1.8],[56.3,-1.8],[56.04,-2.85],[55.98,-3.197],[56.09,-2.65],[56.56,-2.2],[57.145,-2.082],[60.155,-1.142],[60.396,5.317]];
+if (window.L) {
+  document.getElementById("map-fallback").remove();
   const map = L.map('map',{scrollWheelZoom:false});
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
   const track = L.polyline(route,{color:'#166784',weight:3,dashArray:'6 6'}).addTo(map);
@@ -41,4 +43,111 @@ if (window.L) {
     L.marker(point,{icon,title:name,alt:name}).addTo(map).bindPopup('<strong>'+name+'</strong><br>'+date+'<br><a href="#jul-'+day+'">See itinerary</a>');
   });
 }
+
+const guides = [["Pie and mash; fish and chips; sticky toffee pudding; afternoon tea; sausage rolls","Cutty Sark; Royal Observatory; Old Royal Naval College Painted Hall; Greenwich Market; National Maritime Museum"],["Dover sole; fish and chips; Kentish cherry desserts; Kent cheeses; local cider","Dover Castle; White Cliffs of Dover; South Foreland Lighthouse; Dover Museum and Bronze Age Boat; Dover seafront"],["Irish stew; seafood chowder; soda bread; boxty; Dublin coddle","Dún Laoghaire East Pier; Forty Foot; James Joyce Tower; Trinity College and the Book of Kells; St. Stephen’s Green"],["Welsh cakes; bara brith; Welsh rarebit; Anglesey sea salt caramels; Welsh lamb","South Stack Lighthouse; Holyhead Maritime Museum; Breakwater Country Park; St Cybi’s Church; Beaumaris Castle"],["Scouse stew; fish and chips; meat pies; Liverpool tart; local ale","Royal Albert Dock; The Beatles Story; Cavern Club; Liverpool Cathedral; Museum of Liverpool"],["Ulster fry; soda farls; potato bread; fifteens; Irish stew","Titanic Belfast; SS Nomadic; Belfast City Hall; St George’s Market; Botanic Gardens"],["Cullen skink; langoustines; smoked salmon; venison; cranachan","Ullapool Harbour; Ullapool Museum; The Ceilidh Place bookshop; Ullapool Hill; Knockan Crag"],["Orkney cheddar; oatcakes; bere bannocks; Orkney ice cream; local whisky","St Magnus Cathedral; Bishop’s Palace; Orkney Museum; Skara Brae; Ring of Brodgar"],["Haggis, neeps and tatties; Scotch broth; shortbread; cranachan; Scottish smoked salmon","Edinburgh Castle; Royal Mile; National Museum of Scotland; Palace of Holyroodhouse; Newhaven Harbour"],["Butteries (rowies); Cullen skink; Aberdeen Angus beef; Scottish seafood; tablet","Aberdeen Maritime Museum; Footdee; Aberdeen Art Gallery; Old Aberdeen and King’s College; Duthie Park"],["Shetland lamb; fresh mussels; smoked fish; bannocks; reestit mutton soup","Shetland Museum and Archives; Lerwick waterfront; Fort Charlotte; Broch of Clickimin; Jarlshof"],["Fish soup; smoked salmon; fish cakes; brown cheese; skillingsboller cinnamon buns","Bryggen wharf; Fløibanen funicular and Mount Fløyen; Bergen Fish Market; Bergenhus Fortress; KODE art museums"]];
+const picker = document.getElementById('guide-select');
+const title = document.getElementById('guide-title');
+const guideDate = document.getElementById('guide-date');
+const cruiseDay = new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'});
+let displayedDate;
+function showGuide(index, automatic=false) {
+  const [day,name] = ports[index];
+  picker.value = String(index);
+  title.textContent = (automatic ? 'Today in ' : 'Port guide · ') + name;
+  guideDate.textContent = day===14 ? 'July 14–15' : day===27 ? 'July 27–28' : 'July '+day;
+  ['guide-food','guide-sights'].forEach((id,column) => {
+    document.getElementById(id).replaceChildren(...guides[index][column].split('; ').map(text => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      return li;
+    }));
+  });
+}
+ports.forEach((port,index) => picker.add(new Option(port[1],String(index))));
+picker.addEventListener('change',() => { showGuide(Number(picker.value)); });
+function updateGuide() {
+  const parts = Object.fromEntries(cruiseDay.formatToParts(new Date()).map(({type,value})=>[type,value]));
+  const date = parts.year+'-'+parts.month+'-'+parts.day;
+  if (date===displayedDate) return;
+  displayedDate = date;
+  const day = Number(parts.day);
+  if (parts.year==='2028' && parts.month==='07' && day>=14 && day<=28) {
+    if (day===17) {
+      showGuide(2);
+      title.textContent = 'Today · Scenic sailing in the English Channel';
+      guideDate.textContent = 'July 17 · Next port guide shown below for Dublin (July 18).';
+      return;
+    }
+    const index = ports.findIndex(([portDay])=>portDay===(day===15?14:day===28?27:day));
+    if(index>=0) { showGuide(index,true); return; }
+  }
+  showGuide(0);
+}
+updateGuide();
+setInterval(updateGuide,30000);
+
+const weatherGrid = document.getElementById('weather-grid');
+const weatherStatus = document.getElementById('weather-status');
+const cards = ports.map(([,name]) => {
+  const card = document.createElement('article');
+  card.className = 'forecast-card';
+  const heading = document.createElement('h3');
+  heading.textContent = name;
+  const details = document.createElement('p');
+  details.textContent = 'Loading…';
+  card.append(heading,details);
+  weatherGrid.append(card);
+  return details;
+});
+function condition(code) {
+  if (code==null) return '—';
+  if (code===0) return 'Clear';
+  if (code<=2) return 'Partly cloudy';
+  if (code===3) return 'Cloudy';
+  if (code<=48) return 'Fog';
+  if (code<=57) return 'Drizzle';
+  if (code<=67) return 'Rain';
+  if (code<=77) return 'Snow';
+  if (code<=82) return 'Showers';
+  if (code<=86) return 'Snow showers';
+  return 'Thunderstorms';
+}
+const degrees = value => value==null ? '—' : Math.round(value)+'°';
+async function loadWeather() {
+  try {
+    const query = new URLSearchParams({
+      latitude:ports.map(port=>port[4][0]).join(','),
+      longitude:ports.map(port=>port[4][1]).join(','),
+      current:'temperature_2m,weather_code',
+      daily:'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
+      temperature_unit:'fahrenheit',timezone:'auto',forecast_days:'3'
+    });
+    const response = await fetch('https://api.open-meteo.com/v1/forecast?'+query);
+    if (!response.ok) throw Error('Forecast request failed');
+    const forecasts = await response.json();
+    let shown = 0;
+    cards.forEach((details,index) => {
+      const data = forecasts[index];
+      if (!data?.daily || !data.current) { details.textContent = 'Forecast unavailable'; return; }
+      const daily = data.daily;
+      details.textContent = 'Now '+degrees(data.current.temperature_2m)+' · '+condition(data.current.weather_code);
+      const table = document.createElement('table');
+      table.innerHTML = '<thead><tr><th scope="col">Date</th><th scope="col">High / Low</th><th scope="col">Precip.</th></tr></thead>';
+      const body = table.createTBody();
+      daily.time.forEach((date,day) => {
+        const row = body.insertRow();
+        const label = new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',timeZone:'UTC'}).format(new Date(date+'T00:00:00Z'));
+        const rain = daily.precipitation_probability_max[day];
+        [label,degrees(daily.temperature_2m_max[day])+' / '+degrees(daily.temperature_2m_min[day]),rain==null?'—':rain+'%'].forEach(value=>row.insertCell().textContent=value);
+      });
+      details.parentNode.append(table);
+      shown++;
+    });
+    weatherStatus.textContent = shown ? 'Loaded '+new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date())+' on your device.' : 'Forecasts are temporarily unavailable.';
+  } catch {
+    weatherStatus.textContent = 'Forecasts are temporarily unavailable. Reload the page to try again.';
+    cards.forEach(details=>details.textContent='Forecast unavailable');
+  }
+}
+loadWeather();
 </script></body></html>

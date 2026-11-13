@@ -64,8 +64,8 @@ if(next){
  const place=next[1].split(" / ")[0];const facts=tomorrowFacts[next[1]]||tomorrowFacts[place]||["Check the Viking Daily for your confirmed plans.",null];
  const panel=$("journey-tomorrow");panel.replaceChildren();
  const h=document.createElement("h4");h.textContent=new Date(next[0]+"T12:00:00Z").toLocaleDateString("en-US",{month:"long",day:"numeric",timeZone:"UTC"})+" · "+next[1];
- const para=document.createElement("p");para.textContent=facts[0];panel.append(h,para);
- if(next[0]==="2026-11-13"){const link=document.createElement("a");link.href="#viking-daily-nov13";link.textContent="Full Viking Daily schedule";panel.append(link);}
+ const para=document.createElement("p");para.textContent=next[0]==="2026-11-14"?"Viking Ve is scheduled to arrive in Vienna at 6:30 AM. Our tours are Panoramic Vienna (8:30 AM–noon) and Behind the Scenes at the Lipizzans (2:15–5:45 PM). Shore excursions meet on the pier.":facts[0];panel.append(h,para);
+ if(["2026-11-13","2026-11-14"].includes(next[0])){const link=document.createElement("a");link.href="#viking-daily-nov"+next[0].slice(-2);link.textContent="Full Viking Daily schedule";panel.append(link);}
  if(next[0]>="2026-11-17" && next[0]<="2026-11-19"){const link=document.createElement("a");link.href="#budapest-extension";link.textContent="Full Budapest hotel extension schedule";panel.append(link);}
  const note=document.createElement("p");note.className="travel-muted";note.textContent="Scheduled itinerary only; Viking's transfers and excursions may change. Check the Viking Daily for actual plans.";panel.append(note);
  if(facts[1])fetch("https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=650&titles="+encodeURIComponent(facts[1])).then(r=>r.json()).then(data=>{

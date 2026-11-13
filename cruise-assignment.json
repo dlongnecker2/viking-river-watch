@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-11",
+  "last_updated": "2026-11-13",
   "active_ship": {
     "name": "Viking Ve",
     "effective_date": "2026-11-10",
-    "note": "Passenger confirms aboard Viking Ve. November 13 Viking Daily schedules Melk, Krems and onward sailing to Vienna. Budapest navigation remains unconfirmed."
+    "note": "Passenger confirms aboard Viking Ve. November 14 Viking Daily schedules Vienna arrival at 6:30 AM. Budapest navigation remains unconfirmed."
   },
   "ship_history": [
     {
@@ -27,9 +27,9 @@
     }
   ],
   "itinerary_update": {
-    "effective_date": "2026-11-11",
-    "summary": "November 13 Viking Daily: Viking Ve is scheduled to arrive in Melk at 8:30 AM, leave at 1:30 PM, arrive in Krems at 4:00 PM, and leave at 9:45 PM for Vienna. Budapest navigation remains unconfirmed.",
-    "source": "Passenger-provided Viking Daily Nov 12 and firsthand captain announcement Nov 11"
+    "effective_date": "2026-11-14",
+    "summary": "Viking Ve is scheduled to arrive in Vienna at 6:30 AM. Our tours are Panoramic Vienna (8:30 AM–noon) and Behind the Scenes at the Lipizzans (2:15–5:45 PM). Shore excursions meet on the pier. Budapest navigation remains unconfirmed.",
+    "source": "Passenger-provided Viking Daily dated November 14, 2026"
   },
   "transfer_history": [
     {

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>British Isles Explorer · Viking Libra</title><meta name="description" content="Viking Libra’s July 2028 British Isles Explorer cruise from London to Bergen.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7f8;color:#18323b;font:16px system-ui,sans-serif}header{background:#123c4a;color:white;text-align:center;padding:45px 16px 32px}h1{font-size:clamp(2.1rem,6vw,4rem);margin:.15em 0}h2{margin:0 0 .5em}p{line-height:1.5}header p{margin:.4em 0 1em}nav a{color:white;margin:0 .6em}main{max-width:1100px;margin:auto;padding:18px}section{background:white;border-radius:14px;padding:clamp(14px,3vw,25px);margin-bottom:18px;box-shadow:0 2px 8px #18323b16}a{color:#12536c}#count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:550px;margin:auto}#count div{background:#ffffff13;border:1px solid #ffffff45;border-radius:12px;padding:10px 0}#count b{display:block;font-size:clamp(1.35rem,4vw,2.5rem);font-variant-numeric:tabular-nums}#count span{font-size:.78rem}#map{height:clamp(360px,62vh,590px);background:#e2edf0;border-radius:10px}small{color:#48636e}header small{color:#d8ebf0}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 7px;border-bottom:1px solid #e2e7e9}tr:target{background:#dff3e8}td:first-child{white-space:nowrap}footer{text-align:center;padding:0 15px 30px}.pin{border-radius:50%;background:#123c4a;color:white;text-align:center;line-height:26px;border:2px solid white;font-weight:700;box-shadow:0 1px 5px #0005}.intro{margin:.4rem 0 1rem}.map-note{margin:.6em 0 0}@media(max-width:510px){td,th{font-size:.85rem;padding:10px 4px}td:last-child{width:31%}}
+</style></head><body><header>
+<small>Viking Libra · July 14–28, 2028</small><h1>British Isles Explorer</h1><p>London (Greenwich) to Bergen</p>
+<div id="count" aria-label="Countdown to embarkation day"></div><p id="count-label">Until embarkation day in London</p>
+<nav aria-label="Page sections"><a href="#route">Route map</a><a href="#ports">Ports of call</a><a href="#travel">Travel days</a></nav></header>
+<main><section id="route"><h2>Our cruise route</h2><p class="intro">Select a numbered marker to see the port and its schedule.</p><div id="map" aria-label="Interactive cruise route map"><p id="map-fallback">The complete route is listed in the ports of call below.</p></div><p class="map-note"><small>Markers are in sailing order. The line shows the approximate itinerary.</small></p></section>
+<section id="ports"><h2>Ports of call</h2><p class="intro"><small>July 2028 · Local port times from the Viking itinerary. Schedule subject to change.</small></p>
+<table><thead><tr><th scope="col">Date</th><th scope="col">Stop</th><th scope="col">Schedule</th></tr></thead><tbody><tr id="jul-14"><td>Jul 14</td><td><strong>London (Greenwich)</strong><br><small>England</small></td><td>Embarkation</td></tr><tr id="jul-15"><td>Jul 15</td><td><strong>London (Greenwich)</strong><br><small>England</small></td><td>Depart 6:43 p.m.</td></tr><tr id="jul-16"><td>Jul 16</td><td><strong>Dover</strong><br><small>England</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-17"><td>Jul 17</td><td><strong>English Channel</strong></td><td>Scenic sailing</td></tr><tr id="jul-18"><td>Jul 18</td><td><strong>Dublin (Dún Laoghaire)</strong><br><small>Ireland</small></td><td>8 a.m. – 8 p.m.</td></tr><tr id="jul-19"><td>Jul 19</td><td><strong>Holyhead</strong><br><small>Wales</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-20"><td>Jul 20</td><td><strong>Liverpool</strong><br><small>England</small></td><td>7 a.m. – 6 p.m.</td></tr><tr id="jul-21"><td>Jul 21</td><td><strong>Belfast</strong><br><small>Northern Ireland</small></td><td>8 a.m. – 6:30 p.m.</td></tr><tr id="jul-22"><td>Jul 22</td><td><strong>Ullapool</strong><br><small>Scotland</small></td><td>12:30 – 6:30 p.m.</td></tr><tr id="jul-23"><td>Jul 23</td><td><strong>Kirkwall</strong><br><small>Orkney, Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-24"><td>Jul 24</td><td><strong>Edinburgh (Newhaven)</strong><br><small>Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-25"><td>Jul 25</td><td><strong>Aberdeen</strong><br><small>Scotland</small></td><td>8 a.m. – 6 p.m.</td></tr><tr id="jul-26"><td>Jul 26</td><td><strong>Lerwick</strong><br><small>Shetland, Scotland</small></td><td>8 a.m. – 5 p.m.</td></tr><tr id="jul-27"><td>Jul 27</td><td><strong>Bergen</strong><br><small>Norway</small></td><td>Arrive 8 a.m. · Overnight aboard</td></tr><tr id="jul-28"><td>Jul 28</td><td><strong>Bergen</strong><br><small>Norway</small></td><td>Disembarkation</td></tr></tbody></table></section>
+<section id="travel"><h2>Before and after the cruise</h2><p><strong>July 11–14 · Seattle to London</strong><br>Fly July 11, arrive July 12, and spend two nights in London before boarding in Greenwich.</p><p><strong>July 28–30 · Bergen to Seattle</strong><br>Spend two nights in Bergen after disembarking, then fly home July 30.</p></section>
+</main><footer><a href="../">Our Grand European Tour</a></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
+const target = Date.parse('2028-07-14T00:00:00+01:00');
+const units = ['Days','Hours','Minutes','Seconds'];
+const display = document.getElementById('count');
+display.innerHTML = units.map(unit => '<div><b>0</b><span>'+unit+'</span></div>').join('');
+const values = display.querySelectorAll('b');
+function tick() {
+  const seconds = Math.max(0, Math.ceil((target-Date.now())/1000));
+  const parts = [Math.floor(seconds/86400), Math.floor(seconds/3600)%24, Math.floor(seconds/60)%60, seconds%60];
+  values.forEach((element,index) => element.textContent = String(parts[index]).padStart(2,'0'));
+  if (!seconds) document.getElementById('count-label').textContent = 'Embarkation day · July 14, 2028';
+}
+tick();
+setInterval(tick,1000);
+if (window.L) {
+  document.getElementById('map-fallback').remove();
+  const ports = [[14,"London (Greenwich)","England","Embarkation",[51.48,-0.008]],[16,"Dover","England","8 a.m. – 6 p.m.",[51.116,1.325]],[18,"Dublin (Dún Laoghaire)","Ireland","8 a.m. – 8 p.m.",[53.295,-6.135]],[19,"Holyhead","Wales","8 a.m. – 6 p.m.",[53.311,-4.627]],[20,"Liverpool","England","7 a.m. – 6 p.m.",[53.406,-2.999]],[21,"Belfast","Northern Ireland","8 a.m. – 6:30 p.m.",[54.622,-5.884]],[22,"Ullapool","Scotland","12:30 – 6:30 p.m.",[57.894,-5.162]],[23,"Kirkwall","Orkney, Scotland","8 a.m. – 5 p.m.",[58.993,-2.96]],[24,"Edinburgh (Newhaven)","Scotland","8 a.m. – 5 p.m.",[55.98,-3.197]],[25,"Aberdeen","Scotland","8 a.m. – 6 p.m.",[57.145,-2.082]],[26,"Lerwick","Shetland, Scotland","8 a.m. – 5 p.m.",[60.155,-1.142]],[27,"Bergen","Norway","Arrive 8 a.m. · Overnight aboard",[60.396,5.317]]];
+  const route = [[51.48,-0.008],[51.116,1.325],[50.72,1.06],[50.1,-3.1],[49.84,-5.6],[50.13,-6.65],[52,-6.45],[52.5,-5.7],[53.295,-6.135],[53.311,-4.627],[53.406,-2.999],[54.622,-5.884],[55,-5.45],[55.7,-6.55],[56.65,-7.15],[57.75,-6.55],[57.894,-5.162],[58.18,-5.65],[58.75,-5.15],[59.2,-3.75],[58.993,-2.96],[59.2,-2.15],[58.3,-1.8],[56.3,-1.8],[56.04,-2.85],[55.98,-3.197],[56.09,-2.65],[56.56,-2.2],[57.145,-2.082],[60.155,-1.142],[60.396,5.317]];
+  const map = L.map('map',{scrollWheelZoom:false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+  const track = L.polyline(route,{color:'#166784',weight:3,dashArray:'6 6'}).addTo(map);
+  map.fitBounds(track.getBounds(),{padding:[24,24]});
+  ports.forEach(([day,name,country,time,point],index) => {
+    const icon = L.divIcon({className:'pin',html:String(index+1),iconSize:[30,30]});
+    const date = day===14?'July 14–15':day===27?'July 27–28':'July '+day;
+    L.marker(point,{icon,title:name,alt:name}).addTo(map).bindPopup('<strong>'+name+'</strong><br>'+date+'<br><a href="#jul-'+day+'">See itinerary</a>');
+  });
+}
+</script></body></html>

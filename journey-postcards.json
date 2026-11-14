@@ -164,6 +164,27 @@
           "caption": "A trail of painted cobblestones leads under a stone arch in Passau’s old town."
         }
       ]
+    },
+    {
+      "date": "2026-11-13",
+      "place": "Melk Abbey & the Wachau Valley, Austria",
+      "note": "What a beautiful day in Austria! We visited magnificent Melk Abbey, perched high above the Danube, and then enjoyed a gorgeous cruise through the Wachau Valley. The river scenery was spectacular, with one castle after another appearing along the hillsides. It seemed like there was something wonderful to see around every bend! We finished the day with a festive Austrian feast for dinner—a perfect ending to a day full of history, castles, and unforgettable scenery. Our Viking adventure just keeps getting better!",
+      "photo": "photos/IMG_3095.jpeg",
+      "photos": [
+        "photos/IMG_3095.jpeg",
+        "photos/61903428-0BB1-4CD2-8733-5A5555480045.png"
+      ],
+      "photo_alt": "Two photos shared from the November 13 Melk Abbey and Wachau Valley day in Austria.",
+      "photo_captions": [
+        {
+          "photo": "photos/IMG_3095.jpeg",
+          "caption": "A memory from our day at Melk and along the beautiful Danube."
+        },
+        {
+          "photo": "photos/61903428-0BB1-4CD2-8733-5A5555480045.png",
+          "caption": "More memories from our Austrian adventure."
+        }
+      ]
     }
   ]
 }

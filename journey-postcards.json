@@ -185,6 +185,48 @@
           "caption": "More memories from our Austrian adventure."
         }
       ]
+    },
+    {
+      "date": "2026-11-14",
+      "place": "Vienna, Austria — A Grand First Day",
+      "note": "We arrived in Vienna and spent the day exploring this beautiful Austrian capital. Between its magnificent architecture, fascinating history and lively streets, Vienna gave us plenty to see. We were glad to have two days here to take it all in!",
+      "photo": "photos/IMG_3191.jpeg",
+      "photos": [
+        "photos/IMG_3191.jpeg",
+        "photos/IMG_3219.jpeg"
+      ],
+      "photo_alt": "Two photographs shared from our November 14 visit to Vienna.",
+      "photo_captions": [
+        {
+          "photo": "photos/IMG_3191.jpeg",
+          "caption": "A memory from our first day in Vienna."
+        },
+        {
+          "photo": "photos/IMG_3219.jpeg",
+          "caption": "Another moment from our Vienna visit."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "place": "Vienna, Austria — Christmas Markets & Shopping",
+      "note": "Today was a free day in Vienna, so we made the most of it! We visited several Christmas markets, enjoyed the festive atmosphere and did some serious shopping. Between the holiday decorations, market stalls and all the tempting things to browse, it was a wonderful way to spend a day exploring Vienna at our own pace. Our bags may be a little heavier now, but we had a great time!",
+      "photo": "photos/IMG_1576.jpeg",
+      "photos": [
+        "photos/IMG_1576.jpeg",
+        "photos/IMG_3240.jpeg"
+      ],
+      "photo_alt": "Two photographs shared from our November 15 Christmas market and shopping day in Vienna.",
+      "photo_captions": [
+        {
+          "photo": "photos/IMG_1576.jpeg",
+          "caption": "Christmas market memories from Vienna."
+        },
+        {
+          "photo": "photos/IMG_3240.jpeg",
+          "caption": "More festive shopping in Vienna."
+        }
+      ]
     }
   ]
 }

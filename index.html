@@ -368,6 +368,23 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
   <p>Grand European Tour • Amsterdam → Budapest</p>
   <p>November 3–17, 2026</p>
 </header>
+<section class="viking-personal-notice" id="budapest-today" aria-label="Tuesday Budapest schedule" hidden>
+<div class="notice-heading">🇭🇺 TODAY — TUESDAY, NOVEMBER 17</div>
+<h2>Budapest hotel extension</h2>
+<p><strong>No confirmed excursion today.</strong> Disembark Viking Ve and transfer to the New York Palace hotel. Hotel check-in is at <strong>3:00 PM</strong>.</p>
+<p><strong>Tomorrow:</strong> Our booked private Budapest night tour with Mary Carry runs <strong>7:00–10:00 PM</strong>.</p>
+<p><a href="#budapest-extension">Full Budapest hotel extension schedule</a></p>
+</section>
+<script>
+(() => {
+  const notice = document.getElementById("budapest-today");
+  const dateFormat = new Intl.DateTimeFormat("en-GB", {timeZone:"Europe/Budapest", year:"numeric", month:"long", day:"numeric"});
+  const refresh = () => { notice.hidden = dateFormat.format(new Date()) !== "17 November 2026"; };
+  refresh();
+  setInterval(refresh, 60000);
+})();
+</script>
+<details><summary>Previous Viking Daily — Monday, November 16 (Budapest)</summary>
 <section class="viking-personal-notice" id="viking-daily-nov16" aria-label="Monday Budapest Viking Daily">
 <div class="notice-heading">🚢 VIKING DAILY — MONDAY, NOVEMBER 16</div>
 <h2>Budapest, Hungary</h2>
@@ -391,6 +408,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <li><strong>Restaurant:</strong> Breakfast 7:00–9:30 AM, lunch 12:30–2:00 PM, dinner 6:45 PM.</li></ul>
 <p class="small"><strong>Source:</strong> Passenger-provided Viking Daily photograph dated Monday, November 16, 2026. Times are local and subject to onboard changes.</p>
 </section>
+</details>
 <details><summary>Previous Viking Daily — Sunday, November 15 (Vienna)</summary>
 <section class="viking-personal-notice" id="viking-daily-nov15" aria-label="Sunday Vienna Viking Daily">
 <div class="notice-heading">🚢 VIKING DAILY — SUNDAY, NOVEMBER 15</div>
@@ -549,7 +567,7 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
 <h2>Budapest hotel extension · November 17–19</h2>
 <p>All times are local. Viking hospitality desk is in the hotel lobby.</p>
 <h3>Tuesday, November 17</h3>
-<p>Hospitality desk 9:00 AM–1:00 PM and 2:00–6:00 PM. Hotel check-in at 3:00 PM.</p>
+<p><strong>No confirmed excursion.</strong> Disembark Viking Ve and transfer to the New York Palace hotel. Hotel check-in is at 3:00 PM. The hospitality desk is open 9:00 AM–1:00 PM and 2:00–6:00 PM.</p>
 <ul><li>10:30 AM–3:00 PM: Szentendre &amp; Margit Kovács Museum (optional).</li><li>6:00–9:30 PM: Lively Jewish Quarter at Night (optional).</li></ul>
 <h3>Wednesday, November 18</h3>
 <p><strong>Our booked private Budapest night tour with Mary Carry: 7:00–10:00 PM.</strong></p>
@@ -929,7 +947,9 @@ footer{text-align:center;color:#687b82;padding:30px;font-size:14px}
       <tr data-journey-start="2026-11-13" data-journey-end="2026-11-13" class="next"><td>Nov 13</td><td><a href="#viking-daily-nov13">Melk / Wachau / Krems</a> — 8:30 AM Melk, 4:00 PM Krems, 9:45 PM cast-off for Vienna</td><td><strong>Danube — Kienstock / Wachau watch</strong></td></tr>
       <tr data-journey-start="2026-11-14" data-journey-end="2026-11-15" class="next"><td>Nov 14–15</td><td><a href="#viking-daily-nov14">Vienna</a> — 6:30 AM scheduled arrival Nov 14 · <a href="#viking-daily-nov15">5:00 PM scheduled departure Nov 15</a></td><td><strong>Danube — Wildungsmauer watch</strong></td></tr>
       <tr data-journey-start="2026-11-16" data-journey-end="2026-11-16" class="next"><td>Nov 16</td><td>Budapest</td><td><strong>Danube — Budapest gauge watch</strong></td></tr>
-      <tr data-journey-start="2026-11-17" data-journey-end="2026-11-19"><td>Nov 17–19</td><td><a href="#budapest-extension">Budapest hotel extension</a></td><td>Nov 18: booked private night tour at 7:00 PM. Nov 19: airport transfer.</td></tr>
+      <tr data-journey-start="2026-11-17" data-journey-end="2026-11-17"><td>Nov 17</td><td><a href="#budapest-extension">Budapest hotel extension</a></td><td>Hotel transfer and 3:00 PM check-in. No confirmed excursion.</td></tr>
+      <tr data-journey-start="2026-11-18" data-journey-end="2026-11-18"><td>Nov 18</td><td><a href="#budapest-extension">Budapest</a></td><td>Booked private night tour with Mary at 7:00 PM.</td></tr>
+      <tr data-journey-start="2026-11-19" data-journey-end="2026-11-19"><td>Nov 19</td><td><a href="#budapest-extension">Budapest</a></td><td>Hotel checkout and airport transfer.</td></tr>
     </table>
   </div>
 

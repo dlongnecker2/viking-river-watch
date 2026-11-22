@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-22T20:22:33.158008Z",
+  "updated_utc": "2026-11-22T22:21:25.396716Z",
   "sources": {
     "pegelonline": "https://www.pegelonline.wsv.de/",
     "viadonau": "https://www.viadonau.org/en/economy/services-transport-planning/water-levels",
@@ -8,30 +8,30 @@
   "germany": {
     "kaub": {
       "value_cm": 222.0,
-      "timestamp": "2026-11-22T21:15:00+01:00",
+      "timestamp": "2026-11-22T23:15:00+01:00",
       "station": "KAUB"
     },
     "wuerzburg": null,
     "pfelling": {
-      "value_cm": 380.0,
-      "timestamp": "2026-11-22T21:15:00+01:00",
+      "value_cm": 381.0,
+      "timestamp": "2026-11-22T23:15:00+01:00",
       "station": "PFELLING"
     }
   },
   "austria": {
     "achleiten": {
       "value_cm": 256.0,
-      "hour_change_cm": -1.0
+      "hour_change_cm": 0.0
     },
     "kienstock": {
-      "value_cm": 187.0,
+      "value_cm": 190.0,
       "hour_change_cm": 2.0
     },
     "wildungsmauer": {
-      "value_cm": 155.0,
+      "value_cm": 154.0,
       "hour_change_cm": -1.0
     },
-    "source_time": "11/22/2026 9:12 PM"
+    "source_time": "11/22/2026 11:12 PM"
   },
   "viking": {
     "checked": false
@@ -44,15 +44,15 @@
     "position_time": "2026-11-22T13:53:42Z",
     "coordinate_quality": "historical_timestamped",
     "coordinate_source": "ShipFinder (timestamp treated as UTC)",
-    "coordinate_note": "AIS report age 6.5 hours; not continuous GPS.",
+    "coordinate_note": "AIS report age 8.5 hours; not continuous GPS.",
     "source": "https://www.shipfinder.com/ship/detail/mmsi/269057517",
-    "age_hours": 6.5,
+    "age_hours": 8.5,
     "feed_errors": [
       "ais_shipfinder: AIS observation timestamp invalid or older than 30 days",
-      "ais_aprs: APRS vessel identity mismatch",
+      "ais_aprs: APRS has no dated readable position",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ],
-    "verification_time_utc": "2026-11-22T20:22:37.657849Z",
+    "verification_time_utc": "2026-11-22T22:21:27.873208Z",
     "fresh_within_2_hours": false,
     "marine_traffic_url": "https://www.marinetraffic.com/en/ais/home/shipid:3227728/zoom:14"
   },
@@ -64,15 +64,15 @@
     "position_time": "2026-11-22T11:08:00Z",
     "coordinate_quality": "historical_timestamped",
     "coordinate_source": "MyShipTracking dated AIS",
-    "coordinate_note": "AIS report age 9.2 hours; not continuous GPS.",
+    "coordinate_note": "AIS report age 11.2 hours; not continuous GPS.",
     "source": "https://myshiptracking.com/vessels/viking-egdir-mmsi-269057766-imo-0",
-    "age_hours": 9.2,
+    "age_hours": 11.2,
     "feed_errors": [
       "ais_shipfinder: AIS observation timestamp invalid or older than 30 days",
       "ais_aprs: APRS has no dated readable position",
       "ais_trackipi: HTTP Error 403: Forbidden"
     ],
-    "verification_time_utc": "2026-11-22T20:22:37.852946Z",
+    "verification_time_utc": "2026-11-22T22:21:27.938723Z",
     "fresh_within_2_hours": false
   },
   "errors": [
